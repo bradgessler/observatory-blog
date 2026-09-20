@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Star Align: a mount set down anyhow · Observatory</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+<p class="back"><a href="index.html">‹ Observatory</a></p>
+<article>
+  <h1>Star Align: a mount set down anyhow</h1>
+  <time datetime="2026-09-19">19 September 2026</time>
+  <p>Polar alignment is the part of an equatorial mount that makes people give up. You crouch behind the tripod, squint through a little scope at Polaris, and turn knobs until a reticle lines up. I wanted to skip it. Set the mount down roughly north, roughly at my latitude, and let the stars do the rest.</p>
+<p>That's what Star Align is. The software behind it is <code>Controller.Sky.Model</code>, <code>Lineup</code>, <code>Pointing</code> and <code>Tracker</code>, in <code>apps/controller/lib/controller/sky/</code>.</p>
+<h2>The model</h2>
+<p>An EQ6-R has no absolute encoders, so step one is telling it which way it's turned: stand it upright, counterweight down, tube along the polar axis, and zero the axes. That's the mount's reference, not the sky's.</p>
+<p>Then the geometry. A German equatorial is two axes at right angles. The polar axis points somewhere; on a perfectly aligned mount that's the celestial pole, but I don't assume that. The model works in an east-north-up frame and has four parameters: the polar axis altitude and azimuth, plus a zero offset for each encoder.</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/model.ex
+@doc &quot;Where the tube points (ENU unit vector) for encoder angles in degrees from home.&quot;
+def tube_vec(params, signs, theta_ra, theta_dec) do
+  h = (signs.ha_sign * theta_ra + params.off_ra) * @deg
+  d = (signs.dec_sign * theta_dec + params.off_dec) * @deg
+  {p, e, s} = frame(params)
+  # u(H) sweeps from the meridian (s) toward the west (−e) as H grows
+  u = add(scale(s, :math.cos(h)), scale(e, -:math.sin(h)))
+  add(scale(p, :math.cos(d)), scale(u, :math.sin(d)))
+end
+</code></pre>
+<p>Forward: two encoder angles give a direction in the sky. Inverse: a direction in the sky gives two encoder solutions, because a GEM can reach the same spot from either side of the pier. With an ideal mount (axis on the pole, zero offsets) it collapses to the plain first-order model.</p>
+<h2>The fit</h2>
+<p>Each star you centre is a sample: where the encoders were when the tube was on a known direction. The fit is Levenberg-Marquardt on the residual vectors, numeric Jacobian, Gauss-Jordan solve. It's a tiny problem and the code says so: simplicity over speed.</p>
+<p>With one star only the offsets move. With two or more, all four parameters are free, and the fit starts from a ring of axis headings so a mount pointed 90° wrong is still found.</p>
+<p><img src="images/align-three-stars.png" alt="Three stars agree; the page grades the fit and names a fourth" /></p>
+<p>Axis signs are a config guess until the sky says otherwise. A wrong RA sign can't be absorbed by the geometry, so with three stars it shows as degrees of disagreement and the other combinations get tried. A wrong Dec sign is sneakier: the geometry absorbs it as an RA offset near 180°, which means the model thinks the counterweight is up when it's down and would pick the wrong side of the pier for every goto. So that case is detected by the offset, flipped, and refitted.</p>
+<p>The grade comes from the rms of the residuals. Under 30 arcminutes is &quot;just look&quot;, under 10 is &quot;Moon and planets&quot;, under 2 is &quot;deep sky&quot;. The same words appear on the page and in the docs.</p>
+<h2>The tracker</h2>
+<p>On a polar-aligned mount tracking is one motor at sidereal rate. On a mount set down anyhow the target drifts in both axes, so after a goto the software tracks through the model: every half second it asks where the encoders should be now and ten seconds from now, runs both motors at the rates that get there, and adds a gentle correction for whatever error crept in.</p>
+<p>Every slew the tracker issues carries the driver's dead-man and is refreshed inside the 900 ms grace. If the tracker process dies or stalls, the motors stop on their own within a second.</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/tracker.ex
+# the driver's hold grace is 900 ms: refresh well inside it
+@tick_ms 500
+@lookahead_s 10.0
+# correct the accumulated error over this many seconds
+@correct_s 20.0
+@max_rate 16.0
+# further off than this and something else is wrong: stop, don't chase
+@give_up_deg 5.0
+</code></pre>
+<p>After a goto it converges to the target. After a nudge it holds where your hand left the tube; a hand that centred the star wins over the model. It never changes sides of the pier on its own, because chasing a flip at 16× is a slew nobody asked for. Past five degrees of error it gives up and says so.</p>
+<p><img src="images/rehearsal-tracking.png" alt="The rehearsal: three stars on the simulator, then a goto to Jupiter and the tracker holding it" /></p>
+<h2>Three control laws</h2>
+<p>The Setup page has a card called How It's Steered that says which law is in charge. Law 1 is raw axes: the keypad, the strips, no sky at all. Law 2 is the sky through an ideal mount, which assumes you polar-aligned. Law 3 is the sky through this mount as the stars measured it.</p>
+<p><img src="images/setup-how-its-steered.png" alt="Setup showing law 3: star-aligned, the corrections in force, the tracker's rates" /></p>
+<p>The numbers were there from the start, but I couldn't see the correction. So the page now draws it: a target with the true pole at the centre and a dot where this mount's polar axis really points, the two encoder offsets, and a bar per axis for how much authority the tracker is using right now. On a perfect set-up the RA bar sits on the sidereal tick and Dec is empty. Here is the simulator with a polar axis 4.7° off and both offsets wrong on purpose: the dot is out at the second ring, and while it holds Venus the Dec bar is doing work an aligned mount would never need.</p>
+<p><img src="images/corrections-bad-setup.png" alt="A deliberately bad set-up: the polar axis 4.7° from the pole, RA at 1.0×, Dec at −0.1× to hold Venus" /></p>
+<p>Once a star alignment exists, gotos, the RA/Dec readout, the sky map and the orb all go through it. The orb draws the solved geometry instead of the ideal one, which is how you see what the fit actually thinks your mount is doing.</p>
+<p><img src="images/orb-real-mount.png" alt="The orb drawing the real mount: polar axis at 38°, heading 13° east" /></p>
+<h2>What went wrong</h2>
+<p><strong>Two stars fit more than one geometry.</strong> Two samples can be satisfied exactly by several polar-axis placements, and a couple of arcminutes of centring noise picked the wrong one on cost alone. The whole-night simulator test caught a goto landing in the wrong place after a perfect-looking two-star fit. Now, among fits within centring noise of the best, the one nearest the ideal set-up wins:</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/model.ex
+fits = Enum.map(starts, &amp;lm(samples, signs, &amp;1, free))
+best = fits |&gt; Enum.map(&amp;elem(&amp;1, 1)) |&gt; Enum.min()
+tol = length(samples) * @noise_rad * @noise_rad
+
+{params, _} =
+  fits
+  |&gt; Enum.filter(fn {_, cost} -&gt; cost &lt;= best + tol end)
+  |&gt; Enum.min_by(fn {p, _} -&gt; axis_distance(p, start) end)
+</code></pre>
+<p><strong>One star was graded &quot;good for deep sky&quot;.</strong> One or two stars fit exactly whatever they are, so &quot;agree to 0.0′&quot; after a single star was a lie the page told with a straight face. It now says what each count buys you and only grades at three or more.</p>
+<p><strong>Gotos aimed at the past.</strong> A goto computed the encoder target for where the object was when the slew started. Full speed on this mount is about 3.4°/s, so a 30 second slew is 7 arcminutes of sky, which is the difference between &quot;in the eyepiece&quot; and &quot;hunt for it&quot;. <code>Pointing.slew</code> now estimates the flight time and aims at where the object will be when it lands.</p>
+<h2>What's next</h2>
+<p>Nothing here corrects cone error or axes that aren't quite perpendicular; those want more stars and more parameters. With the axis far from the pole the field rotates in the eyepiece, which is fine for looking and a problem for exposures. And the stars I centre by eye are the truth the model is built on. Plate solving replaces my eye, and that's the next real step.</p>
+</article>
+
+</main>
+</body>
+</html>

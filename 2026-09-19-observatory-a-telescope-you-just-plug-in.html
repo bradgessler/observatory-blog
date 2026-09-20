@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Observatory: a telescope you just plug in · Observatory</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+<p class="back"><a href="index.html">‹ Observatory</a></p>
+<article>
+  <h1>Observatory: a telescope you just plug in</h1>
+  <time datetime="2026-09-19">19 September 2026</time>
+  <p>I have a Sky-Watcher EQ6-R and I don't like its hand controller. So the hand controller went in a drawer, an EQDIR cable went from the mount's HAND CONTROL jack to my laptop, and I wrote the other end in Elixir. The whole thing is called Observatory and it's <a href="https://github.com/bradgessler/observatory">open source</a>.</p>
+<p>The pitch, if there is one: plug the mount in, open a page on your phone, look at stuff. Everything precise lives underneath where you can get at it later.</p>
+<h2>What it is</h2>
+<p>It's a Mix umbrella. <code>apps/mount</code> speaks the Sky-Watcher motor-controller protocol at 9600 baud over <code>circuits_uart</code>. <code>Mount.Server</code> owns the mount's state and broadcasts a snapshot every 250 ms and on every change. <code>apps/controller</code> is a Phoenix LiveView app that subscribes to that and renders from assigns. Nothing about the telescope is ever held only in a browser, which is why three phones and the laptop all show the same scope at the same time.</p>
+<p>There is almost no JavaScript. <code>app.js</code> has six hooks, each with a written reason at the top of the file: touch-and-pull, pinch-zoom, reading photo pixels, geolocation, the tilt sensor, video playback. Everything else is <code>phx-click</code> and server-rendered SVG. No bundler.</p>
+<p>A <code>firmware/</code> directory holds a Nerves image so the same apps run on a Raspberry Pi next to the mount. <code>mix phx.server</code> at the root runs it all on the laptop, and when the cable isn't plugged in you get a simulator that speaks the real wire protocol.</p>
+<h2>Tonight's flow</h2>
+<p>The front page is not a menu. It's four steps, and it shows you the one you're on.</p>
+<p><img src="images/start-zero.png" alt="The start page, dark palette, step two: zero the axes" /></p>
+<p><strong>Plug in.</strong> Power the mount, plug in the cable. It appears in a few seconds.</p>
+<p><strong>Zero.</strong> The EQ6-R has no absolute encoders. At power-on both axes read <code>0x800000</code> wherever the mount happens to be. So you put it upright by eye, counterweight down, tube along the polar axis, and tap <em>Zero the axes here</em>. That gives the software a reference for the axis angles and arms the soft limits that keep it from winding up your cables. It has nothing to do with the sky.</p>
+<p><strong>Stars 0/3.</strong> You do not need Polaris. The page names a bright star and says where it is (&quot;high in the west&quot;). Slew near it, centre it with any control, tap <em>That's it</em>. One star fixes the offsets. Two stars far apart pin down where the polar axis actually points. Three stars say how well they agree, and once they agree well enough to land things in an eyepiece the page locks.</p>
+<p><strong>Look.</strong> Locked, the page turns into the control surface. Tonight's targets ranked for this site and this scope, each with <em>Go</em>. The mount slews and then a tracker holds it on both axes at whatever rates the fitted geometry wants, so a crooked polar axis doesn't matter for looking.</p>
+<p><img src="images/start-on-target.png" alt="Locked on Venus: three stars agree to 0.1 arcminute, the tracker is holding, tonight's list below" /></p>
+<p><em>Centre it</em> opens a nudge pad; when you let go the hold picks up from where your hand left the tube, not from where the model thought the object was. STOP is in the header of every page and on the game pad. It stops both axes and ends the hold.</p>
+<h2>Who moved the scope</h2>
+<p>Every command through the driver is logged with who sent it: which page, the game pad, the tracker, the driver itself. When the camera shows the tube somewhere odd, this page answers the question in one glance.</p>
+<p><img src="images/events.png" alt="The events page: the tracker, the Start page and Star Align taking turns" /></p>
+<p>Each LiveView tags its own process on mount, and the events module reads the tag:</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/source.ex
+def on_mount(:default, _params, _session, socket) do
+  name = socket.view |&gt; Module.split() |&gt; List.last() |&gt; String.replace_suffix(&quot;Live&quot;, &quot;&quot;)
+  # modules keep their names; the log uses the words on the page
+  name = Map.get(%{&quot;Lineup&quot; =&gt; &quot;Star Align&quot;, &quot;Start&quot; =&gt; &quot;Start&quot;, &quot;Dpad&quot; =&gt; &quot;Keypad&quot;, &quot;Mount&quot; =&gt; &quot;Axis Strips&quot;}, name, name)
+  Telescope.Events.tag(&quot;page · #{name}&quot;)
+  {:cont, socket}
+end
+</code></pre>
+<h2>The pad</h2>
+<p>A USB game controller drives the scope too, and the browser never sees it. <code>apps/input</code> is a GenServer per device over a tiny C port program linked to libhidapi. The server reads the pad, maps it, and calls the driver. The page just shows what the pad is doing. That's the rule for all hardware here: serial and HID are read by the server, so Safari, Firefox and a phone all work the same.</p>
+<h2>The look</h2>
+<p>Black is <code>#000</code> because OLED phones turn those pixels off. Surfaces are told apart by tone, never by hairlines; there are no borders anywhere. Anything you can push is a key with a two-tone bevel, light edge top-left, dark edge bottom-right, that sinks when pressed. A latched state is a lit key, not an outline.</p>
+<p><img src="images/keypad-dark.png" alt="The keypad in the dark palette: bevelled keys, one lit rate" /></p>
+<pre><code class="language-css">/* apps/controller/priv/static/assets/css/app.css */
+--bevel: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--lo);
+--bevel-in: inset 1px 1px 0 var(--lo), inset -1px -1px 0 var(--hi);
+</code></pre>
+<p>I wanted the panel of a 1970s machine room, kept calm. There's a red night mode where even &quot;on&quot; is a shade of red. Nothing flashes.</p>
+<h2>What went wrong</h2>
+<p>Three stories, in the order they scared me.</p>
+<p><strong>The pad kept the mount moving after I let go.</strong> The input mapper handled every pad report synchronously with blocking calls into the driver. When the stick crossed zero the driver's stop-and-wait took seconds, hundreds of &quot;trigger held&quot; reports queued up, and after my hand came off the mapper replayed them, each one re-feeding the driver's dead-man timer. STOP was undone within a second by the next stale command. A dead-man fed by stale commands is not a dead-man. The rule is now in CLAUDE.md as &quot;only fresh intent moves the scope&quot;: every report is stamped with monotonic time, anything older than a few hundred milliseconds is dropped, backlogs coalesce to the newest report, and the mapper has its own watchdog that releases when input goes quiet.</p>
+<p><strong>The third alignment star landed 9° short.</strong> Found by walking the whole flow on the simulator. The tracker issues its slews with <code>hold: true</code> so a dead tracker can never leave motors running. But that leaves a dead-man armed in the driver, and it fired a second into the next goto. The fix is in the driver, not the UI:</p>
+<pre><code class="language-elixir"># apps/mount/lib/mount/server.ex
+defp goto(state, axis, steps, dir) do
+  # a goto is not a held slew: a dead-man left armed by the last hold
+  # (a tracker's, a pad's) would stop it a second in
+  %{state | holds: cancel_hold(state.holds, axis)}
+  |&gt; stop_axis(axis)
+  |&gt; send!(&quot;G&quot;, axis, P.motion_mode(:goto, dir))
+  |&gt; send!(&quot;H&quot;, axis, P.from_int(steps))
+</code></pre>
+<p><strong>Every confirm dialog was inert.</strong> &quot;Zero the axes here&quot; and &quot;Start over&quot; are supposed to ask first. They didn't, because <code>phoenix_html.js</code> was never served. <code>data-confirm</code> is a no-op without it. Nobody noticed for days because the buttons still worked; they just didn't ask.</p>
+<h2>What's next</h2>
+<p>Plate solving to replace the eyeball-centred stars. A durable event log with an outward feed. The Pi image getting the same attention the laptop has had. And a real night outside with all of it, which is the only test that counts.</p>
+</article>
+
+</main>
+</body>
+</html>
