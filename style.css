@@ -3,6 +3,8 @@
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 -apple-system, system-ui, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 6rem; }
+main.wide { max-width: 68rem; }
+main.wide header.site { max-width: 46rem; }
 a { color: var(--accent); }
 h1 { font-size: 2rem; line-height:1.2; margin: 0 0 .5rem; }
 h2 { font-size: 1.25rem; margin: 2.5rem 0 .5rem; }
@@ -13,7 +15,7 @@ ul.posts { list-style:none; padding:0; display:grid; gap:1.75rem; margin-top:2.5
 .card { background:var(--panel); border-radius:16px; overflow:hidden; transition:transform .12s ease; }
 .card:hover { transform:translateY(-2px); }
 .card a { text-decoration:none; color:inherit; display:block; }
-.card img { width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top center; display:block; margin:0; border-radius:0; background:#000; }
+.card img { width:100%; aspect-ratio:16/10; object-fit:cover; object-position:center; display:block; margin:0; border-radius:0; background:#000; }
 .card-body { padding:1.1rem 1.35rem 1.4rem; }
 .card h2 { font-size:1.2rem; margin:0 0 .15rem; color:var(--accent); }
 .card p { color:var(--dim); margin:.5rem 0 0; font-size:.95rem; }
@@ -29,3 +31,5 @@ article code { font-size:.9em; }
 article pre code { font-size:inherit; }
 article blockquote { border-left:3px solid var(--dim); margin:1.5rem 0; padding-left:1rem; color:var(--dim); }
 header.site { border-bottom:1px solid var(--panel); padding-bottom:1.5rem; }
+/* OpenGraph+ sets data-ogplus while it photographs a page for its share card */
+html[data-ogplus] .back { display:none; }
