@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The Moon we couldn't go to, and a Pi that solves its own plates · Observatory</title>
+<meta name="description" content="The last Go To of the first field night was refused as past the meridian, with nothing in the way. Underneath was a mount that reaches every star two ways, a check that was right on one side of the pier, and a hold with no limit at all. Then the box, which had never solved a photo itself, learned to: in Elixir, on a Pi 3." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The Moon we couldn't go to, and a Pi that solves its own plates" />
+<meta property="og:description" content="The last Go To of the first field night was refused as past the meridian, with nothing in the way. Underneath was a mount that reaches every star two ways, a check that was right on one side of the pier, and a hold with no limit at all. Then the box, which had never solved a photo itself, learned to: in Elixir, on a Pi 3." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-09-26-the-moon-we-couldnt-go-to.html" />
+<meta property="og:image" content="https://bradgessler.github.io/observatory-blog/images/solve-elixir-plate-two.jpg" />
+<meta property="og:image:alt" content="Plate two from the first night: the eyepiece full of moonlight, and the same field cleaned in Elixir down to stars on black" />
+<meta property="article:published_time" content="2026-09-26" />
+<meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -83,9 +98,9 @@ config :controller, :solver, index_config: &quot;/data/astrometry/astrometry.cfg
 defp minus(&lt;&lt;_, ps::binary&gt;&gt;, &lt;&lt;_, bs::binary&gt;&gt;, acc), do: minus(ps, bs, &lt;&lt;acc::binary, 0&gt;&gt;)
 defp minus(&lt;&lt;&gt;&gt;, _, acc), do: acc
 </code></pre>
-<p><img src="images/solve-elixir-plate-two.jpg" alt="Plate two: the raw photo, full of moonlight, and the Elixir cleaning of it" /></p>
+<figure><img src="images/solve-elixir-plate-two.jpg" alt="Plate two: the raw photo, full of moonlight, and the Elixir cleaning of it" loading="lazy" /><figcaption>Plate two: the raw photo, full of moonlight, and the Elixir cleaning of it</figcaption></figure>
 <p>That's plate two, the one ImageMagick never solved. On the Mac the cleaning takes a fifth of a second. All fifteen of the first night's photos, solved on the Mac both ways:</p>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Plate</th>
@@ -162,7 +177,7 @@ defp minus(&lt;&lt;&gt;&gt;, _, acc), do: acc
 <td>0.3′</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>The same ten plus plate two. One, five, thirteen and fourteen didn't solve either way. Where both solved, they agree to within 0.7′, about a hundredth of a degree.</p>
 <h2>On a Pi 3</h2>
 <p>The box is a Raspberry Pi 3 running 32-bit, where the BEAM has no JIT. Cleaning one photo took three rounds to get quick: 7.6 to 22.7 s, then 3.7 to 6.4 s, then 1.7 to 4.3 s.</p>
@@ -173,7 +188,7 @@ defp slide([t | trail], [l | lead], sum, k, acc), do: slide(trail, lead, sum - t
 <p>End to end on the Pi, with a hint for where to look, a phone photo solves in 9 to 13 seconds.</p>
 <h2>A match below the horizon</h2>
 <p>One in-between version worked on half-size photos, and it &quot;solved&quot; plate thirteen, which is mostly Moon glare and a handful of stars. It put the photo at Dec −69°, with odds that cleared the 10¹⁸ bar from last time. Dec −69° never rises here.</p>
-<p><img src="images/solve-thirteen-glare.jpg" alt="Plate thirteen: the Moon's glare, the edge of the eyepiece, and a few stars" /></p>
+<figure><img src="images/solve-thirteen-glare.jpg" alt="Plate thirteen: the Moon's glare, the edge of the eyepiece, and a few stars" loading="lazy" /><figcaption>Plate thirteen: the Moon's glare, the edge of the eyepiece, and a few stars</figcaption></figure>
 <p>Odds say how sure the solver is that the stars match the catalogue. They don't know where you're standing. So a solve now gets the photo's time and the site, and a match below the horizon is refused however good its odds:</p>
 <pre><code class="language-elixir"># apps/controller/lib/controller/sky/solve.ex
 defp above_horizon({:ok, %{ra_deg: ra, dec_deg: dec}} = ok, %{at: %DateTime{} = at, site: %{lat: lat, lon: lon}}) do

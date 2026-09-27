@@ -1,5 +1,5 @@
-:root { color-scheme: dark light; --bg:#0b0d12; --panel:#12151c; --text:#e6e8ee; --dim:#8f95a8; --accent:#6ea8ff; }
-@media (prefers-color-scheme: light) { :root { --bg:#f7f8fa; --panel:#fff; --text:#14171d; --dim:#5a6372; --accent:#2457d6; } }
+:root { color-scheme: dark light; --bg:#0b0d12; --panel:#12151c; --line:#232834; --text:#e6e8ee; --dim:#8f95a8; --accent:#6ea8ff; }
+@media (prefers-color-scheme: light) { :root { --bg:#f7f8fa; --panel:#fff; --line:#e1e4ea; --text:#14171d; --dim:#5a6372; --accent:#2457d6; } }
 * { box-sizing: border-box; }
 body { margin:0; background:var(--bg); color:var(--text); font:17px/1.6 -apple-system, system-ui, sans-serif; }
 main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 6rem; }
@@ -26,8 +26,25 @@ nav.prevnext .dir { display:block; color:var(--dim); font-size:.8rem; text-trans
 nav.prevnext strong { color:var(--accent); font-weight:600; }
 @media (max-width:32rem) { nav.prevnext { grid-template-columns:1fr; } nav.prevnext .later { text-align:left; } }
 article img { max-width:100%; height:auto; border-radius:12px; display:block; margin:1.5rem auto; }
-article pre { background:var(--panel); padding:1rem; border-radius:10px; overflow-x:auto; font-size:.85rem; }
+article figure { margin:2rem 0; }
+article figure img { margin:0 auto; }
+article figcaption { color:var(--dim); font-size:.9rem; line-height:1.45; margin-top:.6rem; text-align:center; text-wrap:balance; }
+article h2 { font-size:1.35rem; margin-top:3rem; text-wrap:balance; }
+article h3 { font-size:1.05rem; margin:2rem 0 .4rem; }
+article pre { background:var(--panel); padding:1rem 1.1rem; border-radius:10px; overflow-x:auto; font-size:.85rem; line-height:1.5; }
+article pre code.hljs { background:transparent; padding:0; }
 article code { font-size:.9em; }
+article :not(pre) > code { background:var(--panel); padding:.1em .35em; border-radius:5px; }
 article pre code { font-size:inherit; }
+article aside { background:var(--panel); border-left:3px solid var(--accent); border-radius:10px; padding:1rem 1.25rem; margin:1.75rem 0; }
+article aside > :first-child { margin-top:0; }
+article aside > :last-child { margin-bottom:0; }
+.table-wrap { overflow-x:auto; margin:1.5rem 0; border-radius:10px; border:1px solid var(--line); }
+article table { width:100%; border-collapse:collapse; font-size:.92rem; font-variant-numeric:tabular-nums; }
+article th, article td { text-align:left; vertical-align:top; padding:.6rem .8rem; border-bottom:1px solid var(--line); }
+article thead th { background:var(--panel); color:var(--dim); font-size:.78rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+article tbody tr:last-child td { border-bottom:0; }
 article blockquote { border-left:3px solid var(--dim); margin:1.5rem 0; padding-left:1rem; color:var(--dim); }
 header.site { border-bottom:1px solid var(--panel); padding-bottom:1.5rem; }
+/* OpenGraph+ sets data-ogplus while it photographs a page for its share card */
+html[data-ogplus] .back { display:none; }

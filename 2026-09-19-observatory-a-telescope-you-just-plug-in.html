@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Observatory: a telescope you just plug in · Observatory</title>
+<meta name="description" content="An EQ6-R, an EQDIR cable, and a Phoenix LiveView page a phone opens. Plug in, zero, three stars, look. What got built, how tonight goes, and the three bugs that would have ruined it." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Observatory: a telescope you just plug in" />
+<meta property="og:description" content="An EQ6-R, an EQDIR cable, and a Phoenix LiveView page a phone opens. Plug in, zero, three stars, look. What got built, how tonight goes, and the three bugs that would have ruined it." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-09-19-observatory-a-telescope-you-just-plug-in.html" />
+<meta property="og:image" content="https://bradgessler.github.io/observatory-blog/images/start-on-target.png" />
+<meta property="og:image:alt" content="Locked on Venus: three stars agree to a tenth of an arcminute and the tracker is holding" />
+<meta property="article:published_time" content="2026-09-19" />
+<meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,16 +35,16 @@
 <p>A <code>firmware/</code> directory holds a Nerves image so the same apps run on a Raspberry Pi next to the mount. <code>mix phx.server</code> at the root runs it all on the laptop, and when the cable isn't plugged in you get a simulator that speaks the real wire protocol.</p>
 <h2>Tonight's flow</h2>
 <p>The front page is not a menu. It's four steps, and it shows you the one you're on.</p>
-<p><img src="images/start-zero.png" alt="The start page, dark palette, step two: zero the axes" /></p>
+<figure><img src="images/start-zero.png" alt="The start page, dark palette, step two: zero the axes" loading="lazy" /><figcaption>The start page, dark palette, step two: zero the axes</figcaption></figure>
 <p><strong>Plug in.</strong> Power the mount, plug in the cable. It appears in a few seconds.</p>
 <p><strong>Zero.</strong> The EQ6-R has no absolute encoders. At power-on both axes read <code>0x800000</code> wherever the mount happens to be. So you put it upright by eye, counterweight down, tube along the polar axis, and tap <em>Zero the axes here</em>. That gives the software a reference for the axis angles and arms the soft limits that keep it from winding up your cables. It has nothing to do with the sky.</p>
 <p><strong>Stars 0/3.</strong> You do not need Polaris. The page names a bright star and says where it is (&quot;high in the west&quot;). Slew near it, centre it with any control, tap <em>That's it</em>. One star fixes the offsets. Two stars far apart pin down where the polar axis actually points. Three stars say how well they agree, and once they agree well enough to land things in an eyepiece the page locks.</p>
 <p><strong>Look.</strong> Locked, the page turns into the control surface. Tonight's targets ranked for this site and this scope, each with <em>Go</em>. The mount slews and then a tracker holds it on both axes at whatever rates the fitted geometry wants, so a crooked polar axis doesn't matter for looking.</p>
-<p><img src="images/start-on-target.png" alt="Locked on Venus: three stars agree to 0.1 arcminute, the tracker is holding, tonight's list below" /></p>
+<figure><img src="images/start-on-target.png" alt="Locked on Venus: three stars agree to 0.1 arcminute, the tracker is holding, tonight's list below" loading="lazy" /><figcaption>Locked on Venus: three stars agree to 0.1 arcminute, the tracker is holding, tonight's list below</figcaption></figure>
 <p><em>Centre it</em> opens a nudge pad; when you let go the hold picks up from where your hand left the tube, not from where the model thought the object was. STOP is in the header of every page and on the game pad. It stops both axes and ends the hold.</p>
 <h2>Who moved the scope</h2>
 <p>Every command through the driver is logged with who sent it: which page, the game pad, the tracker, the driver itself. When the camera shows the tube somewhere odd, this page answers the question in one glance.</p>
-<p><img src="images/events.png" alt="The events page: the tracker, the Start page and Star Align taking turns" /></p>
+<figure><img src="images/events.png" alt="The events page: the tracker, the Start page and Star Align taking turns" loading="lazy" /><figcaption>The events page: the tracker, the Start page and Star Align taking turns</figcaption></figure>
 <p>Each LiveView tags its own process on mount, and the events module reads the tag:</p>
 <pre><code class="language-elixir"># apps/controller/lib/controller/source.ex
 def on_mount(:default, _params, _session, socket) do
@@ -44,7 +59,7 @@ end
 <p>A USB game controller drives the scope too, and the browser never sees it. <code>apps/input</code> is a GenServer per device over a tiny C port program linked to libhidapi. The server reads the pad, maps it, and calls the driver. The page just shows what the pad is doing. That's the rule for all hardware here: serial and HID are read by the server, so Safari, Firefox and a phone all work the same.</p>
 <h2>The look</h2>
 <p>Black is <code>#000</code> because OLED phones turn those pixels off. Surfaces are told apart by tone, never by hairlines; there are no borders anywhere. Anything you can push is a key with a two-tone bevel, light edge top-left, dark edge bottom-right, that sinks when pressed. A latched state is a lit key, not an outline.</p>
-<p><img src="images/keypad-dark.png" alt="The keypad in the dark palette: bevelled keys, one lit rate" /></p>
+<figure><img src="images/keypad-dark.png" alt="The keypad in the dark palette: bevelled keys, one lit rate" loading="lazy" /><figcaption>The keypad in the dark palette: bevelled keys, one lit rate</figcaption></figure>
 <pre><code class="language-css">/* apps/controller/priv/static/assets/css/app.css */
 --bevel: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--lo);
 --bevel-in: inset 1px 1px 0 var(--lo), inset -1px -1px 0 var(--hi);

@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Star Align: a mount set down anyhow · Observatory</title>
+<meta name="description" content="A geometric model of a German equatorial with the polar axis anywhere, fitted from two or three stars centred by eye, and a tracker that holds a target through it on both axes. No Polaris, no level tripod." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Star Align: a mount set down anyhow" />
+<meta property="og:description" content="A geometric model of a German equatorial with the polar axis anywhere, fitted from two or three stars centred by eye, and a tracker that holds a target through it on both axes. No Polaris, no level tripod." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-09-19-star-align-a-mount-set-down-anyhow.html" />
+<meta property="og:image" content="https://bradgessler.github.io/observatory-blog/images/corrections-bad-setup.png" />
+<meta property="og:image:alt" content="A deliberately bad set-up: the polar axis 4.7 degrees off the pole, and the corrections holding Venus anyway" />
+<meta property="article:published_time" content="2026-09-19" />
+<meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -32,7 +47,7 @@ end
 <h2>The fit</h2>
 <p>Each star you centre is a sample: where the encoders were when the tube was on a known direction. The fit is Levenberg-Marquardt on the residual vectors, numeric Jacobian, Gauss-Jordan solve. It's a tiny problem and the code says so: simplicity over speed.</p>
 <p>With one star only the offsets move. With two or more, all four parameters are free, and the fit starts from a ring of axis headings so a mount pointed 90° wrong is still found.</p>
-<p><img src="images/align-three-stars.png" alt="Three stars agree; the page grades the fit and names a fourth" /></p>
+<figure><img src="images/align-three-stars.png" alt="Three stars agree; the page grades the fit and names a fourth" loading="lazy" /><figcaption>Three stars agree; the page grades the fit and names a fourth</figcaption></figure>
 <p>Axis signs are a config guess until the sky says otherwise. A wrong RA sign can't be absorbed by the geometry, so with three stars it shows as degrees of disagreement and the other combinations get tried. A wrong Dec sign is sneakier: the geometry absorbs it as an RA offset near 180°, which means the model thinks the counterweight is up when it's down and would pick the wrong side of the pier for every goto. So that case is detected by the offset, flipped, and refitted.</p>
 <p>The grade comes from the rms of the residuals. Under 30 arcminutes is &quot;just look&quot;, under 10 is &quot;Moon and planets&quot;, under 2 is &quot;deep sky&quot;. The same words appear on the page and in the docs.</p>
 <h2>The tracker</h2>
@@ -49,14 +64,14 @@ end
 @give_up_deg 5.0
 </code></pre>
 <p>After a goto it converges to the target. After a nudge it holds where your hand left the tube; a hand that centred the star wins over the model. It never changes sides of the pier on its own, because chasing a flip at 16× is a slew nobody asked for. Past five degrees of error it gives up and says so.</p>
-<p><img src="images/rehearsal-tracking.png" alt="The rehearsal: three stars on the simulator, then a goto to Jupiter and the tracker holding it" /></p>
+<figure><img src="images/rehearsal-tracking.png" alt="The rehearsal: three stars on the simulator, then a goto to Jupiter and the tracker holding it" loading="lazy" /><figcaption>The rehearsal: three stars on the simulator, then a goto to Jupiter and the tracker holding it</figcaption></figure>
 <h2>Three control laws</h2>
 <p>The Setup page has a card called How It's Steered that says which law is in charge. Law 1 is raw axes: the keypad, the strips, no sky at all. Law 2 is the sky through an ideal mount, which assumes you polar-aligned. Law 3 is the sky through this mount as the stars measured it.</p>
-<p><img src="images/setup-how-its-steered.png" alt="Setup showing law 3: star-aligned, the corrections in force, the tracker's rates" /></p>
+<figure><img src="images/setup-how-its-steered.png" alt="Setup showing law 3: star-aligned, the corrections in force, the tracker's rates" loading="lazy" /><figcaption>Setup showing law 3: star-aligned, the corrections in force, the tracker's rates</figcaption></figure>
 <p>The numbers were there from the start, but I couldn't see the correction. So the page now draws it: a target with the true pole at the centre and a dot where this mount's polar axis really points, the two encoder offsets, and a bar per axis for how much authority the tracker is using right now. On a perfect set-up the RA bar sits on the sidereal tick and Dec is empty. Here is the simulator with a polar axis 4.7° off and both offsets wrong on purpose: the dot is out at the second ring, and while it holds Venus the Dec bar is doing work an aligned mount would never need.</p>
-<p><img src="images/corrections-bad-setup.png" alt="A deliberately bad set-up: the polar axis 4.7° from the pole, RA at 1.0×, Dec at −0.1× to hold Venus" /></p>
+<figure><img src="images/corrections-bad-setup.png" alt="A deliberately bad set-up: the polar axis 4.7° from the pole, RA at 1.0×, Dec at −0.1× to hold Venus" loading="lazy" /><figcaption>A deliberately bad set-up: the polar axis 4.7° from the pole, RA at 1.0×, Dec at −0.1× to hold Venus</figcaption></figure>
 <p>Once a star alignment exists, gotos, the RA/Dec readout, the sky map and the orb all go through it. The orb draws the solved geometry instead of the ideal one, which is how you see what the fit actually thinks your mount is doing.</p>
-<p><img src="images/orb-real-mount.png" alt="The orb drawing the real mount: polar axis at 38°, heading 13° east" /></p>
+<figure><img src="images/orb-real-mount.png" alt="The orb drawing the real mount: polar axis at 38°, heading 13° east" loading="lazy" /><figcaption>The orb drawing the real mount: polar axis at 38°, heading 13° east</figcaption></figure>
 <h2>What went wrong</h2>
 <p><strong>Two stars fit more than one geometry.</strong> Two samples can be satisfied exactly by several polar-axis placements, and a couple of arcminutes of centring noise picked the wrong one on cost alone. The whole-night simulator test caught a goto landing in the wrong place after a perfect-looking two-star fit. Now, among fits within centring noise of the best, the one nearest the ideal set-up wins:</p>
 <pre><code class="language-elixir"># apps/controller/lib/controller/sky/model.ex

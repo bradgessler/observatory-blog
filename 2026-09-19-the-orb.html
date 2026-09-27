@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>The orb · Observatory</title>
+<meta name="description" content="The mount's geometry as a live 3-D gizmo: polar axis, Dec axis, tube, the celestial sphere, drawn server-side as SVG from the driver's 250 ms snapshot. Why it exists and how it's made without JavaScript." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The orb" />
+<meta property="og:description" content="The mount's geometry as a live 3-D gizmo: polar axis, Dec axis, tube, the celestial sphere, drawn server-side as SVG from the driver's 250 ms snapshot. Why it exists and how it's made without JavaScript." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-09-19-the-orb.html" />
+<meta property="og:image" content="https://bradgessler.github.io/observatory-blog/images/orb-dark.png" />
+<meta property="og:image:alt" content="The orb: the celestial sphere with the polar axis, the Dec axis and the tube" />
+<meta property="article:published_time" content="2026-09-19" />
+<meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,17 +29,17 @@
   <time datetime="2026-09-19">19 September 2026</time>
   <p>A German equatorial mount is confusing the first ten times you use it. &quot;East&quot; turns the polar axis. &quot;Up&quot; is toward the pole, not toward the zenith. The same patch of sky can be reached two ways. The keypad hides all of that behind four arrows, which is fine right up until the tube is heading for the tripod leg and you don't know which arrow undoes it.</p>
 <p>The orb shows it instead.</p>
-<p><img src="images/orb-dark.png" alt="The orb in the dark palette: the sphere, the polar axis, the Dec axis, the tube at the pole" /></p>
+<figure><img src="images/orb-dark.png" alt="The orb in the dark palette: the sphere, the polar axis, the Dec axis, the tube at the pole" loading="lazy" /><figcaption>The orb in the dark palette: the sphere, the polar axis, the Dec axis, the tube at the pole</figcaption></figure>
 <h2>What it draws</h2>
 <p>A small sphere, seen from where you stand in the yard. The horizon ring, the celestial equator, the meridian. The polar axis in blue, tilted to your latitude and turned to the heading you set on Setup, or to whatever the star alignment fitted. The Dec axis in green, square to it. The tube in red, at the current encoder angles. A red crosshair on the sphere says &quot;tube points here&quot;.</p>
 <p>When a motor runs, three arrowheads lap a faint ring around that axis in the direction of rotation, and the lap time follows the reported rate. That's SVG <code>animateMotion</code>, no JavaScript.</p>
 <p>Under the sphere are two strips, one per axis. Pull left or right and that axis turns at a speed proportional to the pull; the strip under your finger and the axis on the orb light together. Then STOP, then a row to pick your viewpoint: from S, E, N or W, to match where you're standing or where the webcam is.</p>
-<p><img src="images/orb-laptop-early.png" alt="An earlier build on the laptop, inside the bench, with the RA axis running at 76×" /></p>
+<figure><img src="images/orb-laptop-early.png" alt="An earlier build on the laptop, inside the bench, with the RA axis running at 76×" loading="lazy" /><figcaption>An earlier build on the laptop, inside the bench, with the RA axis running at 76×</figcaption></figure>
 <h2>Why it exists</h2>
 <p>Two reasons.</p>
 <p>The first is understanding a GEM in the dark. Watch the strips move the axes on the sphere for a minute and the mount stops being a mystery. You see that turning RA swings the whole Dec axis around the pole, and that the tube can reach a target from either side.</p>
 <p>The second is seeing what a setting does before it moves the scope. Flip an axis sign on Setup and the orb's arrowheads reverse. Change the mount heading and the whole geometry swings. Once a star alignment exists, the orb draws the solved geometry, so you can see that the fit thinks your polar axis is 12° east of north before you trust it with a goto.</p>
-<p><img src="images/orb-real-mount.png" alt="The orb on the real mount before zeroing: polar axis at 38°, heading 13° east, RA running" /></p>
+<figure><img src="images/orb-real-mount.png" alt="The orb on the real mount before zeroing: polar axis at 38°, heading 13° east, RA running" loading="lazy" /><figcaption>The orb on the real mount before zeroing: polar axis at 38°, heading 13° east, RA running</figcaption></figure>
 <h2>How it's made</h2>
 <p>It's a LiveView. It subscribes to the mount's snapshot, which arrives every 250 ms and on every change, and re-renders. The render is an SVG built from a scene the server computes: a fixed camera south-southeast of the observer, 25° up, so the horizon, the pole and the meridian all read at once.</p>
 <pre><code class="language-elixir"># apps/controller/lib/controller/live/orb_live.ex
@@ -44,7 +59,7 @@ defp project(v, {f, r, u}), do: {@r * dot(v, r), -@r * dot(v, u), dot(v, f)}
 &lt;path d={@scene.meridian.front} class=&quot;ring meridian&quot; /&gt;
 </code></pre>
 <p>The only JavaScript is the <code>Stick</code> hook on the strips, and it exists because LiveView has no pointer bindings and a held slew needs a heartbeat. It sends the pull vector on a 250 ms interval and a <code>stick_end</code> on release. The server turns each into <code>Mount.slew(ref, axis, rate, hold: true)</code>, so the driver's dead-man stops the axis if the heartbeat goes quiet.</p>
-<p><img src="images/orb-phone-early.png" alt="The early orb on a phone, inside the bench, strips below" /></p>
+<figure><img src="images/orb-phone-early.png" alt="The early orb on a phone, inside the bench, strips below" loading="lazy" /><figcaption>The early orb on a phone, inside the bench, strips below</figcaption></figure>
 <h2>What went wrong</h2>
 <p><strong>The red dot confused its own author.</strong> At home the tube lies along the polar axis, so the red crosshair sat right on top of the blue pole mark with the word &quot;scope&quot; next to it. I looked at it and could not tell you what it meant, and I wrote it. It now reads &quot;tube · at the pole&quot; when it's there and &quot;tube points here&quot; everywhere else, and it steps aside so the pole mark stays visible.</p>
 <p><strong>The strips flooded the server.</strong> The first version of the <code>Stick</code> hook pushed an event on every <code>pointermove</code>, which on a phone is 60 to 120 times a second. That's bad on its own, and worse because stale reports could outlive the release: you'd let go and the server would still be chewing through a backlog that said &quot;held&quot;. The hook now sends only on its interval, carrying the latest vector, and <code>stick_end</code> on release stops the axis instantly. The same lesson as the game pad, learned a second time from a different input: only fresh intent moves the scope.</p>

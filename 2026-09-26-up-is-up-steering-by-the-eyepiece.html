@@ -4,6 +4,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Up is up: steering by the eyepiece · Observatory</title>
+<meta name="description" content="At the eyepiece I don't want to think about RA and Dec. I want to pull up and have the stars go up. A red touchpad that pulls from wherever the thumb lands, a D-pad that crawls and then hurries, and one small map from the view to the axes, learned at the eyepiece." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Up is up: steering by the eyepiece" />
+<meta property="og:description" content="At the eyepiece I don't want to think about RA and Dec. I want to pull up and have the stars go up. A red touchpad that pulls from wherever the thumb lands, a D-pad that crawls and then hurries, and one small map from the view to the axes, learned at the eyepiece." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-09-26-up-is-up-steering-by-the-eyepiece.html" />
+<meta property="og:image" content="https://bradgessler.github.io/observatory-blog/images/center-pull-up.png" />
+<meta property="og:image:alt" content="The Center page on the simulator, mid-pull: the eyepiece drawn as a red touchpad, an arrow pointing up, RA running at 2.8×" />
+<meta property="article:published_time" content="2026-09-26" />
+<meta name="twitter:card" content="summary_large_image" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -16,7 +31,7 @@
 <p>An EQ6-R has two axes, RA and Dec, and at the eyepiece neither of them means anything. On a mount set down anyhow, never zeroed, with a star diagonal in the focuser, &quot;Dec forward&quot; might move the stars left, or up, or down and a bit left. It depends on which side of the pier the tube is on, the mirror in the diagonal, and how the diagonal is turned in its holder. A hand controller leaves you to work that out with your eye on the glass, one wrong button at a time.</p>
 <p>I wanted what a map on a phone does. Pull up, the picture goes up.</p>
 <h2>The Center page</h2>
-<p><img src="images/center-pull-up.png" alt="The Center page on the simulator, mid-pull: a thumb pulling up, the view moving up at 2.8×, RA doing the work" /></p>
+<figure><img src="images/center-pull-up.png" alt="The Center page on the simulator, mid-pull: a thumb pulling up, the view moving up at 2.8×, RA doing the work" loading="lazy" /><figcaption>The Center page on the simulator, mid-pull: a thumb pulling up, the view moving up at 2.8×, RA doing the work</figcaption></figure>
 <p>The Center page draws the eyepiece as a round touchpad. Put a thumb on it and pull the way you want the view to go. Further is faster. Let go and it stops. The line under it says what the mount is actually doing, from the mount's own report, so there's proof the thumb is working.</p>
 <p>Speed runs from 0.5× to 8× sidereal, which is nothing like a slew. The curve is eased so the first half of the pull stays slow and only the end is brisk:</p>
 <pre><code class="language-elixir"># apps/controller/lib/controller/live/center_live.ex
