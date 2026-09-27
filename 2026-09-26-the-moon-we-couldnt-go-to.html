@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Moon we couldn't go to, and a Pi that solves its own plates · Observatory</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="">
+<p class="back"><a href="index.html">‹ Observatory</a></p>
+<article>
+  <h1>The Moon we couldn't go to, and a Pi that solves its own plates</h1>
+  <time datetime="2026-09-26">26 September 2026</time>
+  <p>The last Go To of the first field night was to the Moon, and the software refused it: past the meridian. I was standing at the scope and nothing was in the way. The refusal was a bug, and under the bug was a real safety gap. Fixing that, and getting the box to solve its own photos, was the overnight work.</p>
+<h2>Two ways to every star</h2>
+<p>A German equatorial reaches every point in the sky two ways, one from each side of the pier. Turn RA half a turn, mirror Dec, and the tube points at the same star with the whole mount the other way round.</p>
+<p>Go To only looked at the pose nearest where the tube already was. For the Moon, that pose had the counterweight above level, so it said no. The other pose, a meridian flip with the counterweight well down, was never considered. And the check itself computed <code>side * H</code>, which is right on the side of the pier we'd used all night and backwards on the other. On the far side it would read a counterweight 20° <em>below</em> level as 160° past.</p>
+<h2>Where the counterweight is</h2>
+<p>The fix starts with a fact I should have written down on day one: the counterweight shaft <em>is</em> the Dec axis. So its height depends only on the RA axis. It's level when the tube is on the meridian, and straight down or straight up a quarter turn either side.</p>
+<p>Which of those two is down isn't in the pointing. Both poses see exactly the same sky, so no star can tell you. On a zeroed mount, home says it, but this one was never zeroed: encoder zero is wherever it woke up, and the fit put it 60° from where home would be. So the answer comes from people. Every alignment point was someone centring a star at the eyepiece, and nobody does that with the counterweight in the air. The sign that puts most of the points below level is the one.</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/model.ex
+def counterweight(params, signs, theta_ra) do
+  h = (signs.ha_sign * theta_ra + params.off_ra) * @deg
+  Map.get(params, :cw, 1) * :math.asin(:math.sin(h)) / @deg
+end
+
+def cw_down(params, signs, thetas) do
+  lean = thetas |&gt; Enum.map(&amp;counterweight(Map.put(params, :cw, 1), signs, &amp;1)) |&gt; Enum.sum()
+  if lean &gt; 0, do: -1, else: 1
+end
+</code></pre>
+<p><code>asin(sin h)</code> is the whole trick: a triangle wave, level at 0° and 180°, straight up or down at the quarter turns. All eight of the first night's points agree on which way is down.</p>
+<h2>Worse: no limit at all</h2>
+<p><code>Mount.set_home</code> is what arms the soft limits, so a mount that was never homed has none. And the model tracker, the thing holding the Moon, had no meridian stop of its own; it relied on the soft limits. Left alone, it would have carried the Moon across the meridian and the tube into the tripod legs, slowly, after I'd gone to bed. The only guard that night was a person awake at the scope.</p>
+<h2>Go To, the careful way</h2>
+<p><code>Pointing.landing/4</code> looks at both poses. It stays on this side of the pier while the counterweight is within 3° of level, and otherwise plans a flip. RA turns whichever way keeps the counterweight lowest along the whole path, not just at the end:</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/pointing.ex
+# the short way round, unless the long way keeps the counterweight lower
+defp ra_turn(ctx, from, to) do
+  short = Astro.norm180(to - from)
+  long = if short &gt; 0, do: short - 360, else: short + 360
+  Enum.min_by([short, long], &amp;{Float.round(highest(ctx, from, &amp;1), 0), abs(&amp;1)})
+end
+</code></pre>
+<p>Dec goes through the pole, never through the point opposite it, because that path swings the tube through the ground.</p>
+<p>A flip shouldn't just happen. At the scope I'd put it plainly: &quot;take it to where you think it's dangerous, and then stop and check.&quot; So <code>Controller.Sky.Moves</code> flips in two legs. The first goes home: counterweight straight down, tube at the pole, the most compact pose the mount has. It stops there, and every phone asks:</p>
+<blockquote>
+<p>Home, halfway to the Moon. Is the way clear?</p>
+</blockquote>
+<p>Any phone can answer <strong>Continue to the Moon</strong>, and STOP anywhere cancels the move. The pending move belongs to the telescope, not a page, so the question is on every screen at once.</p>
+<p>The hold got its limit too. On a never-zeroed mount it stops when the counterweight reaches 20° above level, about where an EQ6-R's tube can reach the legs, and says why: &quot;the counterweight reached its limit. Go To again flips the mount and holds it from the other side.&quot;</p>
+<p>None of this has flipped a real mount yet. That's first on the list for next time.</p>
+<h2>A correction: the step count can't see a leg</h2>
+<p>While I was in the driver I added stall detection: if an axis the board says is running stops counting, both axes stop. My first note said it would catch the tube hitting a tripod leg. It can't.</p>
+<p>The EQ6-R's motors are steppers, and &quot;position&quot; is the count of steps the board <em>sent</em>. A tube pushed against a leg skips steps and the count carries on. What the watch catches is a board that stopped stepping while still saying &quot;running&quot;: a fault, or the supply sagging under load. So the page says exactly that: &quot;RA stopped counting while told to move.&quot;</p>
+<pre><code class="language-elixir"># apps/mount/lib/mount/server.ex
+# What this cannot see: the EQ6-R's motors are steppers and the count is
+# the steps the board sent, so a tube against a tripod leg skips steps and
+# the count carries on. Seeing that takes something watching the tube
+# itself (the camera, a tilt sensor on the tube).
+</code></pre>
+<p>Real collision detection needs a sensor on the tube (<a href="https://github.com/bradgessler/observatory/issues/98">#98</a>). Until then the guard is the two-leg flip and a person looking.</p>
+<h2>The box had never solved a photo</h2>
+<p>The box has the solver built into its image and the Tycho-2 index files on its data partition. It had never solved a photo. The solver's config pointed at <code>~/.observatory</code>, where there was nothing, so the box found no solver of its own, found the Mac on the cluster, and quietly sent every photo over Erlang distribution.</p>
+<pre><code class="language-elixir"># firmware/config/target.exs
+# The plate solver's Tycho-2 indexes (hundreds of MB) live on /data too, not
+# in the image. Without this the solver looked in ~/.observatory, found
+# nothing, and every photo went to the Mac over the network: fine at home,
+# nothing at all in a field.
+config :controller, :solver, index_config: &quot;/data/astrometry/astrometry.cfg&quot;
+</code></pre>
+<p>The second problem: the cleaning that made the <a href="2026-09-25-phone-photos-and-the-wrong-moon.html">first night's phone photos</a> solvable at all (find the eyepiece's disc, shave off its rim, take away the moonlight, crop) ran on ImageMagick. The Pi doesn't have ImageMagick.</p>
+<h2>Cleaning a photo in Elixir</h2>
+<p><code>Controller.Sky.Solve.Clean</code> does the same steps in under 300 lines:</p>
+<ul>
+<li><strong>The disc</strong>, from <code>djpeg</code>'s 1/8-scale copy: blurred, thresholded at 8%, eroded so the rim is gone. Rows are kept as runs of lit pixels, so erosion is interval arithmetic: shrink the runs above and below by the disc's half-width at that height, and intersect.</li>
+<li><strong>The biggest region</strong>, by union-find over runs. Moonlight flaring off the edge is a second region and gets left out.</li>
+<li><strong>The moonlight</strong>, from the same small copy blurred hard.</li>
+<li><strong>The subtraction</strong>, row by row, with binary pattern matching:</li>
+</ul>
+<pre><code class="language-elixir">defp minus(&lt;&lt;p, ps::binary&gt;&gt;, &lt;&lt;b, bs::binary&gt;&gt;, acc) when p &gt; b, do: minus(ps, bs, &lt;&lt;acc::binary, p - b&gt;&gt;)
+defp minus(&lt;&lt;_, ps::binary&gt;&gt;, &lt;&lt;_, bs::binary&gt;&gt;, acc), do: minus(ps, bs, &lt;&lt;acc::binary, 0&gt;&gt;)
+defp minus(&lt;&lt;&gt;&gt;, _, acc), do: acc
+</code></pre>
+<p><img src="images/solve-elixir-plate-two.jpg" alt="Plate two: the raw photo, full of moonlight, and the Elixir cleaning of it" /></p>
+<p>That's plate two, the one ImageMagick never solved. On the Mac the cleaning takes a fifth of a second. All fifteen of the first night's photos, solved on the Mac both ways:</p>
+<table>
+<thead>
+<tr>
+<th>Plate</th>
+<th>ImageMagick</th>
+<th>Elixir</th>
+<th>Positions agree to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>two</td>
+<td>no solve</td>
+<td>17.6 s</td>
+<td></td>
+</tr>
+<tr>
+<td>three</td>
+<td>13.8 s</td>
+<td>0.6 s</td>
+<td>0.2′</td>
+</tr>
+<tr>
+<td>four</td>
+<td>13.2 s</td>
+<td>0.5 s</td>
+<td>0.2′</td>
+</tr>
+<tr>
+<td>six</td>
+<td>20.8 s</td>
+<td>6.9 s</td>
+<td>0.3′</td>
+</tr>
+<tr>
+<td>seven</td>
+<td>14.3 s</td>
+<td>0.8 s</td>
+<td>0.4′</td>
+</tr>
+<tr>
+<td>eight</td>
+<td>14.8 s</td>
+<td>1.3 s</td>
+<td>0.2′</td>
+</tr>
+<tr>
+<td>nine</td>
+<td>13.6 s</td>
+<td>0.5 s</td>
+<td>0.4′</td>
+</tr>
+<tr>
+<td>ten</td>
+<td>40.4 s</td>
+<td>2.4 s</td>
+<td>0.1′</td>
+</tr>
+<tr>
+<td>eleven</td>
+<td>13.5 s</td>
+<td>0.4 s</td>
+<td>0.5′</td>
+</tr>
+<tr>
+<td>twelve</td>
+<td>31.4 s</td>
+<td>18.2 s</td>
+<td>0.7′</td>
+</tr>
+<tr>
+<td>fifteen</td>
+<td>14.4 s</td>
+<td>0.4 s</td>
+<td>0.3′</td>
+</tr>
+</tbody>
+</table>
+<p>The same ten plus plate two. One, five, thirteen and fourteen didn't solve either way. Where both solved, they agree to within 0.7′, about a hundredth of a degree.</p>
+<h2>On a Pi 3</h2>
+<p>The box is a Raspberry Pi 3 running 32-bit, where the BEAM has no JIT. Cleaning one photo took three rounds to get quick: 7.6 to 22.7 s, then 3.7 to 6.4 s, then 1.7 to 4.3 s.</p>
+<p>What made the difference was getting out of per-pixel work: no floats to box, no closure per pixel, no tuples to index. A blur is now a sliding sum over a list of whole numbers, one add and one subtract per step:</p>
+<pre><code class="language-elixir">defp slide(_trail, [], sum, k, acc), do: Enum.reverse([div(sum, k) | acc])
+defp slide([t | trail], [l | lead], sum, k, acc), do: slide(trail, lead, sum - t + l, k, [div(sum, k) | acc])
+</code></pre>
+<p>End to end on the Pi, with a hint for where to look, a phone photo solves in 9 to 13 seconds.</p>
+<h2>A match below the horizon</h2>
+<p>One in-between version worked on half-size photos, and it &quot;solved&quot; plate thirteen, which is mostly Moon glare and a handful of stars. It put the photo at Dec −69°, with odds that cleared the 10¹⁸ bar from last time. Dec −69° never rises here.</p>
+<p><img src="images/solve-thirteen-glare.jpg" alt="Plate thirteen: the Moon's glare, the edge of the eyepiece, and a few stars" /></p>
+<p>Odds say how sure the solver is that the stars match the catalogue. They don't know where you're standing. So a solve now gets the photo's time and the site, and a match below the horizon is refused however good its odds:</p>
+<pre><code class="language-elixir"># apps/controller/lib/controller/sky/solve.ex
+defp above_horizon({:ok, %{ra_deg: ra, dec_deg: dec}} = ok, %{at: %DateTime{} = at, site: %{lat: lat, lon: lon}}) do
+  {alt, _} = Astro.alt_az(ra, dec, lat, Astro.lst_deg(at, lon))
+  if alt &lt; -2.0, do: {:error, :below_horizon}, else: ok
+end
+</code></pre>
+<p>The final full-size version doesn't match plate thirteen at all, which is the honest answer.</p>
+<h2>What went wrong</h2>
+<ul>
+<li><strong>Go To looked at one pose</strong>, and its meridian check was backwards on the side of the pier we hadn't used.</li>
+<li><strong>The hold had no limit</strong> on a mount with no soft limits.</li>
+<li><strong>I oversold stall detection.</strong> A step count can't feel a tripod leg.</li>
+<li><strong>The box wasn't solving; the Mac was.</strong> One config path, and a fallback that worked too well to notice.</li>
+<li><strong>A half-size cleaning found a sky that never rises.</strong> Now the horizon gets a vote.</li>
+</ul>
+<h2>What's next</h2>
+<p>Field night 2 (<a href="https://github.com/bradgessler/observatory/issues/104">#104</a>):</p>
+<ul>
+<li><strong>Plate alignment on the box</strong>, end to end: phone photos through the eyepiece, uploaded on the page, solved on the Pi, spread across the sky.</li>
+<li><strong>A first real meridian flip.</strong> After it the model has no points on that side of the pier, so expect a worse landing; tap Centered there and see how far the margin moves.</li>
+<li><strong>Adversarial slews.</strong> Throw the scope somewhere with the pad, Go To back, log how far off it lands, again and again.</li>
+<li><strong>Spiral Search sized by the margin</strong> (<a href="https://github.com/bradgessler/observatory/issues/100">#100</a>), on the box as of tonight: views a bit under the eyepiece's field apart, out to three times the margin and no further, with <strong>I See It</strong> holding wherever it stopped. Time it against a loosened alignment.</li>
+</ul>
+</article>
+<nav class="prevnext">
+  <a href="2026-09-26-up-is-up-steering-by-the-eyepiece.html" class="earlier">
+  <span class="dir">Earlier</span>
+  <strong>Up is up: steering by the eyepiece</strong>
+</a>
+
+  <span></span>
+</nav>
+
+</main>
+</body>
+</html>
