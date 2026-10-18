@@ -37,6 +37,7 @@
   <h1>The heart of the Andromeda Galaxy</h1>
   <p class="sub">Messier 31</p>
   <p class="what">The centre of the nearest big galaxy to our own. The glow is billions of stars, too far away to see one by one. The dark lanes are dust in its spiral arms, where new stars form.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,7 +50,42 @@
 <div><dt>For scale</dt><dd>Each pixel is about 10 light-years across</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#andromeda-core">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">38 clear frames of 20 s. An hour on one field; cloud took two frames in three.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>38 x 20 s at ISO 3200: 12.7 minutes</dd></div>
+<div><dt>Frames</dt><dd>109 taken, 38 kept (27 clear, 11 through thin cloud and down-weighted). 71 lost to cloud, judged by how much each frame dimmed the stars</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell. Stars 4.1 arcsec wide</dd></div>
+<div><dt>Field</dt><dd>37.4 x 22.5 arcmin: the part of one sensor frame that at least 31 of the 38 frames cover, less 2.3 arcmin off the top, cropped to lose the shadow of a piece of chaff in the light path</dd></div>
+<div><dt>When</dt><dd>4 October 2026, after midnight, over 70 minutes. 83 degrees up, Moon just rising</dd></div>
+<div><dt>Field rotation</dt><dd>The mount was far off the pole, so the field turned 2.9 degrees during the run. Corrected in registration</dd></div>
+<div><dt>Calibration</dt><dd>Flat built from the clouded frames themselves: cloud glow seen through the optics, less the scaled clear frame. Dust shadows left out of the average. No darks</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean, weighted by transparency. One constant per frame; no sky surface fitted, the galaxy fills the frame</dd></div>
+<div><dt>Finish</dt><dd>Black 13 and white 229 of 255, gamma 1.2, S-curve 0.45. Saturation x 1.2. Dark parts made neutral and smoothed (bilateral, 2.5 px)</dd></div>
+<div><dt>Picture size</dt><dd>2892 x 1743 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  
+  <h3 id="andromeda-core-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="andromeda-core-reddit.txt" aria-describedby="andromeda-core-reddit" hidden>Copy</button>
+    <a class="copy-text" href="andromeda-core-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
 <nav class="prevnext">
   <a href="pleiades.html" class="earlier">
@@ -64,6 +100,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

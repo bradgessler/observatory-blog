@@ -41,6 +41,7 @@
   <h1>Hubble's Variable Nebula</h1>
   <p class="sub">NGC 2261, a fan of dust lit by the star R Monocerotis</p>
   <p class="what">A fan of dust lit from its tip by a young star, like a torch beam in fog. It changes: clouds of dust close to the star cast shadows that sweep up the fan over weeks and months, so no two pictures of it taken a season apart are the same. Edwin Hubble studied it for years, and in January 1949 he made it the first thing photographed with the 200 inch telescope on Palomar.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -53,7 +54,47 @@
 <div><dt>Honest note</dt><dd>A soft picture: the stars came out wider than earlier in the night and thin cloud took the last frames, so the moving shadows are too fine to see here. The pale green tint is the camera's, not the nebula's</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#hubbles-variable-nebula">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">25 of 32 frames of 15 s; thin cloud took the last six. 6.25 minutes of light on a soft night; thin cloud took the last six frames.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>25 x 15 s at ISO 3200: 6.25 minutes</dd></div>
+<div><dt>Frames</dt><dd>32 taken, 25 kept. The first after the slew was dropped by rule. The last six were lost to thin cloud: the stars fell to about half their brightness while staying sharp, under a brighter sky, and were coming back within minutes, which is cloud and not dew. None trailed</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 6.3 arcsec wide (half-flux) in the stack, against about 5 earlier in the night: the whole run is soft. Nothing was sharpened</dd></div>
+<div><dt>Field</dt><dd>10.4 x 7.8 arcmin: an 800 x 600 crop from a stack of 38.7 x 25.5 arcmin, nothing resampled, not turned (north 53 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 17 minutes. About 50 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 126 dust shadows it left, measured on this run's own sky and divided out. Nothing could be judged under the fan itself, and nothing there was touched. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on about 150 stars, 0.40 to 0.64 px rms; the field turned 0.39 degrees. The air spread red from blue by about half an arcsecond: measured on the stars and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.5 to 4.8 times lower than one frame (5.0 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>No saturation added. The fan measures near white: red : green 1.00 and blue : green 0.92 in the camera's daylight white balance. The camera's own colour matrix turns that into a pale cream-green: the tint is the rendering of a near-white measure, not a claim about the nebula</dd></div>
+<div><dt>Finish</dt><dd>Arcsinh stretch; colour from an 8 px average, and only where there is signal. Black at the 65th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px): 5.2 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>800 x 600 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>Each of these repeats in the odd and the even halves of the frames. The comet-shaped fan, 64 times the scatter of blank sky: 91 arcsec long from the star and 83 across at its widest. The star at its southern tip: a bright point in the brightest part of its own nebula, not a clean star image. A second bright knot 15 arcsec north-east of the star. Brighter edges, with a darker channel along the axis 23 to 41 arcsec out</dd></div>
+<div><dt>Not seen</dt><dd>The faint northern end of the fan, out to the catalogue's 2 arcmin, and the fine filaments and shadows that make it variable: the stars are 6.3 arcsec wide. The fan's outer edge is grainy and smoothed by the finish, so texture there is not detail</dd></div>
+</dl>
+  <h3 id="hubbles-variable-nebula-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="hubbles-variable-nebula-reddit.txt" aria-describedby="hubbles-variable-nebula-reddit" hidden>Copy</button>
+    <a class="copy-text" href="hubbles-variable-nebula-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
 <nav class="prevnext">
   <a href="messier-78.html" class="earlier">
@@ -68,6 +109,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

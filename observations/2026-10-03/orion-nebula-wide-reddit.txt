@@ -28,4 +28,4 @@ Night of 3 October 2026, San Francisco Bay Area
 
 Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/orion-nebula-wide.html
 
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#orion-nebula-wide
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/orion-nebula-wide.html#technical

@@ -37,6 +37,7 @@
   <h1>Saturn and seven of its moons</h1>
   <p class="sub">At opposition, 4 October 2026</p>
   <p class="what">Saturn at its closest and brightest for the year, its rings tilted only a few degrees toward us. Every labelled point is a moon. Titan, the big one, is larger than the planet Mercury.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,7 +50,44 @@
 <div><dt>Honest note</dt><dd>The three inner moons are named from how they moved between frames</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#saturn">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">Planet: the 16 sharpest of 48 frames at 1/40 s; moons: 2 s frames. Two exposures in one picture: 1/40 s for the planet, 2 s for the moons.</p>
+  <figure class="plate pan"><a href="images/saturn-frames.jpg"><img src="images/saturn-frames-1600.jpg" srcset="images/saturn-frames-1600.jpg 1600w, images/saturn-frames.jpg 3565w" sizes="(min-width: 80rem) 78rem, 100vw" width="3565" height="1668" alt="Saturn and seven of its moons, with the frames that were joined outlined" /></a></figure><p class="pan-hint">Swipe sideways to see the rest. Tap the picture for full size.</p>
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>Planet: 1/40 s at ISO 800. Moons: 2 s at ISO 6400, 640 times the planet's exposure</dd></div>
+<div><dt>Frames</dt><dd>Planet: 61 taken, 48 usable, the 16 sharpest kept. Moons: 2 clear frames; the other ten were behind cloud</dd></div>
+<div><dt>Sampling</dt><dd>Field: 0.388 arcsec per pixel, north up (9 catalogue stars, 0.6 arcsec)</dd></div>
+<div><dt>When</dt><dd>4 October 2026, after midnight, over 19 minutes. 52 degrees up, at opposition</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Planet stack</dt><dd>Each RAW colour plane placed at its own sub-pixel offset on a grid 3 x finer than the sensor (0.129 arcsec). No demosaic. Colours re-registered for the air's prism effect. Shown here at the sensor's scale, not enlarged</dd></div>
+<div><dt>Restoration</dt><dd>Blur measured from Titan in the same frames: 2.7 x 2.2 arcsec (5.0 x 4.0 before the refocus). Richardson-Lucy, 8 rounds; stopped where a model planet starts to grow a false rim</dd></div>
+<div><dt>Composite</dt><dd>The planet is set into the moon field where the 2 s frames are blown out. The planet's glare is subtracted ring by ring. Moons are lifted about 640 x relative to the planet</dd></div>
+<div><dt>Picture size</dt><dd>3565 x 1668 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>Moon names</dt><dd>No ephemeris used: each point keeps its place beside Saturn while the stars slide past, and sits at its orbit's reach. Worth a check</dd></div>
+<div><dt>Not seen</dt><dd>The Cassini division: no dip along the ring line in the plain stack or the restored one</dd></div>
+</dl>
+  <h3 id="saturn-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="saturn-reddit.txt" aria-describedby="saturn-reddit" hidden>Copy</button>
+    <a class="copy-text" href="saturn-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
 <nav class="prevnext">
   <a href="andromeda-core.html" class="earlier">
@@ -64,6 +102,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

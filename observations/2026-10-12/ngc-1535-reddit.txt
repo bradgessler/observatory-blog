@@ -28,4 +28,4 @@ Night of 12 October 2026, San Francisco Bay Area
 
 Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-1535.html
 
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#ngc-1535
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-1535.html#technical

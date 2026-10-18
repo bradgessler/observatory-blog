@@ -36,6 +36,7 @@
   <h1>The Dumbbell Nebula</h1>
   <p class="sub">Messier 27, a planetary nebula in Vulpecula</p>
   <p class="what">This is what a star like the Sun does at the end: it puffs its outer layers off into space, and the bare, hot core left behind, one of the hottest stars known, makes them glow. The cloud has been growing for about 10,000 years. Charles Messier found it in 1764: the first nebula of its kind anyone saw.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -48,13 +49,76 @@
 <div><dt>Honest note</dt><dd>The glow from oxygen is a blue-green purer than any screen can show, so the screen's nearest colour stands in for it. The faint halo deep pictures show further out is not reached in 16 minutes from a suburban sky</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#dumbbell-nebula">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">66 of 70 frames of 15 s. 16.5 minutes of light on a clear evening, the first target of the night.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082.4 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided, not dithered on this target. Set down about 10 degrees off the pole; aligned from four plate-solved photos (under 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>66 x 15 s at ISO 3200: 16.5 minutes. Nothing clipped on the nebula: its brightest pixel reached 12 percent of the sensor's range in a frame</dd></div>
+<div><dt>Frames</dt><dd>70 taken, 66 kept. The first after the slew was dropped by rule; three were smeared (every star stretched the same way, ellipticity 0.20 to 0.21). No cloud: every frame's stars within 2 percent of the run's typical brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 4.47 arcsec wide (half-flux, 117 stars) in the stack, 4.94 in one frame</dd></div>
+<div><dt>Field</dt><dd>15.5 x 12.9 arcmin: a 1200 x 1000 crop from a stack of 36.9 x 24.3 arcmin, nothing resampled after the stack, not turned (north 116 degrees clockwise of up)</dd></div>
+<div><dt>When</dt><dd>The evening of 17 October 2026, over 36 minutes. About 60 degrees up</dd></div>
+<div><dt>Darks</dt><dd>None taken tonight. Hot pixels found from the run itself, about 20,000 to 21,500 per colour plane, and repaired by the 3 x 3 median of their colour plane</dd></div>
+<div><dt>Flats</dt><dd>No flat frames tonight. The hybrid flat of 13 October: its large scale from that night's open sky, its dust from the 13 October twilight frames. Picked over two others on this run's own sky: it leaves 0.57 percent in green after a plane, against 0.80 and 1.98 for the others</dd></div>
+<div><dt>Calibration</dt><dd>Dust that moved since 13 October, measured on this run's own sky, seen in the odd and the even frames alone, and divided out: 11 shadows, 0.73 percent of the sensor. Among them a new crescent 12.7 percent deep, which the 13 October flat does not have, left at 1.7 percent</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on the stars; the field drifted 3.7 arcmin across the sensor and turned 0.05 degrees. Red and blue star images sat 0.3 sensor px off green (the air's prism): measured and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, proper coaddition (Zackay and Ofek: each frame weighted by its own measured blur and noise). One sky constant per colour per frame; in the picture only, a sky plane per colour, about 3 DN across it. Noise 7.5 to 7.8 times lower than one frame (8.1 expected from the weights). The old sigma-clipped mean was made beside it as a control</dd></div>
+<div><dt>Colour</dt><dd>The camera's colour matrix with its white balance set by the colours of 93 Gaia stars in the field (red x 1.01, blue x 1.15). The oxygen glow is outside what a screen shows; the faint lobes are grey, because their colour there is set by sky and flat, not the nebula</dd></div>
+<div><dt>Finish</dt><dd>Star colours from Gaia, the camera's colour matrix. Arcsinh stretch; black at the 50th percentile, S-curve 0.15, saturation x 1.2; the dark sky smoothed (bilateral 4 px) and set near black, by choice: 4.0 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>1200 x 1000 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The bright body and the faint outer lobes that fill it out to its apple shape: 3 to 4 arcmin from the star they stand 11 to 12 times above blank sky in the odd and the even frames each alone. The nebula is followed 8.1 arcmin across</dd></div>
+<div><dt>Not seen</dt><dd>The faint outer halo of deep pictures: beyond 4 arcmin from the star nothing passes the half-stack test. Nor the fine knots inside the nebula: the stars are 4.5 arcsec wide</dd></div>
+</dl>
+  <h3 id="dumbbell-nebula-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="dumbbell-nebula-reddit.txt" aria-describedby="dumbbell-nebula-reddit" hidden>Copy</button>
+    <a class="copy-text" href="dumbbell-nebula-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 17 October 2026</p>
 <nav class="prevnext">
   <span></span>
   <span></span>
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

@@ -41,6 +41,7 @@
   <h1>The Crystal Ball Nebula</h1>
   <p class="sub">NGC 1514, a planetary nebula in Taurus</p>
   <p class="what">Two stars at the centre, one of them dying, wrapped in the shell of gas it threw off. In 1790 it changed William Herschel's mind: a star inside a glow showed him that not every faint smudge in the sky is a crowd of stars too far away to see apart.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -53,7 +54,46 @@
 <div><dt>The shell is</dt><dd>About a light-year across, and too faint to see in any one photo</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#crystal-ball">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">14 of 25 frames of 15 s. 3.5 minutes of light; the mount smeared most of the rest.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>14 x 15 s at ISO 3200: 3.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>25 taken on target, 14 kept. 3 were centring frames; 8 smeared in one direction while the mount's hold settled and in single frames after (stars 6.1 to 9.7 arcsec, stretched 1.6 to 2.9 to 1). The sky was clear</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 4.9 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>7.8 x 5.2 arcmin, cropped round the central star from one sensor frame and turned by quarter turns only</dd></div>
+<div><dt>When</dt><dd>9 October 2026, after midnight, over 10 minutes. 48 to 50 degrees up, no Moon</dd></div>
+<div><dt>Field rotation</dt><dd>0.5 degrees over the run, corrected in registration (second-order fit on 50 or more stars)</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken: hot pixels found from the run itself (21,000 to 23,000 per colour plane) and repaired; vignetting and dust not corrected</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 3.6 times lower than one frame (3.7 expected)</dd></div>
+<div><dt>Sky</dt><dd>In the picture only: one plane per colour fitted to the sky more than 101 arcsec from the star, taking off a ramp of 7 to 10 DN across the picture</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Arcsinh stretch on brightness, colour from an 8 px blur where faint, the star's clipped core white. Black at the 40th percentile, gamma 0.9, saturation x 1.4. Dark sky smoothed (median 5 px, bilateral 4 px)</dd></div>
+<div><dt>Picture size</dt><dd>600 x 400 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The shell repeats in two independent half stacks (13.5 and 13.6 DN, shapes correlated 0.87). The star's own glare is 8 percent of the shell's light. Texture inside the shell is noise</dd></div>
+</dl>
+  <h3 id="crystal-ball-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="crystal-ball-reddit.txt" aria-describedby="crystal-ball-reddit" hidden>Copy</button>
+    <a class="copy-text" href="crystal-ball-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,082 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 8 October 2026</p>
 <nav class="prevnext">
   <a href="ring-nebula.html" class="earlier">
@@ -68,6 +108,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

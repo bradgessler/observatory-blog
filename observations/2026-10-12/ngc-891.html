@@ -36,6 +36,7 @@
   <h1>NGC 891</h1>
   <p class="sub">A spiral galaxy in Andromeda, seen edge on</p>
   <p class="what">A spiral galaxy much like our own, seen almost exactly from the side. The dark line down its middle is dust in the disc, the same kind of dust that draws the dark lanes through our Milky Way on a clear night. This is roughly how our own galaxy would look from outside: a thin disc of stars with a warm bulge of older stars at its centre.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -48,7 +49,47 @@
 <div><dt>Honest note</dt><dd>Seven and a half minutes of light is too little for the faint tips of the disc: about a tenth of its length is missing at each end</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#ngc-891">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">30 of 31 frames of 15 s. 7.5 minutes of light on one field; no frame trailed.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.8 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>30 x 15 s at ISO 3200: 7.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>31 taken, 30 kept. Only the first frame after the slew was dropped, by rule (it measured fine). No frame trailed: stars 3.6 to 4.4 arcsec, every frame within 1.3 percent of the run's star brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 3.8 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>23.3 x 15.5 arcmin: an 1800 x 1200 crop round the galaxy from a stack of 38.2 x 25.4 arcmin, nothing resampled, as the camera saw it (north 56 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 20 minutes. Nearly overhead</dd></div>
+<div><dt>Field rotation</dt><dd>0.5 degrees over the run, because the polar axis is about 5 degrees off; corrected in registration (rotation and shift on about 180 stars, 0.26 to 0.36 px rms)</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The flat is built from this run's own open sky, per colour: an elliptical fall-off (light falls off faster along the sensor's short side; green corners at 68 percent) and a measured map of 58 dust shadows over 1.9 percent of the sensor. Dust under the galaxy itself could not be measured. Hot pixels from the run itself (5,900 to 6,600 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.3 times lower than one frame (5.5 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>Shown only where the light can carry it, 3.3 percent of the picture: the stars and the galaxy's middle. The ends of the disc are grey on purpose. White stars come out slightly green: the camera's daylight white balance and matrix, with no star-colour calibration</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Brightness smoothed 1.2 px, arcsinh stretch. Black at the 60th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. Faint parts smoothed (bilateral, 4 px), the dark sky without colour; about 0.9 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>1800 x 1200 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The disc, followed for 11.1 arcmin (the catalogue gives 13.5). The dust lane: across the centre two ridges of light 33 arcsec apart with a dip between them 34 times the noise, and the odd and the even frames each show it alone. The warm bulge either side of the lane</dd></div>
+<div><dt>Not seen</dt><dd>The lane's fine filaments, the last 1.2 arcmin of each end of the disc, and the halo: 7.5 minutes at f/10 stops at about 3 times the noise. No companion galaxies were identified</dd></div>
+</dl>
+  <h3 id="ngc-891-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="ngc-891-reddit.txt" aria-describedby="ngc-891-reddit" hidden>Copy</button>
+    <a class="copy-text" href="ngc-891-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
 <nav class="prevnext">
   <a href="almach.html" class="earlier">
@@ -63,6 +104,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

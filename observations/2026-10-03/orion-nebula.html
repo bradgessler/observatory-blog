@@ -38,6 +38,7 @@
   <h1>The Orion Nebula</h1>
   <p class="sub">Messier 42</p>
   <p class="what">A cloud of glowing gas where stars are being born right now. The four young stars at its heart, the Trapezium, light up the whole nebula.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -50,7 +51,42 @@
 <div><dt>For scale</dt><dd>Neptune's whole orbit would cover a fifth of one pixel</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#orion-nebula">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">39 frames of 20 s, with 16 of 2 s for the bright core. 13 minutes of light on one field, plus short frames so the core does not burn out.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>39 x 20 s at ISO 3200 for the nebula; 16 x 2 s at ISO 800 for the core</dd></div>
+<div><dt>Frames</dt><dd>69 long frames taken, 39 kept. 30 lost to passing cloud (stars dimmed to between 3 and 77 percent)</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell. Stars 4.2 arcsec wide</dd></div>
+<div><dt>Field</dt><dd>38.8 x 25.8 arcmin: one sensor frame</dd></div>
+<div><dt>When</dt><dd>4 October 2026, before dawn. 41 to 46 degrees up, 41 percent Moon in the sky, thin cloud passing</dd></div>
+<div><dt>Calibration</dt><dd>Flat from 26 twilight-sky frames, its large-scale shape from cloud-lit frames. No darks</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>High dynamic range</dt><dd>The 2 s stack replaces the 20 s stack wherever any frame came within 7 percent of clipping: 31 star cores, the Trapezium among them. Measured ratio 41.0, expected 40</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean. One sky constant per colour</dd></div>
+<div><dt>Finish</dt><dd>Black 19 and white 217 of 255, gamma 0.95, S-curve 0.3. Saturation x 1.6 in CIELAB. Dark sky made neutral and smoothed (bilateral, 2.5 px)</dd></div>
+<div><dt>Picture size</dt><dd>3002 x 1995 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  
+  <h3 id="orion-nebula-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="orion-nebula-reddit.txt" aria-describedby="orion-nebula-reddit" hidden>Copy</button>
+    <a class="copy-text" href="orion-nebula-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
 <nav class="prevnext">
   <span></span>
@@ -61,6 +97,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

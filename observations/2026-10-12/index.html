@@ -40,6 +40,7 @@
 <header>
   <h1>Night of 12 October 2026</h1>
   <p class="lede">A night the telescope ran by itself, published as it went: ten pictures from a list of eleven, from the Triangulum Galaxy and a gold and blue double star to a globular cluster 300,000 light-years away.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <ul class="sky"><li>
   <a href="triangulum-galaxy.html">
@@ -221,7 +222,36 @@
 <p>Earlier in the evening some frames came out with trailed stars. The tracking was letting go of the motors for a few seconds at a time, whenever the network between the telescope and the computer indoors got busy. That was found and fixed before the list started. The Triangulum Galaxy was photographed across the fix, and its page says how many frames it cost.</p>
 <p>Pick a picture to see what it is, how far away it is, and how it was made.</p>
 </article>
-<p class="technical"><a href="technical.html">Technical details</a><span class="detail">The equipment, how each picture was taken and processed, and what went wrong at the telescope.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+  <p class="lede">The equipment for the whole night, what went wrong at the telescope and what we did about it, and the software. Each picture's exposures and processing are at the foot of its own page.</p>
+  <dl class="spec">
+<div><dt>Location</dt><dd>San Francisco Bay Area. A driveway at home, with trees on most sides</dd></div>
+<div><dt>Sky</dt><dd>Clear and calm until the last hour and a half, when thin cloud came through in patches</dd></div>
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain. 203 mm aperture, about 2,085 mm focal length by plate solve, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus. APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Field</dt><dd>38.8 x 25.9 arcmin in one frame, 0.388 arcsec per pixel</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, set down without polar alignment. Aligned from four plate-solved photos and driven from that model, unguided</dd></div>
+<div><dt>Computer</dt><dd>Raspberry Pi 3 running Observatory, in Elixir</dd></div>
+<div><dt>Frames</dt><dd>15 second exposures at ISO 3200 for the galaxies and nebulae, 4 seconds for the two small planetary nebulae, a sixtieth of a second for the double star. 12 to 104 taken per object and 5 to 66 kept</dd></div>
+<div><dt>Processing</dt><dd>Stacked from the RAW frames with numpy, OpenCV and rawpy. Plate solving by astrometry.net. Nothing generated</dd></div>
+</dl>
+  <h3>Each picture</h3><ul class="notes"><li><a href="triangulum-galaxy.html#technical"><span class="note-title">The Triangulum Galaxy</span><span class="note-summary">66 of 104 frames of 15 s; 34 were trailed by a tracking fault that was fixed during the run</span></a></li>
+<li><a href="almach.html#technical"><span class="note-title">Almach</span><span class="note-summary">The sharpest 5 of 13 frames of 1/60 s</span></a></li>
+<li><a href="ngc-891.html#technical"><span class="note-title">NGC 891</span><span class="note-summary">30 of 31 frames of 15 s</span></a></li>
+<li><a href="messier-77.html#technical"><span class="note-title">Messier 77</span><span class="note-summary">29 of 31 frames of 15 s</span></a></li>
+<li><a href="ngc-1535.html#technical"><span class="note-title">NGC 1535</span><span class="note-summary">30 of 33 frames of 4 s</span></a></li>
+<li><a href="crab-nebula.html#technical"><span class="note-title">The Crab Nebula</span><span class="note-summary">37 of 41 frames of 15 s</span></a></li>
+<li><a href="messier-78.html#technical"><span class="note-title">Messier 78</span><span class="note-summary">34 of 36 frames of 15 s</span></a></li>
+<li><a href="hubbles-variable-nebula.html#technical"><span class="note-title">Hubble's Variable Nebula</span><span class="note-summary">25 of 32 frames of 15 s; thin cloud took the last six</span></a></li>
+<li><a href="ngc-2392.html#technical"><span class="note-title">NGC 2392</span><span class="note-summary">21 of 32 frames of 4 s; cloud took the last ten</span></a></li>
+<li><a href="ngc-2419.html#technical"><span class="note-title">NGC 2419</span><span class="note-summary">17 of 29 frames of 15 s; cloud took the other twelve</span></a></li>
+<li><span class="note-title">The Cigar Galaxy</span><span class="note-summary">Skipped: thin cloud had come in, and the pictures taken to find it showed almost no stars</span></li></ul>
+  
+  <h3>Source</h3>
+<p>Observatory, the software that drove the mount, took the frames and published these pages, is open source: <a href="https://github.com/bradgessler/observatory">source on GitHub</a>.</p>
+
+</section>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
 
 </main>

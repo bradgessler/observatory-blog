@@ -27,4 +27,4 @@ Night of 12 October 2026, San Francisco Bay Area
 
 Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/messier-77.html
 
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#messier-77
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/messier-77.html#technical

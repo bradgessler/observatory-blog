@@ -40,6 +40,7 @@
   <h1>The Moon at last quarter</h1>
   <p class="sub">4 October 2026  ·  41 percent lit</p>
   <p class="what">Along the line between day and night the Sun is setting, so every crater rim and mountain throws a long shadow. That is why the detail is richest there.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -52,7 +53,42 @@
 <div><dt>For scale</dt><dd>Copernicus is 93 km wide; Clavius, 231 km</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#moon">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">39 frames of 1/60 s over four fields, flat-fielded. Lucky imaging over a 2 x 2 mosaic in morning twilight, with cloud about.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>1/60 s at ISO 100</dd></div>
+<div><dt>Frames</dt><dd>78 taken over five aims in two passes, 39 kept. 17 saw only the night side; the rest were lost to cloud</dd></div>
+<div><dt>Sampling</dt><dd>0.388 arcsec per pixel, the sensor's own: 0.7 km per pixel on the Moon</dd></div>
+<div><dt>Field</dt><dd>Disc 32.7 arcmin across, taller than one 38.8 x 25.9 frame: a 2 x 2 mosaic and a centre frame. One panel saw only the night side</dd></div>
+<div><dt>When</dt><dd>4 October 2026, in morning twilight, over half an hour. 62 to 70 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>Flat from 7 twilight-sky frames: corners at 74 percent of the centre, 340 dust shadows divided out. Cloud glow fitted and subtracted per frame</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Lucky imaging</dt><dd>Frames registered on the lunar surface itself (12,000 matched features, 0.8 px). In each patch only the sharpest 30 percent of the clear frames are averaged</dd></div>
+<div><dt>Restoration</dt><dd>Blur measured at the limb: 1.8 arcsec. Wiener and Richardson-Lucy with the gain capped at 3 x and held at the limb. No ringing found at limb, cusps or terminator</dd></div>
+<div><dt>Orientation</dt><dd>Lunar north up, from 17 craters of known position (32.2 degrees from the sensor's way up)</dd></div>
+<div><dt>Picture size</dt><dd>3036 x 5434 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  
+  <h3 id="moon-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="moon-reddit.txt" aria-describedby="moon-reddit" hidden>Copy</button>
+    <a class="copy-text" href="moon-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
 <nav class="prevnext">
   <a href="orion-nebula.html" class="earlier">
@@ -67,6 +103,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

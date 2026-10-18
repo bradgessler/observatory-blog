@@ -36,6 +36,7 @@
   <h1>The Triangulum Galaxy</h1>
   <p class="sub">Messier 33, a spiral galaxy in Triangulum</p>
   <p class="what">The third-largest galaxy in our small group of neighbours, after Andromeda and our own Milky Way: a loose spiral of some 40 billion stars. The bright knot at lower left, NGC 604, is a cloud where new stars are being born, 1,500 light-years across.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -48,7 +49,44 @@
 <div><dt>Honest note</dt><dd>The disc is grey on purpose: these frames cannot measure its faint colour</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#triangulum-galaxy">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">21 of 24 frames of 15 s. 5.25 minutes of light on one field, under a clear sky.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.5 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>21 x 15 s at ISO 3200: 5.25 minutes</dd></div>
+<div><dt>Frames</dt><dd>24 taken, 21 kept. 3 smeared by the mount, every star stretched the same way: one taken during a nudge, two that drifted. One 2 s centring frame left out. Clear: every kept frame within 2 percent of the run's star brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell. Stars 3.9 arcsec wide (half-flux), the sharpest of the night</dd></div>
+<div><dt>Field</dt><dd>38.4 x 25.6 arcmin: one sensor frame, in the camera's orientation (north up and to the left)</dd></div>
+<div><dt>When</dt><dd>8 to 9 October 2026, around midnight, over 15 minutes. 69 to 72 degrees up, no Moon</dd></div>
+<div><dt>Field rotation</dt><dd>0.5 degrees over the run, corrected in registration</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The flat is built from the night's own open-sky frames of M57 and NGC 1514, at the same exposure: vignetting (corners at 69 percent) and 10 dust shadows divided out. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One constant per colour per frame, set where the galaxy is faintest; no surface fitted, the galaxy fills the frame. Noise 4.4 times lower than one frame (4.6 expected)</dd></div>
+<div><dt>Colour</dt><dd>Shown only where the light can carry it, 0.5 percent of the picture: the core, star clusters, the brightest star-forming clouds and the stars. The faint disc is grey because its colour here would be set by the flat, not measured</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Brightness smoothed 1 px (2 px where dark), arcsinh stretch, saturation x 1.1. Black just above the faintest part of the galaxy</dd></div>
+<div><dt>Not used</dt><dd>Wiener and Richardson-Lucy restoration: every setting that made the stars smaller dug a dark moat round the bright ones</dd></div>
+<div><dt>Picture size</dt><dd>2970 x 1980 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  
+  <h3 id="triangulum-galaxy-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="triangulum-galaxy-reddit.txt" aria-describedby="triangulum-galaxy-reddit" hidden>Copy</button>
+    <a class="copy-text" href="triangulum-galaxy-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,082 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 8 October 2026</p>
 <nav class="prevnext">
   <a href="crystal-ball.html" class="earlier">
@@ -63,6 +101,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

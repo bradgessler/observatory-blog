@@ -41,6 +41,7 @@
   <h1>Almach</h1>
   <p class="sub">Gamma Andromedae, a gold and blue double star in Andromeda</p>
   <p class="what">To the eye it is one star in Andromeda. A telescope splits it in two: a gold giant and a small blue companion, a favourite for the contrast of their colours. The blue one is really three stars, too close together for this picture to separate. Everything here, both stars and the dark between them, would fit in half a light-year.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -53,7 +54,47 @@
 <div><dt>Honest note</dt><dd>The colours are as the camera recorded them, with nothing added: the gold star is probably a little more orange than this, and the blue one a little bluer</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#almach">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">The sharpest 5 of 13 frames of 1/60 s. The sharpest 5 of 13 frames, each a sixtieth of a second, at the sensor's own scale.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,084 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>5 x 1/60 s at ISO 400: a twelfth of a second of light. The primary did not clip: the brightest pixel of any colour plane in any frame is 72 percent of the 14-bit ceiling</dd></div>
+<div><dt>Frames</dt><dd>13 taken, the sharpest 5 kept: the primary 3.03 to 3.46 arcsec wide (half-flux) in those, 3.65 to 4.31 in the 8 left out. A sixtieth of a second freezes the air, so a frame is sharp or it is not, and every frame added softens the star: all 13 give 3.70 arcsec against 3.32 for these 5</dd></div>
+<div><dt>Sampling</dt><dd>0.388 arcsec per pixel: the sensor's own pixels, never enlarged. The pair is 25 px across; the stars are 3.3 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>4.1 x 4.1 arcmin: a 640 x 640 crop round the pair, north up and east left by one Lanczos turn of 56.2 degrees. No other star shows in a sixtieth of a second</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 5 minutes. Nearly overhead</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat. Each frame's sky median taken off per colour plane, one hot pixel repaired. The pair sits at the middle of the sensor, where a flat would change it by well under a percent</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic). Shift only: each plane of each frame placed on its own centroid of the primary, at the true sensor position of every sample, as square drops of 1 px (drizzle). Each frame scaled to the run's median brightness first, since the star twinkles 8 percent from frame to frame</dd></div>
+<div><dt>Orientation</dt><dd>From a plate-solved 15 s frame of the same field, taken just before with the camera untouched: in a sixtieth of a second there are no other stars to solve on</dd></div>
+<div><dt>Colour</dt><dd>The camera's daylight white balance (red x 2.67, blue x 1.24) and its own colour matrix, no star-colour calibration, saturation x 1.0. Red over green and blue over green: primary 1.09 and 0.56, companion 0.72 and 1.02. The companion is the bluer star in 13 of 13 frames; the primary's red halo spills onto it, so it is bluer than shown</dd></div>
+<div><dt>Finish</dt><dd>Brightness smoothed 0.8 px, colour 1.5 px, arcsinh stretch. Black at the 60th percentile, white at the brightest channel of the brightest pixel, S-curve 0.15, no saturation added. Dark sky smoothed (bilateral, 2 px) and without colour</dd></div>
+<div><dt>Picture size</dt><dd>640 x 640 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>The pair</dt><dd>9.55 arcsec apart (standard error 0.09) at position angle 62.3 degrees (0.3): two-star fits to each of the 13 frames. With the model's own error, 9.6 plus or minus 0.15 arcsec at 62 plus or minus 1 degrees. The primary is 9.0 times the companion in the camera's green (2.4 magnitudes)</dd></div>
+<div><dt>Not resolved</dt><dd>The companion is itself a close pair, about half an arcsecond apart: far inside the 3.3 arcsec blur of the air on this night. A seeing-limited picture; nothing finer than 2 to 3 arcsec is shown</dd></div>
+</dl>
+  <h3 id="almach-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="almach-reddit.txt" aria-describedby="almach-reddit" hidden>Copy</button>
+    <a class="copy-text" href="almach-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
 <nav class="prevnext">
   <a href="triangulum-galaxy.html" class="earlier">
@@ -68,6 +109,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

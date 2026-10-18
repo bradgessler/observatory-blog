@@ -37,6 +37,7 @@
   <h1>The Andromeda Galaxy: core, dust lanes and a companion</h1>
   <p class="sub">Messier 31 and Messier 32</p>
   <p class="what">Six fields joined round the galaxy's core. M32, the fuzzy ball below it, is a small galaxy in orbit round Andromeda.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,7 +50,44 @@
 <div><dt>For scale</dt><dd>Each pixel is about 19 light-years across</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#andromeda-mosaic">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">Six fields of 30 s frames joined to the deep core; thin cloud that hour. A 3 x 2 mosaic joined to the deep core field; each outline is one sensor frame, with frames kept of frames taken.</p>
+  <figure class="plate pan"><a href="images/andromeda-mosaic-frames.jpg"><img src="images/andromeda-mosaic-frames-1600.jpg" srcset="images/andromeda-mosaic-frames-1600.jpg 1600w, images/andromeda-mosaic-frames.jpg 2892w" sizes="(min-width: 80rem) 78rem, 100vw" width="2892" height="1644" alt="The Andromeda Galaxy: core, dust lanes and a companion, with the frames that were joined outlined" /></a></figure><p class="pan-hint">Swipe sideways to see the rest. Tap the picture for full size.</p>
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>Panels: 30 s at ISO 3200. Core: 20 s at ISO 3200</dd></div>
+<div><dt>Frames</dt><dd>66 panel frames taken, 23 kept: 11.5 minutes. 43 lost to cloud. The core adds 38 frames, 12.7 minutes</dd></div>
+<div><dt>Sampling</dt><dd>1.552 arcsec per pixel. Stars 4.1 arcsec wide</dd></div>
+<div><dt>Field</dt><dd>74.8 x 42.5 arcmin, cropped level from the mosaic; one frame is 38.8 x 25.9</dd></div>
+<div><dt>When</dt><dd>4 October 2026, in the small hours, over 67 minutes. 72 to 61 degrees up, Moon up, cloud passing</dd></div>
+<div><dt>Calibration</dt><dd>Flat from 26 twilight-sky frames, its large-scale shape from cloud-lit frames; the dust in it checked against this hour's frames. No darks</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Mosaic</dt><dd>Each panel plate-solved, then all solved jointly on shared stars (0.4 to 0.6 arcsec). One brightness scale per panel from shared stars; backgrounds matched with a plane per panel; feathered</dd></div>
+<div><dt>Finish</dt><dd>Black 53 and white 226 of 255, gamma 1.2, S-curve 0.3. Dark sky made neutral and smoothed (bilateral, 3.5 px)</dd></div>
+<div><dt>Picture size</dt><dd>2892 x 1644 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>Honest limits</dt><dd>Outside the core field the panels hold 1 to 14 percent of the core's depth, and are shown in grey because their colour zero is not trusted. A map, not a measurement</dd></div>
+</dl>
+  <h3 id="andromeda-mosaic-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="andromeda-mosaic-reddit.txt" aria-describedby="andromeda-mosaic-reddit" hidden>Copy</button>
+    <a class="copy-text" href="andromeda-mosaic-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
 <nav class="prevnext">
   <a href="orion-nebula-wide.html" class="earlier">
@@ -64,6 +102,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>

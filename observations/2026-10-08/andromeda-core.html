@@ -37,6 +37,7 @@
   <h1>The core of the Andromeda Galaxy</h1>
   <p class="sub">Messier 31</p>
   <p class="what">The centre of the nearest big galaxy to our own, with the dark lanes of dust in its spiral arms. The glow is the light of billions of stars, too far away to see one by one.</p>
+  <p class="jump"><a href="#technical">Technical details</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,7 +50,44 @@
 <div><dt>At its centre</dt><dd>A black hole of over 100 million Suns</dd></div>
 </dl>
 </section>
-<p class="technical"><a href="technical.html#andromeda-core">Technical details</a><span class="detail">How this picture was made: the equipment, the exposures and the processing.</span></p>
+<section class="technical-details" id="technical" aria-labelledby="technical-h">
+  <h2 id="technical-h">Technical details</h2>
+    <p class="lede">30 of 33 frames of 15 s, under a clear sky. 7.5 minutes of light on one field, under a clear sky.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>30 x 15 s at ISO 3200: 7.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>33 taken, 30 kept. 2 were centring frames just after the slew, 1 smeared by the mount. Clear: the weights all between 0.97 and 1.04</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell. Stars 4.5 arcsec wide (half-flux), 4.3 FWHM</dd></div>
+<div><dt>Field</dt><dd>38.3 x 25.6 arcmin: one sensor frame, in the camera's orientation (north to the left). M32 is 4.4 arcmin off the right edge</dd></div>
+<div><dt>When</dt><dd>8 October 2026, late evening, over 17 minutes. 75 to 79 degrees up, no Moon</dd></div>
+<div><dt>Field rotation</dt><dd>0.6 degrees over the run, corrected in registration</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The flat is built from the open sky round M76, shot 25 to 55 minutes earlier with nothing moved but the mount; it agrees with the 3 October flat to 1 percent in green and blue. 50 dust shadows divided out</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one constant per frame. Noise 5.6 times lower than one frame (5.5 expected)</dd></div>
+<div><dt>Zero level</dt><dd>The galaxy fills the frame, so the true sky cannot be measured: the darkest part of the field, 19.7 arcmin from the nucleus, is set to zero. Good to a few DN of a 99 DN sky</dd></div>
+<div><dt>Finish</dt><dd>The camera's as-shot white balance, no colour matrix. Arcsinh stretch with the nucleus unclipped (250 of 255). Gamma 1.2, S-curve 0.45, saturation x 1.2. Faint glow made neutral, dark parts smoothed (bilateral, 2.5 px)</dd></div>
+<div><dt>Not used</dt><dd>A deconvolved version, kept apart: stars 7 percent smaller, but a dark moat round every star and 34 percent more grain. The dust lanes are limited by noise, not blur</dd></div>
+<div><dt>Picture size</dt><dd>2962 x 1982 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  
+  <h3 id="andromeda-core-reddit">Copy for Reddit</h3>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-src="andromeda-core-reddit.txt" aria-describedby="andromeda-core-reddit" hidden>Copy</button>
+    <a class="copy-text" href="andromeda-core-reddit.txt">Open as text</a>
+  </div>
+
+</section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,082 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 8 October 2026</p>
 <nav class="prevnext">
   <span></span>
@@ -60,6 +98,27 @@
 
 </nav>
 <p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
+  });
+});
+</script>
+
 
 </main>
 </body>
