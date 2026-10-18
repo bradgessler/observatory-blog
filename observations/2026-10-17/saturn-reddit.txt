@@ -1,0 +1,34 @@
+﻿**Saturn and five of its moons**: The ringed planet, in Pisces
+
+Night of 17 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,084 mm focal length by plate solve, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided, not dithered
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: 488 x 1/60 s at ISO 800 for the planet; 2 x 2 s at ISO 6400 for the moons, the two framing shots taken just before, in which the planet is blown out (960 times the exposure)
+* Frames: 488 taken for the planet, all usable, the sharpest 25 kept
+* When: The night of 17 October 2026, from late in the evening to just after midnight, over two hours; 24 of the 25 kept frames from its first hour. About 50 degrees up
+* Sky: Clear and still. A Moon a little under half lit, low in the southwest early on and soon behind the garage
+* Calibration: No darks or flats. Each frame's sky, one constant per colour plane, taken off. The two moon frames averaged, and where they disagree by more than 6 sigma the lower kept, so a hot pixel or a cosmic ray in one drops out (the field moved 4.6 arcmin across the sensor between them)
+* Field: 6.2 x 3.3 arcmin, north up and east left
+* Sampling: 0.388 arcsec per pixel, the sensor's own scale, never enlarged
+
+**Processing**
+
+* Registration: Each colour plane laid at its own place on a grid 3 times finer than the sensor (0.129 arcsec), no demosaic; the field's turn (0.026 degrees a minute) taken out; registered to 0.04 sensor px rms. The air's prism: red sat 0.31, 0.36 and blue -0.52, -0.54 sensor px from green, the same in each half of the frames, and were slid back onto it
+* Lucky imaging: Plain stacks of the sharpest 5 up to all 488 compared on the polar limb, the ring's width and the gap between rings and globe: 8 to 25 frames sit on one plateau, more are softer, and 5 is sharper by the gap (0.145 against 0.127), so the rule chose 5. 25 were kept, because restored, 25 beat 5 (gap 0.359 against 0.313) with less than half the grain and Titan measured at 18 sigma instead of 8: the blur is known better
+* Planet stack: The 25 frames each turned back to the moons' moment and laid down in one Lanczos resampling with their colour places and shift, then averaged; two half stacks (odd and even ranks) made the same way for the tests
+* Composite: The planet set into the moon field where the 2 s frames are blown out, grown 28 px and feathered over 8. The planet's glare taken off the moon field ring by ring. Each part has its own white: the moons are lifted hundreds to thousands of times against the planet
+* Restoration: Blur measured on Titan in the same 25 frames: 3.20 x 2.97 arcsec (Titan's own disc, 0.8 arcsec, adds about 1 percent). Divided out with 24 rounds of Richardson-Lucy on brightness, each colour scaled alike. The rounds were set on a model Saturn blurred the same way with the stack's own grain: stopped before its false bright rim passes 2 percent of the globe
+* Finish: Planet: white at its brightest 0.05 percent, gamma 1.25. Moons: an arcsinh stretch so Titan and Iapetus both show. Then the dark sky set neutral and to black at its own level (60th percentile), smoothed (bilateral 4 px), saturation x 1.15
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-17/saturn.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-17/saturn.html#technical

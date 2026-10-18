@@ -16,7 +16,7 @@
 <meta property="og:plus:viewport:width" content="1200" />
 <meta property="og:plus:style" content="margin:0;padding:0;background:#000" />
 <meta property="og:plus:cache:max_age" content="3600" />
-<meta property="og:plus:cache:etag" content="c51630c4b36e" />
+<meta property="og:plus:cache:etag" content="c1951fd7da2b" />
 <link rel="stylesheet" href="../../style.css" />
 </head>
 <body class="obs">
@@ -28,7 +28,9 @@
     <div style="font-size:4.6vw;font-weight:700;line-height:1.05;letter-spacing:-.01em;">Night of 17 October 2026</div>
     <div style="font-size:1.85vw;color:#cfcfcb;margin-top:1.5vw;line-height:1.4;">Four targets and as long as the night allows on each: the Dumbbell Nebula, the Triangulum Galaxy, Saturn, and the Orion Nebula.</div>
   </div>
-  <div style="flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.3vw;"><div style="min-width:0;min-height:0;overflow:hidden;"><img src="images/dumbbell-nebula-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div></div>
+  <div style="flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.3vw;"><div style="min-width:0;min-height:0;overflow:hidden;"><img src="images/dumbbell-nebula-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+<div style="min-width:0;min-height:0;overflow:hidden;"><img src="images/triangulum-galaxy-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+<div style="min-width:0;min-height:0;overflow:hidden;"><img src="images/saturn-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div></div>
 </div>
 </div></template>
 <p class="back"><a href="../">‹ Observations</a></p>
@@ -44,6 +46,22 @@
     <span class="detail">Messier 27, a planetary nebula in Vulpecula</span>
   </a>
 </li>
+
+<li>
+  <a href="triangulum-galaxy.html">
+    <span class="frame"><img src="images/triangulum-galaxy-thumb.jpg" width="900" height="530" alt="" loading="lazy" /></span>
+    <strong>The Triangulum Galaxy</strong>
+    <span class="detail">Messier 33, a spiral galaxy in Triangulum</span>
+  </a>
+</li>
+
+<li>
+  <a href="saturn.html">
+    <span class="frame"><img src="images/saturn-thumb.jpg" width="900" height="480" alt="" loading="lazy" /></span>
+    <strong>Saturn and five of its moons</strong>
+    <span class="detail">The ringed planet, in Pisces</span>
+  </a>
+</li>
 </ul>
 <section class="menu" aria-labelledby="menu-h">
   <h2 id="menu-h">On the menu</h2>
@@ -56,19 +74,19 @@
   </a>
 </li>
 
-<li class="is-processing">
+<li class="is-published">
   <a href="triangulum-galaxy.html">
     <strong>The Triangulum Galaxy</strong>
     <span class="detail">Messier 33, a spiral galaxy, going deeper</span>
-    <span class="state">Photographed, being processed</span>
+    <span class="state">Published</span>
   </a>
 </li>
 
-<li class="is-processing">
+<li class="is-published">
   <a href="saturn.html">
     <strong>Saturn</strong>
     <span class="detail">The ringed planet, in Pisces</span>
-    <span class="state">Photographed, being processed</span>
+    <span class="state">Published</span>
   </a>
 </li>
 
@@ -101,8 +119,8 @@
 <div><dt>Processing</dt><dd>Stacked from the RAW frames with numpy, OpenCV and rawpy. No darks tonight: hot pixels found from each run itself. Flats from open sky and earlier twilight frames, with tonight's dust measured on each run's own sky and divided out. Star colours from the Gaia catalogue. Plate solving by astrometry.net. Nothing generated</dd></div>
 </dl>
   <h3>Each picture</h3><ul class="notes"><li><a href="dumbbell-nebula.html#technical"><span class="note-title">The Dumbbell Nebula</span><span class="note-summary">66 of 70 frames of 15 s</span></a></li>
-<li><span class="note-title">The Triangulum Galaxy</span><span class="note-summary">Photographed, being processed</span></li>
-<li><span class="note-title">Saturn</span><span class="note-summary">Photographed, being processed</span></li>
+<li><a href="triangulum-galaxy.html#technical"><span class="note-title">The Triangulum Galaxy</span><span class="note-summary">267 of 342 frames of 15 s, from two nights</span></a></li>
+<li><a href="saturn.html#technical"><span class="note-title">Saturn and five of its moons</span><span class="note-summary">25 of 488 frames of 1/60 s for the planet, 2 frames of 2 s for the moons</span></a></li>
 <li><span class="note-title">The Orion Nebula</span><span class="note-summary">Being photographed now</span></li></ul>
   <section class="notes"><h2>Technical notes from the night</h2><p class="lede">What went wrong at the telescope, and what we did about it, as it happened.</p><ul class="notes"><li><a href="../../2026-10-17-you-cant-plate-solve-the-moon.html"><span class="note-title">You can't plate solve the Moon, and you don't need to</span><span class="note-summary">My telescope finds where it's pointing by matching stars. A photo of the Moon has no stars in it. Here's how it would point at the Moon anyway, and how one grey photo showed my garage was in the way.</span></a></li>
 <li><a href="../../2026-10-17-the-dust-detector-saw-a-galaxy.html"><span class="note-title">My telescope's new dust detector mistook a galaxy for dust</span><span class="note-summary">A few hours after we taught the telescope to find dust on its camera by itself, it decided 122 specks of dust were covering 14 percent of the camera. Most of them were the galaxy. The fix was the same test I'd done by eye.</span></a></li>
