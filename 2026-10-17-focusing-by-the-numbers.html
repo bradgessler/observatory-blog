@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Focusing a telescope by reading a number instead of squinting · Observatory</title>
+<meta name="description" content="My stars were blurry donuts 12 arcseconds wide. The software measured every picture and put one number on my phone, and I turned the focus knob until it dropped to 5." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Focusing a telescope by reading a number instead of squinting" />
+<meta property="og:description" content="My stars were blurry donuts 12 arcseconds wide. The software measured every picture and put one number on my phone, and I turned the focus knob until it dropped to 5." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/2026-10-17-focusing-by-the-numbers.html" />
+<meta property="og:image" content="https://mlghbepw.ogplus.net/observatory-blog/2026-10-17-focusing-by-the-numbers.html" />
+<meta property="article:published_time" content="2026-10-17" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:plus:viewport:width" content="1200" />
+<meta property="og:plus:style" content="margin:0;padding:0;background:#000" />
+<meta property="og:plus:cache:max_age" content="3600" />
+<meta property="og:plus:cache:etag" content="7df60b6fcd70" /><link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/elixir.min.js"></script>
+<script>addEventListener("DOMContentLoaded", () => window.hljs && hljs.highlightAll());</script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="">
+<template id="ogplus"><div style="position:relative;width:100vw;height:100vh;overflow:hidden;background:#000;color:#fff;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif;">
+<div style="display:flex;width:100%;height:100%;">
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4vw;box-sizing:border-box;">
+    <div style="margin-bottom:auto;font-size:1.5vw;color:#b8b8b4;">Brad Gessler · Observatory</div>
+    <div style="font-size:1.6vw;color:#b8b8b4;">17 October 2026</div>
+<div style="font-size:3.7vw;font-weight:700;line-height:1.1;letter-spacing:-.01em;margin-top:1vw;">Focusing a telescope by reading a number instead of squinting</div>
+
+  </div>
+  <img src="images/2026-10-17-focus-before-after.jpg" alt="" style="height:100%;width:auto;max-width:52%;object-fit:cover;display:block;" />
+</div>
+</div></template>
+<p class="back"><a href="index.html">‹ Observatory</a></p>
+<article>
+  <p class="kind">Technical note</p>
+  <h1>Focusing a telescope by reading a number instead of squinting</h1>
+  <time datetime="2026-10-17">17 October 2026</time>
+  <p>The first pictures tonight were out of focus. Not a little soft. Every star was a ring with a hole in the middle, about 12 arcseconds across. Last week the same telescope made stars 4 to 5 arcseconds wide.</p>
+<p>Nothing in software fixes that. Claude told me as much, and I told it I could dial in focus in 45 minutes.</p>
+<h2>Why an out-of-focus star is a donut</h2>
+<p>My telescope is a Celestron 8SE, a Schmidt-Cassegrain. Light comes in the front, bounces off a big mirror at the back, then off a small mirror stuck to the middle of the front glass, and back out through a hole in the big mirror to the camera. That small mirror blocks the middle of the light coming in.</p>
+<p>In focus, all of that light meets at a point, so you never see the shadow. Out of focus, each star turns into a little picture of the telescope's opening, with the small mirror's shadow as the hole. The bigger the donut, the further out of focus you are.</p>
+<h2>Measure the star, don't eyeball it</h2>
+<p>Judging focus by eye on a camera's little screen in the dark is miserable. So the software measures it. For every picture it finds the stars and, for each one, measures how wide a circle you need to hold half of that star's light. That's called the half-flux diameter. It works the same on a donut as on a point, so it always tells you how far off you are. The software takes the middle value over all the stars in the picture and shows it on the camera page as &quot;Star size&quot;, with the last picture's number beside it.</p>
+<p>My camera puts 0.39 arcseconds on each pixel, so a 12 arcsecond star is about 30 pixels across.</p>
+<h2>Park on a bright star and take pictures nonstop</h2>
+<p>While I was still out, Claude pointed the telescope at Vega and set the camera taking a 2 second picture back to back, one about every 17 seconds. When I got there all I had to do was turn the knob, wait for the next picture, and look at the number.</p>
+<p>On an 8SE the focus knob is on the back of the tube. It slides the big mirror back and forth. There's no lock and no fine adjustment, just the knob. I turned it a bit and Claude read the next pictures.</p>
+<figure><img src="images/2026-10-17-focus-before-after.jpg" alt="Vega and two nearby stars, twice: on the left the small stars are rings, on the right they are points" loading="lazy" /><figcaption>The same patch of sky around Vega before and after one turn of the focus knob. On the left the two small stars on either side of Vega are rings. On the right they are points. The software measured 12.2 arcseconds before and 4.8 after.</figcaption></figure>
+<p>The numbers, picture by picture: 12.8, 12.2, then 4.8 and 5.2. One turn, in the right direction, and it was there.</p>
+<h2>How small is small enough</h2>
+<p>You can't get a star down to nothing, because the air between you and the star moves around and smears it. On a typical night here that's about 4 arcseconds. Once you're at 5, more fiddling mostly chases the air. Claude's advice was to stop there rather than risk turning past it.</p>
+<p>If you have a camera on your telescope and any software that measures star size (a lot of free capture programs do, under names like HFD or FWHM), this is the way to focus. Pick a bright star, take short pictures nonstop, and turn the knob in the direction that makes the number go down. When it starts going back up, come back half as far.</p>
+</article>
+<nav class="prevnext">
+  <a href="2026-10-17-you-cant-plate-solve-the-moon.html" class="earlier">
+  <span class="dir">Earlier</span>
+  <strong>You can't plate solve the Moon, and you don't need to</strong>
+</a>
+
+  <a href="2026-10-17-a-meridian-flip-broke-centering.html" class="later">
+  <span class="dir">Later</span>
+  <strong>After a meridian flip, my telescope thought a one degree nudge was a half turn</strong>
+</a>
+
+</nav>
+
+</main>
+</body>
+</html>

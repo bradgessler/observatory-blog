@@ -15,7 +15,7 @@
 <meta property="og:plus:viewport:width" content="1200" />
 <meta property="og:plus:style" content="margin:0;padding:0;background:#000" />
 <meta property="og:plus:cache:max_age" content="3600" />
-<meta property="og:plus:cache:etag" content="d15d51ece4c0" />
+<meta property="og:plus:cache:etag" content="40d1d63182dd" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -27,12 +27,7 @@
     <div style="font-size:4.6vw;font-weight:700;line-height:1.05;letter-spacing:-.01em;">Observatory</div>
     <div style="font-size:1.85vw;color:#cfcfcb;margin-top:1.5vw;line-height:1.4;">Telescope control in Elixir: a mount driver, a Phoenix LiveView controller a phone opens, and a Nerves image for a Pi. Notes from building it.</div>
   </div>
-  <div style="flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.3vw;"><div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/triangulum-galaxy-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-<div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/almach-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-<div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/ngc-891-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-<div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/messier-77-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-<div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/ngc-1535-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
-<div style="min-width:0;min-height:0;overflow:hidden;"><img src="observations/2026-10-12/images/crab-nebula-thumb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div></div>
+  <div style="flex:1;min-width:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:.3vw;"></div>
 </div>
 </div></template>
 <header class="site">
@@ -41,16 +36,16 @@
   <p class="lede"><a href="https://github.com/bradgessler/observatory">Source on GitHub</a></p>
 </header>
 <a class="night" href="observations/">
-  <div class="strip"><img src="observations/2026-10-12/images/triangulum-galaxy-thumb.jpg" alt="The Triangulum Galaxy" loading="lazy" />
-<img src="observations/2026-10-12/images/almach-thumb.jpg" alt="Almach" loading="lazy" />
-<img src="observations/2026-10-12/images/ngc-891-thumb.jpg" alt="NGC 891" loading="lazy" />
-<img src="observations/2026-10-12/images/messier-77-thumb.jpg" alt="Messier 77" loading="lazy" /></div>
+  <div class="strip"></div>
   <div class="card-body">
     <h2>Observations</h2>
-    <p>Pictures from the telescope, a page per night. Latest: Night of 12 October 2026, 10 pictures.</p>
+    <p>Pictures from the telescope, a page per night. Latest: Night of 17 October 2026, the first pictures are on their way.</p>
   </div>
 </a>
 
+<section class="notes"><h2>Technical notes</h2><p class="lede">The problems we ran into with the software and the hardware, written up as they happened.</p><ul class="notes"><li><a href="2026-10-17-a-meridian-flip-broke-centering.html"><span class="note-title">After a meridian flip, my telescope thought a one degree nudge was a half turn</span><time datetime="2026-10-17">17 October 2026</time><span class="note-summary">My mount can point at any star two ways. After it flipped to the other side, the software that centers targets worked out its correction for the wrong side and gave up. The fix was one line.</span></a></li>
+<li><a href="2026-10-17-focusing-by-the-numbers.html"><span class="note-title">Focusing a telescope by reading a number instead of squinting</span><time datetime="2026-10-17">17 October 2026</time><span class="note-summary">My stars were blurry donuts 12 arcseconds wide. The software measured every picture and put one number on my phone, and I turned the focus knob until it dropped to 5.</span></a></li>
+<li><a href="2026-10-17-you-cant-plate-solve-the-moon.html"><span class="note-title">You can't plate solve the Moon, and you don't need to</span><time datetime="2026-10-17">17 October 2026</time><span class="note-summary">My telescope finds where it's pointing by matching stars. A photo of the Moon has no stars in it. Here's how the software would point at the Moon anyway, and how it worked out that my garage was in the way.</span></a></li></ul></section>
 <ul class="posts"><li class="card">
   <a href="2026-10-08-one-button-and-a-crooked-tripod.html">
     <img src="images/2026-10-08-alignment-frames.jpg" alt="Five photos of star fields taken by the telescope's camera, four of them labelled with how fast they were plate solved, one washed out orange by a garage light" loading="lazy" />
