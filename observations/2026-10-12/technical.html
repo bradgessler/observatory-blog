@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Technical details, Night of 12 October 2026 · Observatory</title>
+<meta name="description" content="How the pictures of the night of 12 october 2026 were made: the equipment, the exposures and the processing." />
+<meta property="og:site_name" content="Observatory" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Technical details, Night of 12 October 2026" />
+<meta property="og:description" content="How the pictures of the night of 12 october 2026 were made: the equipment, the exposures and the processing." />
+<meta property="og:url" content="https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html" />
+<meta property="og:image" content="https://mlghbepw.ogplus.net/observatory-blog/observations/2026-10-12/technical.html" />
+<meta property="article:published_time" content="2026-10-12" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="og:plus:viewport:width" content="800" />
+<link rel="stylesheet" href="../../style.css" />
+</head>
+<body class="obs tech">
+<main class="wide">
+<p class="back"><a href="./">‹ Night of 12 October 2026</a></p>
+<header>
+  <h1>Technical details</h1>
+  <p class="sub">Night of 12 October 2026</p>
+  <p class="lede">The equipment, then each target: how it was taken, how it was processed, and what the picture does and does not show. Each published target has a block to copy into a forum post.</p>
+</header>
+<section aria-labelledby="setup-h">
+  <h2 id="setup-h">Session</h2>
+  <dl class="spec">
+<div><dt>Location</dt><dd>San Francisco Bay Area. A driveway at home, with trees on most sides</dd></div>
+<div><dt>Sky</dt><dd>Clear and calm until the last hour and a half, when thin cloud came through in patches</dd></div>
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain. 203 mm aperture, about 2,085 mm focal length by plate solve, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus. APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Field</dt><dd>38.8 x 25.9 arcmin in one frame, 0.388 arcsec per pixel</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, set down without polar alignment. Aligned from four plate-solved photos and driven from that model, unguided</dd></div>
+<div><dt>Computer</dt><dd>Raspberry Pi 3 running Observatory, in Elixir</dd></div>
+<div><dt>Frames</dt><dd>15 second exposures at ISO 3200 for the galaxies and nebulae, 4 seconds for the two small planetary nebulae, a sixtieth of a second for the double star. 12 to 104 taken per object and 5 to 66 kept</dd></div>
+<div><dt>Processing</dt><dd>Stacked from the RAW frames with numpy, OpenCV and rawpy. Plate solving by astrometry.net. Nothing generated</dd></div>
+</dl>
+</section>
+<section class="target" id="triangulum-galaxy" aria-labelledby="triangulum-galaxy-h">
+  <h2 id="triangulum-galaxy-h"><a href="triangulum-galaxy.html">The Triangulum Galaxy</a></h2>
+  <p class="sub">Messier 33, a spiral galaxy in Triangulum</p>
+  <p class="lede">66 of 104 frames of 15 s; 34 were trailed by a tracking fault that was fixed during the run. 16.5 minutes of light on one field, under a clear sky.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.5 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>66 x 15 s at ISO 3200: 16.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>104 taken, 66 kept. 34 frames were trailed by a tracking fault that was fixed during the run: the drive let go of both motors for about 5 s now and then, leaving each star a dot with a tail of 4 to 9 arcsec. 4 more had soft stars (4.4 to 4.7 arcsec). Clear: every untrailed frame within 5 percent of the run's star brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 3.6 arcsec wide (half-flux), against 3.9 on 8 October</dd></div>
+<div><dt>Field</dt><dd>36.8 x 24.5 arcmin: the part of one sensor frame that at least 53 of the 66 frames cover, as the camera saw it (north 56 degrees anticlockwise of up). Not turned: a turn would resample the picture</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 72 minutes. High in the sky, about 80 degrees up</dd></div>
+<div><dt>Field rotation</dt><dd>1.7 degrees over the run, because the polar axis is about 5 degrees off; corrected in registration (rotation and shift on 65 to 73 stars, 0.3 to 0.5 px rms)</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. Vignetting: the radial profile measured on 8 October from open sky, same telescope, camera and settings (corners at 69 percent); the galaxy fills tonight's frames, so it cannot be checked. Dust: 10 shadows found in tonight's own frames and divided out, each only where both halves of the run show it alike. Hot pixels from the run itself (5,700 to 6,500 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One constant per colour per frame, set where the galaxy is faintest; no surface fitted. Noise 7.8 times lower than one frame (8.1 expected from the weights), and half that of 8 October's picture of this field, which had a third of the light (5.25 minutes)</dd></div>
+<div><dt>Zero level</dt><dd>The galaxy is bigger than the frame, so the true sky cannot be measured: zero is the galaxy's faintest part in this field. The black point was raised for a quiet sky, which leaves about 2 percent of the picture, the darkest sky, exactly black</dd></div>
+<div><dt>Colour</dt><dd>Shown only where the light can carry it, 0.4 percent of the picture: the stars, the core, the brightest star-forming clouds such as NGC 604. The disc is grey on purpose. White stars come out slightly green (red : green : blue about 0.91 : 1 : 0.94): the camera's daylight white balance and matrix, with no star-colour calibration</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Brightness smoothed 1 px, arcsinh stretch. Black at the 14th percentile, gamma 0.9, S-curve 0.3, saturation x 1.25. Dark sky smoothed (bilateral, 3 px) and without colour</dd></div>
+<div><dt>Picture size</dt><dd>2844 x 1892 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>Known flaws</dt><dd>Stars towards the corners have a short flare pointing away from the centre: the optics off axis, not the tracking. Two shallow dust shadows near the middle could not be confirmed tonight and were left alone</dd></div>
+</dl>
+  <h3 id="triangulum-galaxy-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="triangulum-galaxy-text" aria-describedby="triangulum-galaxy-reddit" hidden>Copy</button>
+    <pre id="triangulum-galaxy-text">**The Triangulum Galaxy**: Messier 33, a spiral galaxy in Triangulum
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.5 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 66 × 15 s at ISO 3200 (16.5 minutes)
+* Frames: 104 taken, 66 kept
+* When: 13 October 2026, after midnight, over 72 minutes. High in the sky, about 80 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. Vignetting: the radial profile measured on 8 October from open sky, same telescope, camera and settings (corners at 69 percent); the galaxy fills tonight's frames, so it cannot be checked. Dust: 10 shadows found in tonight's own frames and divided out, each only where both halves of the run show it alike. Hot pixels from the run itself (5,700 to 6,500 per colour plane)
+* Field: 36.8 x 24.5 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One constant per colour per frame, set where the galaxy is faintest; no surface fitted. Noise 7.8 times lower than one frame (8.1 expected from the weights), and half that of 8 October's picture of this field, which had a third of the light (5.25 minutes)
+* Finish: The camera's daylight white balance and colour matrix. Brightness smoothed 1 px, arcsinh stretch. Black at the 14th percentile, gamma 0.9, S-curve 0.3, saturation x 1.25. Dark sky smoothed (bilateral, 3 px) and without colour
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/triangulum-galaxy.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#triangulum-galaxy</pre>
+  </div>
+</section>
+
+<section class="target" id="almach" aria-labelledby="almach-h">
+  <h2 id="almach-h"><a href="almach.html">Almach</a></h2>
+  <p class="sub">Gamma Andromedae, a gold and blue double star in Andromeda</p>
+  <p class="lede">The sharpest 5 of 13 frames of 1/60 s. The sharpest 5 of 13 frames, each a sixtieth of a second, at the sensor's own scale.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,084 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>5 x 1/60 s at ISO 400: a twelfth of a second of light. The primary did not clip: the brightest pixel of any colour plane in any frame is 72 percent of the 14-bit ceiling</dd></div>
+<div><dt>Frames</dt><dd>13 taken, the sharpest 5 kept: the primary 3.03 to 3.46 arcsec wide (half-flux) in those, 3.65 to 4.31 in the 8 left out. A sixtieth of a second freezes the air, so a frame is sharp or it is not, and every frame added softens the star: all 13 give 3.70 arcsec against 3.32 for these 5</dd></div>
+<div><dt>Sampling</dt><dd>0.388 arcsec per pixel: the sensor's own pixels, never enlarged. The pair is 25 px across; the stars are 3.3 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>4.1 x 4.1 arcmin: a 640 x 640 crop round the pair, north up and east left by one Lanczos turn of 56.2 degrees. No other star shows in a sixtieth of a second</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 5 minutes. Nearly overhead</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat. Each frame's sky median taken off per colour plane, one hot pixel repaired. The pair sits at the middle of the sensor, where a flat would change it by well under a percent</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic). Shift only: each plane of each frame placed on its own centroid of the primary, at the true sensor position of every sample, as square drops of 1 px (drizzle). Each frame scaled to the run's median brightness first, since the star twinkles 8 percent from frame to frame</dd></div>
+<div><dt>Orientation</dt><dd>From a plate-solved 15 s frame of the same field, taken just before with the camera untouched: in a sixtieth of a second there are no other stars to solve on</dd></div>
+<div><dt>Colour</dt><dd>The camera's daylight white balance (red x 2.67, blue x 1.24) and its own colour matrix, no star-colour calibration, saturation x 1.0. Red over green and blue over green: primary 1.09 and 0.56, companion 0.72 and 1.02. The companion is the bluer star in 13 of 13 frames; the primary's red halo spills onto it, so it is bluer than shown</dd></div>
+<div><dt>Finish</dt><dd>Brightness smoothed 0.8 px, colour 1.5 px, arcsinh stretch. Black at the 60th percentile, white at the brightest channel of the brightest pixel, S-curve 0.15, no saturation added. Dark sky smoothed (bilateral, 2 px) and without colour</dd></div>
+<div><dt>Picture size</dt><dd>640 x 640 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>The pair</dt><dd>9.55 arcsec apart (standard error 0.09) at position angle 62.3 degrees (0.3): two-star fits to each of the 13 frames. With the model's own error, 9.6 plus or minus 0.15 arcsec at 62 plus or minus 1 degrees. The primary is 9.0 times the companion in the camera's green (2.4 magnitudes)</dd></div>
+<div><dt>Not resolved</dt><dd>The companion is itself a close pair, about half an arcsecond apart: far inside the 3.3 arcsec blur of the air on this night. A seeing-limited picture; nothing finer than 2 to 3 arcsec is shown</dd></div>
+</dl>
+  <h3 id="almach-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="almach-text" aria-describedby="almach-reddit" hidden>Copy</button>
+    <pre id="almach-text">**Almach**: Gamma Andromedae, a gold and blue double star in Andromeda
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,084 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 5 × 1/60 s at ISO 400 (a twelfth of a second of light)
+* Frames: 13 taken, the sharpest 5 kept
+* When: 13 October 2026, after midnight, over 5 minutes. Nearly overhead
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat. Each frame's sky median taken off per colour plane, one hot pixel repaired. The pair sits at the middle of the sensor, where a flat would change it by well under a percent
+* Field: 4.1 x 4.1 arcmin
+* Sampling: 0.388 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic). Shift only: each plane of each frame placed on its own centroid of the primary, at the true sensor position of every sample, as square drops of 1 px (drizzle). Each frame scaled to the run's median brightness first, since the star twinkles 8 percent from frame to frame
+* Finish: Brightness smoothed 0.8 px, colour 1.5 px, arcsinh stretch. Black at the 60th percentile, white at the brightest channel of the brightest pixel, S-curve 0.15, no saturation added. Dark sky smoothed (bilateral, 2 px) and without colour
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/almach.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#almach</pre>
+  </div>
+</section>
+
+<section class="target" id="ngc-891" aria-labelledby="ngc-891-h">
+  <h2 id="ngc-891-h"><a href="ngc-891.html">NGC 891</a></h2>
+  <p class="sub">A spiral galaxy in Andromeda, seen edge on</p>
+  <p class="lede">30 of 31 frames of 15 s. 7.5 minutes of light on one field; no frame trailed.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.8 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>30 x 15 s at ISO 3200: 7.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>31 taken, 30 kept. Only the first frame after the slew was dropped, by rule (it measured fine). No frame trailed: stars 3.6 to 4.4 arcsec, every frame within 1.3 percent of the run's star brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 3.8 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>23.3 x 15.5 arcmin: an 1800 x 1200 crop round the galaxy from a stack of 38.2 x 25.4 arcmin, nothing resampled, as the camera saw it (north 56 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 20 minutes. Nearly overhead</dd></div>
+<div><dt>Field rotation</dt><dd>0.5 degrees over the run, because the polar axis is about 5 degrees off; corrected in registration (rotation and shift on about 180 stars, 0.26 to 0.36 px rms)</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The flat is built from this run's own open sky, per colour: an elliptical fall-off (light falls off faster along the sensor's short side; green corners at 68 percent) and a measured map of 58 dust shadows over 1.9 percent of the sensor. Dust under the galaxy itself could not be measured. Hot pixels from the run itself (5,900 to 6,600 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.3 times lower than one frame (5.5 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>Shown only where the light can carry it, 3.3 percent of the picture: the stars and the galaxy's middle. The ends of the disc are grey on purpose. White stars come out slightly green: the camera's daylight white balance and matrix, with no star-colour calibration</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Brightness smoothed 1.2 px, arcsinh stretch. Black at the 60th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. Faint parts smoothed (bilateral, 4 px), the dark sky without colour; about 0.9 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>1800 x 1200 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The disc, followed for 11.1 arcmin (the catalogue gives 13.5). The dust lane: across the centre two ridges of light 33 arcsec apart with a dip between them 34 times the noise, and the odd and the even frames each show it alone. The warm bulge either side of the lane</dd></div>
+<div><dt>Not seen</dt><dd>The lane's fine filaments, the last 1.2 arcmin of each end of the disc, and the halo: 7.5 minutes at f/10 stops at about 3 times the noise. No companion galaxies were identified</dd></div>
+</dl>
+  <h3 id="ngc-891-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="ngc-891-text" aria-describedby="ngc-891-reddit" hidden>Copy</button>
+    <pre id="ngc-891-text">**NGC 891**: A spiral galaxy in Andromeda, seen edge on
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.8 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 30 × 15 s at ISO 3200 (7.5 minutes)
+* Frames: 31 taken, 30 kept
+* When: 13 October 2026, after midnight, over 20 minutes. Nearly overhead
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The flat is built from this run's own open sky, per colour: an elliptical fall-off (light falls off faster along the sensor's short side; green corners at 68 percent) and a measured map of 58 dust shadows over 1.9 percent of the sensor. Dust under the galaxy itself could not be measured. Hot pixels from the run itself (5,900 to 6,600 per colour plane)
+* Field: 23.3 x 15.5 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.3 times lower than one frame (5.5 expected from the weights)
+* Finish: The camera's daylight white balance and colour matrix. Brightness smoothed 1.2 px, arcsinh stretch. Black at the 60th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. Faint parts smoothed (bilateral, 4 px), the dark sky without colour; about 0.9 percent of the picture is exactly black
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-891.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#ngc-891</pre>
+  </div>
+</section>
+
+<section class="target" id="messier-77" aria-labelledby="messier-77-h">
+  <h2 id="messier-77-h"><a href="messier-77.html">Messier 77</a></h2>
+  <p class="sub">NGC 1068, a spiral galaxy in Cetus with an active centre</p>
+  <p class="lede">29 of 31 frames of 15 s. 7.25 minutes of light on one field, lower in the sky than the night's other pictures.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>29 x 15 s at ISO 3200: 7.25 minutes. The core did not clip: its brightest pixel in any frame is 24 percent of the ceiling. Nothing painted or repaired</dd></div>
+<div><dt>Frames</dt><dd>31 taken, 29 kept. The first frame after the slew was dropped by rule; one was trailed as the field jumped across it. The 29 kept are within 2.4 percent of the run's star brightness</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 4.8 arcsec wide (half-flux): softer than the night's other pictures, because this one was lower in the sky</dd></div>
+<div><dt>Field</dt><dd>15.5 x 10.4 arcmin: a 1200 x 800 crop round the nucleus from a stack of 38.4 x 25.6 arcmin, nothing resampled, as the camera saw it (north 56 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 20 minutes. About 50 degrees up</dd></div>
+<div><dt>Field rotation</dt><dd>0.43 degrees over the run, because the polar axis is about 5 degrees off; corrected in registration (rotation and shift on 45 or 46 stars, 0.24 to 0.41 sensor px rms)</dd></div>
+<div><dt>Dispersion</dt><dd>The air is a prism this low: red sat 0.43 and blue 0.69 sensor px either side of green, measured on stars in ten frames. Taken out in the one resampling; under 0.05 px is left in the stack</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 94 dust shadows it left, measured on this run's own sky and divided out. Hot pixels from the run itself (5,600 to 6,400 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.8 to 5.2 times lower than one frame (5.4 expected from the weights)</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix, no star-colour calibration. Colour only where the light is over 8 DN, the bright disc and the stars; the fainter edge is grey. Arcsinh stretch, black at the 78th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. The dark sky is set near black and smoothed (bilateral, 5 px), by choice: 8.6 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>1200 x 800 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The star-like nucleus on a short bright bar. The bright inner disc, 2.5 arcmin across: followed while its light is over 3 times the spread of blank sky, the same in the odd and the even frames. The inner arms as a brighter oval with knots</dd></div>
+<div><dt>Not seen</dt><dd>The faint outer arms and the outer ring, 2.2 to 3.6 arcmin from the nucleus: the light there measures zero or less. The sky within about 4 arcmin of the galaxy sits about 1 percent low, because the night's flat was fitted where NGC 891 hid the middle of the sensor. That is what hides the outer disc</dd></div>
+</dl>
+  <h3 id="messier-77-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="messier-77-text" aria-describedby="messier-77-reddit" hidden>Copy</button>
+    <pre id="messier-77-text">**Messier 77**: NGC 1068, a spiral galaxy in Cetus with an active centre
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 29 × 15 s at ISO 3200 (7.25 minutes)
+* Frames: 31 taken, 29 kept
+* When: 13 October 2026, after midnight, over 20 minutes. About 50 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 94 dust shadows it left, measured on this run's own sky and divided out. Hot pixels from the run itself (5,600 to 6,400 per colour plane)
+* Field: 15.5 x 10.4 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.8 to 5.2 times lower than one frame (5.4 expected from the weights)
+* Finish: The camera's daylight white balance and colour matrix, no star-colour calibration. Colour only where the light is over 8 DN, the bright disc and the stars; the fainter edge is grey. Arcsinh stretch, black at the 78th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. The dark sky is set near black and smoothed (bilateral, 5 px), by choice: 8.6 percent of the picture is exactly black
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/messier-77.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#messier-77</pre>
+  </div>
+</section>
+
+<section class="target" id="ngc-1535" aria-labelledby="ngc-1535-h">
+  <h2 id="ngc-1535-h"><a href="ngc-1535.html">NGC 1535</a></h2>
+  <p class="sub">Cleopatra's Eye, a planetary nebula in Eridanus</p>
+  <p class="lede">30 of 33 frames of 4 s. Two minutes of light, low in the sky: the softest picture of the night.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.2 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>30 x 4 s at ISO 1600: 120 seconds. Nothing clipped: the nebula peaks at 3 percent of the range in a 4 s frame</dd></div>
+<div><dt>Frames</dt><dd>33 taken, 30 kept. One was taken while the mount was still re-centring after the telescope's computer was restarted mid-run; one had soft stars (6.55 arcsec against a limit of 6.5); one was trailed. The frames came in two runs either side of the restart, 17 and 13 kept, with the nebula in two different places on the sensor</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 5.8 arcsec wide (half-flux): the softest picture of the night, because it was the lowest</dd></div>
+<div><dt>Field</dt><dd>9.3 x 6.2 arcmin: a 720 x 480 crop round the nebula, turned by quarter turns only (no resampling after the stack). North 36 degrees clockwise of up</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 17 minutes. About 40 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. Divided by the night's flat, built from the open sky of the NGC 891 run. This run's own sky is too faint in 4 s to check dust near the nebula; the odd and the even frames, each with frames of both runs, agree to 1 percent on the nebula. Hot pixels from the run itself (690 to 760 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on 35 to 70 stars; the field turned 0.38 degrees. The air is a prism this low: red and blue star images sat 0.79 arcsec apart, measured on 22 stars and taken out in the one resampling (0.02 left). For the nebula's own light, which is not starlight, blue is still about 0.15 arcsec off</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour, under 1.5 DN across it</dd></div>
+<div><dt>Colour</dt><dd>The camera's daylight white balance and colour matrix, no saturation added. The nebula shines mostly in doubly ionised oxygen at 501 nm, a green-blue outside what a screen can show: the matrix gives it a negative red, which is shown as zero across the disc. That is the colour space, not the sensor</dd></div>
+<div><dt>Finish</dt><dd>Brightness smoothed 1 px, colour 3.5 px, arcsinh stretch. Black at the 60th percentile, S-curve 0.15. Dark sky smoothed (median 3 px, bilateral 4 px) but kept below the shell on purpose: the shell's outer edge is grainy at full size, which is the stack's own noise</dd></div>
+<div><dt>Picture size</dt><dd>720 x 480 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The blue-green inner disc. The central star, as a star-wide bright core in the middle of it. The faint outer shell: in the ring 14 to 25 arcsec out the green light is 10.0 DN where the disc's own blur would leave 2.2, 73 times the noise, and the odd and the even frames each show it (55 and 65 times). The light ends 28 to 34 arcsec from the centre</dd></div>
+<div><dt>Not seen</dt><dd>Any structure inside the disc, or a sharp edge between disc and shell: with stars 5.8 arcsec wide the two run into each other. A small brighter spot in the shell about 17 arcsec out repeats in both halves and is not identified</dd></div>
+</dl>
+  <h3 id="ngc-1535-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="ngc-1535-text" aria-describedby="ngc-1535-reddit" hidden>Copy</button>
+    <pre id="ngc-1535-text">**NGC 1535**: Cleopatra's Eye, a planetary nebula in Eridanus
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.2 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 30 × 4 s at ISO 1600 (120 seconds)
+* Frames: 33 taken, 30 kept
+* When: 13 October 2026, after midnight, over 17 minutes. About 40 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. Divided by the night's flat, built from the open sky of the NGC 891 run. This run's own sky is too faint in 4 s to check dust near the nebula; the odd and the even frames, each with frames of both runs, agree to 1 percent on the nebula. Hot pixels from the run itself (690 to 760 per colour plane)
+* Field: 9.3 x 6.2 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Registration: Rotation and shift on 35 to 70 stars; the field turned 0.38 degrees. The air is a prism this low: red and blue star images sat 0.79 arcsec apart, measured on 22 stars and taken out in the one resampling (0.02 left). For the nebula's own light, which is not starlight, blue is still about 0.15 arcsec off
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour, under 1.5 DN across it
+* Finish: Brightness smoothed 1 px, colour 3.5 px, arcsinh stretch. Black at the 60th percentile, S-curve 0.15. Dark sky smoothed (median 3 px, bilateral 4 px) but kept below the shell on purpose: the shell's outer edge is grainy at full size, which is the stack's own noise
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-1535.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#ngc-1535</pre>
+  </div>
+</section>
+
+<section class="target" id="crab-nebula" aria-labelledby="crab-nebula-h">
+  <h2 id="crab-nebula-h"><a href="crab-nebula.html">The Crab Nebula</a></h2>
+  <p class="sub">Messier 1, the wreck of an exploded star in Taurus</p>
+  <p class="lede">37 of 41 frames of 15 s. 9.25 minutes of light on one field, against one minute on 8 October.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>37 x 15 s at ISO 3200: 9.25 minutes</dd></div>
+<div><dt>Frames</dt><dd>41 taken, 37 kept. The first after the slew was dropped by rule; two were smeared and one had wide stars. A few frames were slightly trailed by the unguided drive, every star stretched the same way: not out of focus. The stars dimmed 4 percent over the run; the frames are scaled and weighted for it</dd></div>
+<div><dt>Sampling</dt><dd>0.776 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 4.8 arcsec wide (half-flux), round</dd></div>
+<div><dt>Field</dt><dd>10.4 x 7.8 arcmin: an 800 x 600 crop round the catalogue place from a stack of 38.3 x 25.3 arcmin, nothing resampled, not turned (north 53 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 27 minutes. About 60 degrees up</dd></div>
+<div><dt>Field rotation</dt><dd>0.65 degrees over the run, because the polar axis is about 5 degrees off; corrected in registration (rotation and shift on about 200 stars, 0.32 to 0.48 sensor px rms)</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 133 dust shadows it left, measured on this run's own sky and divided out. The sky just round the nebula sits about 1 percent low, which trims the nebula's faintest edge a little. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.5 to 5.7 times lower than one frame (6.1 expected from the weights)</dd></div>
+<div><dt>Finish</dt><dd>Warm white, red : green : blue 1.10 : 1 : 0.83 in the camera's daylight white balance, core and rim alike. The colour comes from a 32 px average, so the stars are shown white: a side effect, not their colour. Arcsinh stretch, black at the 60th percentile, S-curve 0.15, no saturation added. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px), by choice: 2.8 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>800 x 600 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The oval glow, 44 times the scatter of blank sky: half its central brightness at 3.1 x 2.0 arcmin, into the sky by 7.0 x 4.4. And the structure inside it: the odd and the even halves of the frames, band-passed, agree inside the nebula at 9 to 16 sigma over blank sky, at scales from 3 to 44 arcsec. On 8 October the same tests gave 1.4 and 3.5</dd></div>
+<div><dt>Not seen</dt><dd>The red filaments as such: the red-excess test does not repeat between the halves (0.6, -0.1 and 0.9 sigma), and a stock camera passes little of their deep red. So the nebula is given one colour and no red web is drawn. The pulsar is not shown as a separate star: it and its 16th magnitude neighbour, about 5 arcsec apart, are one blob at this star size</dd></div>
+<div><dt>Compared</dt><dd>With 8 October's picture of it: 37 frames against 4, 9.25 minutes against 1, noise per pixel 5.9 DN against 38 in green for about the same nebula, stars 4.8 arcsec and round against 5.6 and stretched, and a flat this time. That picture had star colours; this one does not</dd></div>
+</dl>
+  <h3 id="crab-nebula-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="crab-nebula-text" aria-describedby="crab-nebula-reddit" hidden>Copy</button>
+    <pre id="crab-nebula-text">**The Crab Nebula**: Messier 1, the wreck of an exploded star in Taurus
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 37 × 15 s at ISO 3200 (9.25 minutes)
+* Frames: 41 taken, 37 kept
+* When: 13 October 2026, after midnight, over 27 minutes. About 60 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 133 dust shadows it left, measured on this run's own sky and divided out. The sky just round the nebula sits about 1 percent low, which trims the nebula's faintest edge a little. Hot pixels from the run itself
+* Field: 10.4 x 7.8 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.5 to 5.7 times lower than one frame (6.1 expected from the weights)
+* Finish: Warm white, red : green : blue 1.10 : 1 : 0.83 in the camera's daylight white balance, core and rim alike. The colour comes from a 32 px average, so the stars are shown white: a side effect, not their colour. Arcsinh stretch, black at the 60th percentile, S-curve 0.15, no saturation added. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px), by choice: 2.8 percent of the picture is exactly black
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/crab-nebula.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#crab-nebula</pre>
+  </div>
+</section>
+
+<section class="target" id="messier-78" aria-labelledby="messier-78-h">
+  <h2 id="messier-78-h"><a href="messier-78.html">Messier 78</a></h2>
+  <p class="sub">A cloud of dust in Orion, lit by the stars inside it</p>
+  <p class="lede">34 of 36 frames of 15 s. 8.5 minutes of light on one field; no frame trailed.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>34 x 15 s at ISO 3200: 8.5 minutes</dd></div>
+<div><dt>Frames</dt><dd>36 taken, 34 kept. The first after the slew was dropped by rule, and the last, whose stars had widened to 6.6 arcsec. None trailed. In the last four frames the stars widened and dimmed together, which is what dew starting on the telescope's front plate does; thin cloud is the other reading. Until then the stars' brightness was steady within 5 percent</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 5.5 arcsec wide (half-flux) in the stack; 5.2 to 5.7 over most of the run</dd></div>
+<div><dt>Field</dt><dd>17.1 x 12.8 arcmin: a 1320 x 990 crop from a stack of 38.6 x 25.4 arcmin, nothing resampled, not turned (north 54 degrees anticlockwise of up). NGC 2071, 14 arcmin away, is real in the full field and outside this crop</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 23 minutes. About 45 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 75 dust shadows it left, measured on this run's own sky and divided out. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on 22 or 23 stars (a field in a dark cloud has few), 0.33 to 0.59 sensor px rms; the field turned 0.54 degrees. The air spread red from blue by 0.57 arcsec: measured on the stars and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.1 to 5.5 times lower than one frame (5.8 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>No saturation added. In the camera's daylight white balance the bright body is red : green : blue 0.98 : 1 : 1.01, a cool white; the two stars that light it are 0.83 and 0.63 in blue over green. So the nebula is bluer than the bluer of its stars, by 4.2 sigma, which is what scattering by dust does; against white it is neutral. No colour is shown in the faintest parts</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Arcsinh stretch, black at the 70th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px), by choice: 14 percent of the picture is exactly black, and the faintest edge, the arc and NGC 2064 are smoothed with the sky</dd></div>
+<div><dt>Picture size</dt><dd>1320 x 990 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>Each of these repeats in the odd and the even halves of the frames. The glow round the two stars, 20 times the scatter of blank sky. The dark lane to the north-west: its far bank stands above it at 8 sigma. The arc beyond the lane, the edge of NGC 2067. NGC 2064, small and faint, at 16 sigma. Above the sky the glow is 5.4 arcmin east to west by 4.5 north to south; the catalogue gives 8 x 6</dd></div>
+<div><dt>Known flaws</dt><dd>The sky under the nebula is probably a little too high (the dark lane reads slightly below zero), so the nebula's faint edge is trimmed. A short dark streak at the nebula's southern edge is a dust shadow that could not be measured there: it was left, not painted out. Some of the light within 20 to 40 arcsec of the two stars is the telescope's own spread of starlight</dd></div>
+</dl>
+  <h3 id="messier-78-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="messier-78-text" aria-describedby="messier-78-reddit" hidden>Copy</button>
+    <pre id="messier-78-text">**Messier 78**: A cloud of dust in Orion, lit by the stars inside it
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 34 × 15 s at ISO 3200 (8.5 minutes)
+* Frames: 36 taken, 34 kept
+* When: 13 October 2026, after midnight, over 23 minutes. About 45 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 75 dust shadows it left, measured on this run's own sky and divided out. Hot pixels from the run itself
+* Field: 17.1 x 12.8 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Registration: Rotation and shift on 22 or 23 stars (a field in a dark cloud has few), 0.33 to 0.59 sensor px rms; the field turned 0.54 degrees. The air spread red from blue by 0.57 arcsec: measured on the stars and taken out in the one resampling
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 5.1 to 5.5 times lower than one frame (5.8 expected from the weights)
+* Finish: The camera's daylight white balance and colour matrix. Arcsinh stretch, black at the 70th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px), by choice: 14 percent of the picture is exactly black, and the faintest edge, the arc and NGC 2064 are smoothed with the sky
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/messier-78.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#messier-78</pre>
+  </div>
+</section>
+
+<section class="target" id="hubbles-variable-nebula" aria-labelledby="hubbles-variable-nebula-h">
+  <h2 id="hubbles-variable-nebula-h"><a href="hubbles-variable-nebula.html">Hubble's Variable Nebula</a></h2>
+  <p class="sub">NGC 2261, a fan of dust lit by the star R Monocerotis</p>
+  <p class="lede">25 of 32 frames of 15 s; thin cloud took the last six. 6.25 minutes of light on a soft night; thin cloud took the last six frames.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>25 x 15 s at ISO 3200: 6.25 minutes</dd></div>
+<div><dt>Frames</dt><dd>32 taken, 25 kept. The first after the slew was dropped by rule. The last six were lost to thin cloud: the stars fell to about half their brightness while staying sharp, under a brighter sky, and were coming back within minutes, which is cloud and not dew. None trailed</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 6.3 arcsec wide (half-flux) in the stack, against about 5 earlier in the night: the whole run is soft. Nothing was sharpened</dd></div>
+<div><dt>Field</dt><dd>10.4 x 7.8 arcmin: an 800 x 600 crop from a stack of 38.7 x 25.5 arcmin, nothing resampled, not turned (north 53 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 17 minutes. About 50 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 126 dust shadows it left, measured on this run's own sky and divided out. Nothing could be judged under the fan itself, and nothing there was touched. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on about 150 stars, 0.40 to 0.64 px rms; the field turned 0.39 degrees. The air spread red from blue by about half an arcsecond: measured on the stars and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.5 to 4.8 times lower than one frame (5.0 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>No saturation added. The fan measures near white: red : green 1.00 and blue : green 0.92 in the camera's daylight white balance. The camera's own colour matrix turns that into a pale cream-green: the tint is the rendering of a near-white measure, not a claim about the nebula</dd></div>
+<div><dt>Finish</dt><dd>Arcsinh stretch; colour from an 8 px average, and only where there is signal. Black at the 65th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px): 5.2 percent of the picture is exactly black</dd></div>
+<div><dt>Picture size</dt><dd>800 x 600 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>Each of these repeats in the odd and the even halves of the frames. The comet-shaped fan, 64 times the scatter of blank sky: 91 arcsec long from the star and 83 across at its widest. The star at its southern tip: a bright point in the brightest part of its own nebula, not a clean star image. A second bright knot 15 arcsec north-east of the star. Brighter edges, with a darker channel along the axis 23 to 41 arcsec out</dd></div>
+<div><dt>Not seen</dt><dd>The faint northern end of the fan, out to the catalogue's 2 arcmin, and the fine filaments and shadows that make it variable: the stars are 6.3 arcsec wide. The fan's outer edge is grainy and smoothed by the finish, so texture there is not detail</dd></div>
+</dl>
+  <h3 id="hubbles-variable-nebula-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="hubbles-variable-nebula-text" aria-describedby="hubbles-variable-nebula-reddit" hidden>Copy</button>
+    <pre id="hubbles-variable-nebula-text">**Hubble's Variable Nebula**: NGC 2261, a fan of dust lit by the star R Monocerotis
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 25 × 15 s at ISO 3200 (6.25 minutes)
+* Frames: 32 taken, 25 kept
+* When: 13 October 2026, after midnight, over 17 minutes. About 50 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 126 dust shadows it left, measured on this run's own sky and divided out. Nothing could be judged under the fan itself, and nothing there was touched. Hot pixels from the run itself
+* Field: 10.4 x 7.8 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Registration: Rotation and shift on about 150 stars, 0.40 to 0.64 px rms; the field turned 0.39 degrees. The air spread red from blue by about half an arcsecond: measured on the stars and taken out in the one resampling
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.5 to 4.8 times lower than one frame (5.0 expected from the weights)
+* Finish: Arcsinh stretch; colour from an 8 px average, and only where there is signal. Black at the 65th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 5 px, bilateral 5 px): 5.2 percent of the picture is exactly black
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/hubbles-variable-nebula.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#hubbles-variable-nebula</pre>
+  </div>
+</section>
+
+<section class="target" id="ngc-2392" aria-labelledby="ngc-2392-h">
+  <h2 id="ngc-2392-h"><a href="ngc-2392.html">NGC 2392</a></h2>
+  <p class="sub">A planetary nebula in Gemini</p>
+  <p class="lede">21 of 32 frames of 4 s; cloud took the last ten. 84 seconds of light, taken the same way as NGC 1535; cloud took the last ten frames.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.7 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>21 x 4 s at ISO 1600: 84 seconds. Nothing clipped: the nebula peaks at 8 percent of the range in a 4 s frame</dd></div>
+<div><dt>Frames</dt><dd>32 taken, 21 kept. The first after the slew was dropped by rule; the last ten were lost to cloud, when the stars fell below half their brightness. None trailed. Cloud thickened through the run, so the later frames kept are scaled up and weighted down: the stack is worth about 15 clear frames, a minute of light</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged, as for NGC 1535. Stars 5.0 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>9.3 x 6.2 arcmin: a 720 x 480 crop round the nebula, turned by quarter turns only (no resampling after the stack). North 38 degrees clockwise of up</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 10 minutes. About 50 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. Divided by the night's flat, built from the open sky of the NGC 891 run. This run's own sky is too faint in 4 s to check the flat's dust, and the nebula sat on the same pixels throughout, so a shadow there would not average out. Hot pixels from the run itself (580 to 620 per colour plane)</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on 81 to 156 stars, 0.8 to 1.1 px rms; the field turned 0.23 degrees over the frames used. The air spread red from blue by 0.48 arcsec: measured on 62 stars and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well</dd></div>
+<div><dt>Colour</dt><dd>The camera's daylight white balance and colour matrix, no saturation added. As with NGC 1535, the green-blue of doubly ionised oxygen at 501 nm lies outside what a screen can show: the matrix gives it a negative red, shown as zero across the outer disc. The stars read slightly green-yellow, as in tonight's other pictures: that is the camera, not the stars</dd></div>
+<div><dt>Finish</dt><dd>Brightness smoothed 1.5 px (NGC 1535: 1.0), colour 3.5 px, arcsinh stretch. Black at the 60th percentile, S-curve 0.15. Dark sky smoothed (median 3 px, bilateral 4 px). The 8th magnitude star north of the nebula is five times brighter than the nebula's centre: its core is at full scale in green for a few pixels</dd></div>
+<div><dt>Picture size</dt><dd>720 x 480 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>The central star, a clear star-like point, far stronger than in NGC 1535: 716 DN at the centre against 136 at 4.7 arcsec out. The inner shell, a blue-green shoulder of light from about 4 to 10 arcsec out. The fainter outer disc: in the ring 14 to 25 arcsec out the green light is 17.3 DN where spilled inner light would leave 0.9, 136 times the noise, and the odd and the even frames each show it (95 and 112 times). The light ends 28 to 34 arcsec from the centre</dd></div>
+<div><dt>Not seen</dt><dd>A dark gap between the star and the inner shell, the shell's rim as a ring, knots or filaments: with stars 5.0 arcsec wide the star's own image reaches the shell. The star images in this stack are slightly lopsided, so no claim is made about the nebula's shape</dd></div>
+</dl>
+  <h3 id="ngc-2392-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="ngc-2392-text" aria-describedby="ngc-2392-reddit" hidden>Copy</button>
+    <pre id="ngc-2392-text">**NGC 2392**: A planetary nebula in Gemini
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.7 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 21 × 4 s at ISO 1600 (84 seconds)
+* Frames: 32 taken, 21 kept
+* When: 13 October 2026, after midnight, over 10 minutes. About 50 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. Divided by the night's flat, built from the open sky of the NGC 891 run. This run's own sky is too faint in 4 s to check the flat's dust, and the nebula sat on the same pixels throughout, so a shadow there would not average out. Hot pixels from the run itself (580 to 620 per colour plane)
+* Field: 9.3 x 6.2 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Registration: Rotation and shift on 81 to 156 stars, 0.8 to 1.1 px rms; the field turned 0.23 degrees over the frames used. The air spread red from blue by 0.48 arcsec: measured on 62 stars and taken out in the one resampling
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well
+* Finish: Brightness smoothed 1.5 px (NGC 1535: 1.0), colour 3.5 px, arcsinh stretch. Black at the 60th percentile, S-curve 0.15. Dark sky smoothed (median 3 px, bilateral 4 px). The 8th magnitude star north of the nebula is five times brighter than the nebula's centre: its core is at full scale in green for a few pixels
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-2392.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#ngc-2392</pre>
+  </div>
+</section>
+
+<section class="target" id="ngc-2419" aria-labelledby="ngc-2419-h">
+  <h2 id="ngc-2419-h"><a href="ngc-2419.html">NGC 2419</a></h2>
+  <p class="sub">A globular cluster in Lynx, at the far edge of our galaxy</p>
+  <p class="lede">17 of 29 frames of 15 s; cloud took the other twelve. 4.25 minutes of light, between patches of cloud.</p>
+  
+  <h3>Equipment</h3>
+<dl class="spec">
+<div><dt>Telescope</dt><dd>Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3</dd></div>
+<div><dt>Camera</dt><dd>Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW</dd></div>
+<div><dt>Mount</dt><dd>Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model</dd></div>
+</dl>
+  <h3>Acquisition</h3>
+<dl class="spec">
+<div><dt>Exposures</dt><dd>17 x 15 s at ISO 3200: 4.25 minutes</dd></div>
+<div><dt>Frames</dt><dd>29 taken, 17 kept. All 12 dropped were lost to cloud: the run began and ended under thin cloud in patches, the stars dimmer under a brighter sky, with 13 clear frames in a row in the middle. Four thin frames, at 80 to 90 percent, are used, scaled up and weighted down</dd></div>
+<div><dt>Sampling</dt><dd>0.777 arcsec per pixel: one pixel per 2 x 2 colour cell, never enlarged. Stars 5.0 arcsec wide (half-flux)</dd></div>
+<div><dt>Field</dt><dd>15.5 x 10.4 arcmin: a 1200 x 800 crop from a stack of 38.7 x 25.6 arcmin, nothing resampled, not turned (north 52 degrees anticlockwise of up)</dd></div>
+<div><dt>When</dt><dd>13 October 2026, after midnight, over 15 minutes. About 60 degrees up</dd></div>
+<div><dt>Calibration</dt><dd>No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 53 dust shadows it left, measured on this run's own sky and divided out; nothing within 3 arcmin of the cluster was judged or changed. Hot pixels from the run itself</dd></div>
+</dl>
+  <h3>Processing</h3>
+<dl class="spec">
+<div><dt>Registration</dt><dd>Rotation and shift on 84 to 86 stars, 0.31 to 0.42 sensor px rms; the field turned 0.40 degrees. The air spread red from blue by 0.32 arcsec: measured on the stars and taken out in the one resampling</dd></div>
+<div><dt>Stacking</dt><dd>RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 3.7 to 3.8 times lower than one frame (4.1 expected from the weights)</dd></div>
+<div><dt>Colour</dt><dd>No saturation added. The haze is a faintly warm white, red : green : blue 1.10 : 1 : 0.81 in the camera's daylight white balance: the same, within the errors, as the field's stars. The two bright stars clip in every frame: they are shown white and were not repaired, and the glow round each is the telescope's own spread of their light</dd></div>
+<div><dt>Finish</dt><dd>The camera's daylight white balance and colour matrix. Arcsinh stretch, black at the 75th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 3 px, bilateral 4 px), by choice: 8.3 percent of the picture is exactly black, and the haze's outermost ring fades into it</dd></div>
+<div><dt>Picture size</dt><dd>1200 x 800 pixels</dd></div>
+<div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
+</dl>
+  <h3>What the picture shows</h3>
+<dl class="spec">
+<div><dt>What is real</dt><dd>A round haze, brightest at the centre (38 percent above the sky there) and falling to half at 22 arcsec. It stands above the sky over 2.1 arcmin, in the stack and in the odd and the even halves of the frames each alone; 2.5 against the sky just round it. The haze is grainy and the grain is real: of 36 points in it, 21 repeat in both halves, where chance would give about 2</dd></div>
+<div><dt>Not claimed</dt><dd>Any single star of the cluster: each point is a bright giant, a blend of a few, or a star in front. Nor the catalogue's 4 to 6 arcmin: the outer part is too faint for 4.25 minutes. The sky round the cluster reads slightly low, so the width given is a lower limit</dd></div>
+</dl>
+  <h3 id="ngc-2419-reddit">Copy for Reddit</h3>
+  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <div class="copy">
+    <button type="button" class="copy" data-copy="ngc-2419-text" aria-describedby="ngc-2419-reddit" hidden>Copy</button>
+    <pre id="ngc-2419-text">**NGC 2419**: A globular cluster in Lynx, at the far edge of our galaxy
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 17 × 15 s at ISO 3200 (4.25 minutes)
+* Frames: 29 taken, 17 kept
+* When: 13 October 2026, after midnight, over 15 minutes. About 60 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 53 dust shadows it left, measured on this run's own sky and divided out; nothing within 3 arcmin of the cluster was judged or changed. Hot pixels from the run itself
+* Field: 15.5 x 10.4 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Registration: Rotation and shift on 84 to 86 stars, 0.31 to 0.42 sensor px rms; the field turned 0.40 degrees. The air spread red from blue by 0.32 arcsec: measured on the stars and taken out in the one resampling
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 3.7 to 3.8 times lower than one frame (4.1 expected from the weights)
+* Finish: The camera's daylight white balance and colour matrix. Arcsinh stretch, black at the 75th percentile, S-curve 0.15. The dark sky is set near black and smoothed (median 3 px, bilateral 4 px), by choice: 8.3 percent of the picture is exactly black, and the haze's outermost ring fades into it
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/ngc-2419.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#ngc-2419</pre>
+  </div>
+</section>
+
+<section class="target" id="cigar-galaxy" aria-labelledby="cigar-galaxy-h">
+  <h2 id="cigar-galaxy-h"><a href="cigar-galaxy.html">The Cigar Galaxy</a></h2>
+  <p class="sub">Messier 82, in Ursa Major</p>
+  <p class="waiting" role="status">Skipped: thin cloud had come in, and the pictures taken to find it showed almost no stars. Its technical details will be here when its picture is published.</p>
+</section>
+
+
+<section class="source" aria-labelledby="source-h">
+  <h2 id="source-h">Source</h2>
+  <p class="lede">Observatory, the software that drove the mount, took the frames and published these pages, is open source.</p>
+  <p><a href="https://github.com/bradgessler/observatory">Source on GitHub</a></p>
+</section>
+<p class="rights">© 2026 Brad Gessler. The pictures and the words are his own; all rights reserved.</p>
+<script>
+document.querySelectorAll("button.copy").forEach(function (b) {
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    var pre = document.getElementById(b.dataset.copy);
+    var select = function () { var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    try { navigator.clipboard.writeText(pre.textContent).then(done, select); } catch (e) { select(); }
+  });
+});
+</script>
+
+
+</main>
+</body>
+</html>
