@@ -28,4 +28,4 @@ Night of 12 October 2026, San Francisco Bay Area
 
 Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/hubbles-variable-nebula.html
 
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/hubbles-variable-nebula.html#technical
+All the photography notes: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/hubbles-variable-nebula.html#photography

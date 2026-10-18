@@ -41,7 +41,7 @@
   <h1>Almach</h1>
   <p class="sub">Gamma Andromedae, a gold and blue double star in Andromeda</p>
   <p class="what">To the eye it is one star in Andromeda. A telescope splits it in two: a gold giant and a small blue companion, a favourite for the contrast of their colours. The blue one is really three stars, too close together for this picture to separate. Everything here, both stars and the dark between them, would fit in half a light-year.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -54,8 +54,9 @@
 <div><dt>Honest note</dt><dd>The colours are as the camera recorded them, with nothing added: the gold star is probably a little more orange than this, and the blue one a little bluer</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">The sharpest 5 of 13 frames of 1/60 s. The sharpest 5 of 13 frames, each a sixtieth of a second, at the sensor's own scale.</p>
   
   <h3>Equipment</h3>
@@ -87,12 +88,11 @@
 <div><dt>The pair</dt><dd>9.55 arcsec apart (standard error 0.09) at position angle 62.3 degrees (0.3): two-star fits to each of the 13 frames. With the model's own error, 9.6 plus or minus 0.15 arcsec at 62 plus or minus 1 degrees. The primary is 9.0 times the companion in the camera's green (2.4 magnitudes)</dd></div>
 <div><dt>Not resolved</dt><dd>The companion is itself a close pair, about half an arcsecond apart: far inside the 3.3 arcsec blur of the air on this night. A seeing-limited picture; nothing finer than 2 to 3 arcsec is shown</dd></div>
 </dl>
-  <h3 id="almach-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="almach-reddit.txt" aria-describedby="almach-reddit" hidden>Copy</button>
-    <a class="copy-text" href="almach-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="almach-notes.txt" data-label="Copy photographer's notes" aria-describedby="almach-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="almach-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="almach-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -115,7 +115,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

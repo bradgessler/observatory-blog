@@ -36,7 +36,7 @@
   <h1>Messier 78</h1>
   <p class="sub">A cloud of dust in Orion, lit by the stars inside it</p>
   <p class="what">This cloud does not shine by itself. It is dust, lit by the young stars inside it the way fog glows round a street lamp, and it is bluer than its stars for the same reason the daytime sky is blue. The black band above it is more of the same dust, unlit. It is one of the brightest clouds of its kind in the sky, and part of the great cloud where Orion's stars are being born.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>The cloud measures bluer than the stars that light it, but that is only a cool white beside them, and no colour was added to make it blue. Its faint outer parts are not shown</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">34 of 36 frames of 15 s. 8.5 minutes of light on one field; no frame trailed.</p>
   
   <h3>Equipment</h3>
@@ -82,12 +83,11 @@
 <div><dt>What is real</dt><dd>Each of these repeats in the odd and the even halves of the frames. The glow round the two stars, 20 times the scatter of blank sky. The dark lane to the north-west: its far bank stands above it at 8 sigma. The arc beyond the lane, the edge of NGC 2067. NGC 2064, small and faint, at 16 sigma. Above the sky the glow is 5.4 arcmin east to west by 4.5 north to south; the catalogue gives 8 x 6</dd></div>
 <div><dt>Known flaws</dt><dd>The sky under the nebula is probably a little too high (the dark lane reads slightly below zero), so the nebula's faint edge is trimmed. A short dark streak at the nebula's southern edge is a dust shadow that could not be measured there: it was left, not painted out. Some of the light within 20 to 40 arcsec of the two stars is the telescope's own spread of starlight</dd></div>
 </dl>
-  <h3 id="messier-78-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="messier-78-reddit.txt" aria-describedby="messier-78-reddit" hidden>Copy</button>
-    <a class="copy-text" href="messier-78-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="messier-78-notes.txt" data-label="Copy photographer's notes" aria-describedby="messier-78-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="messier-78-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="messier-78-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -110,7 +110,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

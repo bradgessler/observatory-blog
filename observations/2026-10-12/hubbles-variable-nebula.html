@@ -41,7 +41,7 @@
   <h1>Hubble's Variable Nebula</h1>
   <p class="sub">NGC 2261, a fan of dust lit by the star R Monocerotis</p>
   <p class="what">A fan of dust lit from its tip by a young star, like a torch beam in fog. It changes: clouds of dust close to the star cast shadows that sweep up the fan over weeks and months, so no two pictures of it taken a season apart are the same. Edwin Hubble studied it for years, and in January 1949 he made it the first thing photographed with the 200 inch telescope on Palomar.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -54,8 +54,9 @@
 <div><dt>Honest note</dt><dd>A soft picture: the stars came out wider than earlier in the night and thin cloud took the last frames, so the moving shadows are too fine to see here. The pale green tint is the camera's, not the nebula's</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">25 of 32 frames of 15 s; thin cloud took the last six. 6.25 minutes of light on a soft night; thin cloud took the last six frames.</p>
   
   <h3>Equipment</h3>
@@ -87,12 +88,11 @@
 <div><dt>What is real</dt><dd>Each of these repeats in the odd and the even halves of the frames. The comet-shaped fan, 64 times the scatter of blank sky: 91 arcsec long from the star and 83 across at its widest. The star at its southern tip: a bright point in the brightest part of its own nebula, not a clean star image. A second bright knot 15 arcsec north-east of the star. Brighter edges, with a darker channel along the axis 23 to 41 arcsec out</dd></div>
 <div><dt>Not seen</dt><dd>The faint northern end of the fan, out to the catalogue's 2 arcmin, and the fine filaments and shadows that make it variable: the stars are 6.3 arcsec wide. The fan's outer edge is grainy and smoothed by the finish, so texture there is not detail</dd></div>
 </dl>
-  <h3 id="hubbles-variable-nebula-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="hubbles-variable-nebula-reddit.txt" aria-describedby="hubbles-variable-nebula-reddit" hidden>Copy</button>
-    <a class="copy-text" href="hubbles-variable-nebula-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="hubbles-variable-nebula-notes.txt" data-label="Copy photographer's notes" aria-describedby="hubbles-variable-nebula-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="hubbles-variable-nebula-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="hubbles-variable-nebula-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -115,7 +115,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

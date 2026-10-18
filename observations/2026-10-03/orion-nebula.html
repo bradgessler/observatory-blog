@@ -38,7 +38,7 @@
   <h1>The Orion Nebula</h1>
   <p class="sub">Messier 42</p>
   <p class="what">A cloud of glowing gas where stars are being born right now. The four young stars at its heart, the Trapezium, light up the whole nebula.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -51,8 +51,9 @@
 <div><dt>For scale</dt><dd>Neptune's whole orbit would cover a fifth of one pixel</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">39 frames of 20 s, with 16 of 2 s for the bright core. 13 minutes of light on one field, plus short frames so the core does not burn out.</p>
   
   <h3>Equipment</h3>
@@ -79,12 +80,11 @@
 <div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
 </dl>
   
-  <h3 id="orion-nebula-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="orion-nebula-reddit.txt" aria-describedby="orion-nebula-reddit" hidden>Copy</button>
-    <a class="copy-text" href="orion-nebula-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="orion-nebula-notes.txt" data-label="Copy photographer's notes" aria-describedby="orion-nebula-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="orion-nebula-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="orion-nebula-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
@@ -103,7 +103,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

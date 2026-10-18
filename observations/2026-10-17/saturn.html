@@ -41,7 +41,7 @@
   <h1>Saturn and five of its moons</h1>
   <p class="sub">The ringed planet, in Pisces</p>
   <p class="what">A planet ten times as far from the Sun as the Earth, with rings of ice wider than the planet itself. Two hours of short pictures around its highest point in the sky, and only the sharpest moments kept.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -54,8 +54,9 @@
 <div><dt>Honest note</dt><dd>The air was soft that night. The rings, the dark gap inside them and the globe show; the Cassini division in the rings does not. The planet and the moons are shown at different brightness: the moons are hundreds to thousands of times fainter than the planet.</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">25 of 488 frames of 1/60 s for the planet, 2 frames of 2 s for the moons. The sharpest 25 of 488 short frames for the planet, two longer ones for the moons, set together at the sensor's own scale.</p>
   
   <h3>Equipment</h3>
@@ -90,12 +91,11 @@
 <div><dt>Not seen</dt><dd>The Cassini division: at its place the light lies between ring B's and ring A's at both ends, in the plain stack, the restored one and each half alone, with no dip. Mimas (30 arcsec out) not found; Tethys (10 arcsec out) inside the blown-out patch; Hyperion too faint. Seven faint points (6 to 8 sigma) match no moon; one is a Gaia star, the others are not named</dd></div>
 <div><dt>Compared</dt><dd>Not as sharp as 4 October: Titan's blur 3.2 x 3.0 arcsec against 2.7 x 2.2 then, and by the same measures the plain stack's gap contrast 0.13 against 0.32 and the ring's width 4.2 against 3.8 arcsec</dd></div>
 </dl>
-  <h3 id="saturn-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="saturn-reddit.txt" aria-describedby="saturn-reddit" hidden>Copy</button>
-    <a class="copy-text" href="saturn-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="saturn-notes.txt" data-label="Copy photographer's notes" aria-describedby="saturn-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="saturn-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="saturn-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 17 October 2026</p>
@@ -114,7 +114,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

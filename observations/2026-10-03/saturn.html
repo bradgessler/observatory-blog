@@ -37,7 +37,7 @@
   <h1>Saturn and seven of its moons</h1>
   <p class="sub">At opposition, 4 October 2026</p>
   <p class="what">Saturn at its closest and brightest for the year, its rings tilted only a few degrees toward us. Every labelled point is a moon. Titan, the big one, is larger than the planet Mercury.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -50,8 +50,9 @@
 <div><dt>Honest note</dt><dd>The three inner moons are named from how they moved between frames</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">Planet: the 16 sharpest of 48 frames at 1/40 s; moons: 2 s frames. Two exposures in one picture: 1/40 s for the planet, 2 s for the moons.</p>
   <figure class="plate pan"><a href="images/saturn-frames.jpg"><img src="images/saturn-frames-1600.jpg" srcset="images/saturn-frames-1600.jpg 1600w, images/saturn-frames.jpg 3565w" sizes="(min-width: 80rem) 78rem, 100vw" width="3565" height="1668" alt="Saturn and seven of its moons, with the frames that were joined outlined" /></a></figure><p class="pan-hint">Swipe sideways to see the rest. Tap the picture for full size.</p>
   <h3>Equipment</h3>
@@ -80,12 +81,11 @@
 <div><dt>Moon names</dt><dd>No ephemeris used: each point keeps its place beside Saturn while the stars slide past, and sits at its orbit's reach. Worth a check</dd></div>
 <div><dt>Not seen</dt><dd>The Cassini division: no dip along the ring line in the plain stack or the restored one</dd></div>
 </dl>
-  <h3 id="saturn-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="saturn-reddit.txt" aria-describedby="saturn-reddit" hidden>Copy</button>
-    <a class="copy-text" href="saturn-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="saturn-notes.txt" data-label="Copy photographer's notes" aria-describedby="saturn-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="saturn-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="saturn-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
@@ -108,7 +108,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

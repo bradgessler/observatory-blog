@@ -37,7 +37,7 @@
   <h1>The Pleiades</h1>
   <p class="sub">Messier 45, the Seven Sisters</p>
   <p class="what">A family of about a thousand young stars, born together some 100 million years ago. The blue haze round Merope and Maia is a dust cloud they are drifting through, lit by their light.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -50,8 +50,9 @@
 <div><dt>Honest note</dt><dd>The glow round Atlas and Pleione is thin cloud that night, not nebula</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">Nine fields, 60 frames of 10 s. A 3 x 3 mosaic; each outline is one sensor frame, with frames kept of frames taken.</p>
   <figure class="plate pan"><a href="images/pleiades-frames.jpg"><img src="images/pleiades-frames-1600.jpg" srcset="images/pleiades-frames-1600.jpg 1600w, images/pleiades-frames.jpg 3832w" sizes="(min-width: 80rem) 78rem, 100vw" width="3832" height="2428" alt="The Pleiades, with the frames that were joined outlined" /></a></figure><p class="pan-hint">Swipe sideways to see the rest. Tap the picture for full size.</p>
   <h3>Equipment</h3>
@@ -80,12 +81,11 @@
 <dl class="spec">
 <div><dt>What is real</dt><dd>The haze at Merope and Maia repeats between independent stacks at 4 to 11 sigma. The glow at Atlas and Pleione is cloud</dd></div>
 </dl>
-  <h3 id="pleiades-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="pleiades-reddit.txt" aria-describedby="pleiades-reddit" hidden>Copy</button>
-    <a class="copy-text" href="pleiades-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="pleiades-notes.txt" data-label="Copy photographer's notes" aria-describedby="pleiades-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="pleiades-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="pleiades-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
@@ -108,7 +108,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

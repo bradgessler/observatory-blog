@@ -42,7 +42,7 @@
   <h1>The Ring Nebula</h1>
   <p class="sub">Messier 57, a planetary nebula in Lyra</p>
   <p class="what">A dying star has puffed off its outer layers, and the hot core left behind makes them glow: oxygen blue-green, hydrogen and nitrogen red at the edge. It is more barrel than ring, and we look down its length. The Sun will do the same in about 5 billion years.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -55,8 +55,9 @@
 <div><dt>The ring is</dt><dd>About a light-year across: over 60,000 times the distance from the Earth to the Sun</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">18 frames of 15 s; a patch of thin cloud took 15 more. 4.5 minutes of light on one field; a patch of thin cloud took 15 of the 33 frames.</p>
   
   <h3>Equipment</h3>
@@ -88,12 +89,11 @@
 <dl class="spec">
 <div><dt>Not shown</dt><dd>The faint outer halo (to 1.9 arcmin) and the galaxy IC 1296, 4 arcmin away: both detected in the stack, both under the quiet sky. A Wiener-restored version was made and kept apart (stars 30 percent smaller, sky 40 percent noisier)</dd></div>
 </dl>
-  <h3 id="ring-nebula-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="ring-nebula-reddit.txt" aria-describedby="ring-nebula-reddit" hidden>Copy</button>
-    <a class="copy-text" href="ring-nebula-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="ring-nebula-notes.txt" data-label="Copy photographer's notes" aria-describedby="ring-nebula-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="ring-nebula-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="ring-nebula-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,082 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 8 October 2026</p>
@@ -116,7 +116,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

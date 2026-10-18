@@ -36,7 +36,7 @@
   <h1>NGC 2419</h1>
   <p class="sub">A globular cluster in Lynx, at the far edge of our galaxy</p>
   <p class="what">A ball of hundreds of thousands of ancient stars, nearly twice as far away as the Large Magellanic Cloud, the Milky Way's big companion galaxy. It is so far out that it was once thought to be adrift between galaxies, and was called the Intergalactic Wanderer; in fact it orbits the Milky Way. The two bright stars beside it are in our own neighbourhood, hundreds or thousands of times nearer.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>A short picture, partly through cloud: only the bright middle of the cluster shows, less than half its full width. Its speckle is real, but no single star can be picked out</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">17 of 29 frames of 15 s; cloud took the other twelve. 4.25 minutes of light, between patches of cloud.</p>
   
   <h3>Equipment</h3>
@@ -82,12 +83,11 @@
 <div><dt>What is real</dt><dd>A round haze, brightest at the centre (38 percent above the sky there) and falling to half at 22 arcsec. It stands above the sky over 2.1 arcmin, in the stack and in the odd and the even halves of the frames each alone; 2.5 against the sky just round it. The haze is grainy and the grain is real: of 36 points in it, 21 repeat in both halves, where chance would give about 2</dd></div>
 <div><dt>Not claimed</dt><dd>Any single star of the cluster: each point is a bright giant, a blend of a few, or a star in front. Nor the catalogue's 4 to 6 arcmin: the outer part is too faint for 4.25 minutes. The sky round the cluster reads slightly low, so the width given is a lower limit</dd></div>
 </dl>
-  <h3 id="ngc-2419-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="ngc-2419-reddit.txt" aria-describedby="ngc-2419-reddit" hidden>Copy</button>
-    <a class="copy-text" href="ngc-2419-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="ngc-2419-notes.txt" data-label="Copy photographer's notes" aria-describedby="ngc-2419-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="ngc-2419-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="ngc-2419-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -106,7 +106,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

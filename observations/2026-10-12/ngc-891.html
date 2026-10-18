@@ -36,7 +36,7 @@
   <h1>NGC 891</h1>
   <p class="sub">A spiral galaxy in Andromeda, seen edge on</p>
   <p class="what">A spiral galaxy much like our own, seen almost exactly from the side. The dark line down its middle is dust in the disc, the same kind of dust that draws the dark lanes through our Milky Way on a clear night. This is roughly how our own galaxy would look from outside: a thin disc of stars with a warm bulge of older stars at its centre.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>Seven and a half minutes of light is too little for the faint tips of the disc: about a tenth of its length is missing at each end</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">30 of 31 frames of 15 s. 7.5 minutes of light on one field; no frame trailed.</p>
   
   <h3>Equipment</h3>
@@ -82,12 +83,11 @@
 <div><dt>What is real</dt><dd>The disc, followed for 11.1 arcmin (the catalogue gives 13.5). The dust lane: across the centre two ridges of light 33 arcsec apart with a dip between them 34 times the noise, and the odd and the even frames each show it alone. The warm bulge either side of the lane</dd></div>
 <div><dt>Not seen</dt><dd>The lane's fine filaments, the last 1.2 arcmin of each end of the disc, and the halo: 7.5 minutes at f/10 stops at about 3 times the noise. No companion galaxies were identified</dd></div>
 </dl>
-  <h3 id="ngc-891-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="ngc-891-reddit.txt" aria-describedby="ngc-891-reddit" hidden>Copy</button>
-    <a class="copy-text" href="ngc-891-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="ngc-891-notes.txt" data-label="Copy photographer's notes" aria-describedby="ngc-891-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="ngc-891-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="ngc-891-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -110,7 +110,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

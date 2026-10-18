@@ -36,7 +36,7 @@
   <h1>Messier 77</h1>
   <p class="sub">NGC 1068, a spiral galaxy in Cetus with an active centre</p>
   <p class="what">A spiral galaxy seen nearly face on, and one of the nearest and brightest galaxies with an active centre. Deep in its middle, gas is falling toward a black hole of roughly ten million Suns and blazing as it falls, which helps make the centre shine like a star. Galaxies like this are called Seyfert galaxies, after Carl Seyfert, who described them in 1943.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>This picture shows the bright heart of the galaxy only. Its faint outer arms and ring, about three times as wide, are not seen</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">29 of 31 frames of 15 s. 7.25 minutes of light on one field, lower in the sky than the night's other pictures.</p>
   
   <h3>Equipment</h3>
@@ -82,12 +83,11 @@
 <div><dt>What is real</dt><dd>The star-like nucleus on a short bright bar. The bright inner disc, 2.5 arcmin across: followed while its light is over 3 times the spread of blank sky, the same in the odd and the even frames. The inner arms as a brighter oval with knots</dd></div>
 <div><dt>Not seen</dt><dd>The faint outer arms and the outer ring, 2.2 to 3.6 arcmin from the nucleus: the light there measures zero or less. The sky within about 4 arcmin of the galaxy sits about 1 percent low, because the night's flat was fitted where NGC 891 hid the middle of the sensor. That is what hides the outer disc</dd></div>
 </dl>
-  <h3 id="messier-77-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="messier-77-reddit.txt" aria-describedby="messier-77-reddit" hidden>Copy</button>
-    <a class="copy-text" href="messier-77-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="messier-77-notes.txt" data-label="Copy photographer's notes" aria-describedby="messier-77-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="messier-77-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="messier-77-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -110,7 +110,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

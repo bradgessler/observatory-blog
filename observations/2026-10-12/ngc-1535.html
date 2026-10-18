@@ -41,7 +41,7 @@
   <h1>NGC 1535</h1>
   <p class="sub">Cleopatra's Eye, a planetary nebula in Eridanus</p>
   <p class="what">This is what a star like the Sun does at the end: it puffs its outer layers off into space, and the bare, hot core left behind makes them glow. The bright middle of the disc is that core, on its way to becoming a white dwarf; the faint shell round the disc is gas the star threw off earlier. William Herschel found it in 1785.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -54,8 +54,9 @@
 <div><dt>Honest note</dt><dd>The nebula glows in a blue-green from oxygen that is purer than any screen can show, so the screen's nearest colour stands in for it</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">30 of 33 frames of 4 s. Two minutes of light, low in the sky: the softest picture of the night.</p>
   
   <h3>Equipment</h3>
@@ -87,12 +88,11 @@
 <div><dt>What is real</dt><dd>The blue-green inner disc. The central star, as a star-wide bright core in the middle of it. The faint outer shell: in the ring 14 to 25 arcsec out the green light is 10.0 DN where the disc's own blur would leave 2.2, 73 times the noise, and the odd and the even frames each show it (55 and 65 times). The light ends 28 to 34 arcsec from the centre</dd></div>
 <div><dt>Not seen</dt><dd>Any structure inside the disc, or a sharp edge between disc and shell: with stars 5.8 arcsec wide the two run into each other. A small brighter spot in the shell about 17 arcsec out repeats in both halves and is not identified</dd></div>
 </dl>
-  <h3 id="ngc-1535-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="ngc-1535-reddit.txt" aria-describedby="ngc-1535-reddit" hidden>Copy</button>
-    <a class="copy-text" href="ngc-1535-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="ngc-1535-notes.txt" data-label="Copy photographer's notes" aria-describedby="ngc-1535-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="ngc-1535-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="ngc-1535-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, f/10.3) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 12 October 2026</p>
@@ -115,7 +115,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

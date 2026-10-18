@@ -36,7 +36,7 @@
   <h1>The Blue Snowball</h1>
   <p class="sub">NGC 7662, a planetary nebula in Andromeda</p>
   <p class="what">A star like our Sun at the end of its life, puffing its outer layers into space. Its exposed core makes the gas glow; the blue-green is oxygen. The Sun will do this in about 5 billion years.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>Taken before the telescope was refocused, so it is soft</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">25 frames of 6 s. The first deep-sky target of the night, shot before the focus was fixed.</p>
   
   <h3>Equipment</h3>
@@ -77,12 +78,11 @@
 <div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
 </dl>
   
-  <h3 id="blue-snowball-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="blue-snowball-reddit.txt" aria-describedby="blue-snowball-reddit" hidden>Copy</button>
-    <a class="copy-text" href="blue-snowball-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="blue-snowball-notes.txt" data-label="Copy photographer's notes" aria-describedby="blue-snowball-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="blue-snowball-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="blue-snowball-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,080 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  4 October 2026</p>
@@ -101,7 +101,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {

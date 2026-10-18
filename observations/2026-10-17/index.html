@@ -37,7 +37,7 @@
 <header>
   <h1>Night of 17 October 2026</h1>
   <p class="lede">Four targets and as long as the night allows on each: the Dumbbell Nebula, the Triangulum Galaxy, Saturn, and the Orion Nebula.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <ul class="sky"><li>
   <a href="dumbbell-nebula.html">
@@ -105,8 +105,9 @@
 <p>The night started late. The focus was off, which nothing in software can fix, so the first hour went to setting the telescope up on Vega and reading star sizes off each picture while I turned the focus knob, from 12 arcseconds down to 5. Then the Triangulum Galaxy was still behind a tree, so the telescope went to the Dumbbell Nebula, high overhead, until the galaxy climbed clear.</p>
 <p>This page fills in as the night goes. The problems we ran into along the way are written up as technical notes.</p>
 </article>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
   <p class="lede">The equipment for the whole night, what went wrong at the telescope and what we did about it, and the software. Each picture's exposures and processing are at the foot of its own page.</p>
   <dl class="spec">
 <div><dt>Location</dt><dd>San Francisco Bay Area. A driveway at home, with trees on most sides</dd></div>
@@ -118,9 +119,9 @@
 <div><dt>Sky</dt><dd>Clear and still. A Moon a little under half lit, low in the southwest early on and soon behind the garage</dd></div>
 <div><dt>Processing</dt><dd>Stacked from the RAW frames with numpy, OpenCV and rawpy. No darks tonight: hot pixels found from each run itself. Flats from open sky and earlier twilight frames, with tonight's dust measured on each run's own sky and divided out. Star colours from the Gaia catalogue. Plate solving by astrometry.net. Nothing generated</dd></div>
 </dl>
-  <h3>Each picture</h3><ul class="notes"><li><a href="dumbbell-nebula.html#technical"><span class="note-title">The Dumbbell Nebula</span><span class="note-summary">66 of 70 frames of 15 s</span></a></li>
-<li><a href="triangulum-galaxy.html#technical"><span class="note-title">The Triangulum Galaxy</span><span class="note-summary">267 of 342 frames of 15 s, from two nights</span></a></li>
-<li><a href="saturn.html#technical"><span class="note-title">Saturn and five of its moons</span><span class="note-summary">25 of 488 frames of 1/60 s for the planet, 2 frames of 2 s for the moons</span></a></li>
+  <h3>Each picture</h3><ul class="notes"><li><a href="dumbbell-nebula.html#photography"><span class="note-title">The Dumbbell Nebula</span><span class="note-summary">66 of 70 frames of 15 s</span></a></li>
+<li><a href="triangulum-galaxy.html#photography"><span class="note-title">The Triangulum Galaxy</span><span class="note-summary">267 of 342 frames of 15 s, from two nights</span></a></li>
+<li><a href="saturn.html#photography"><span class="note-title">Saturn and five of its moons</span><span class="note-summary">25 of 488 frames of 1/60 s for the planet, 2 frames of 2 s for the moons</span></a></li>
 <li><span class="note-title">The Orion Nebula</span><span class="note-summary">Being photographed now</span></li></ul>
   <section class="notes"><h2>Technical notes from the night</h2><p class="lede">What went wrong at the telescope, and what we did about it, as it happened.</p><ul class="notes"><li><a href="../../2026-10-17-you-cant-plate-solve-the-moon.html"><span class="note-title">You can't plate solve the Moon, and you don't need to</span><span class="note-summary">My telescope finds where it's pointing by matching stars. A photo of the Moon has no stars in it. Here's how it would point at the Moon anyway, and how one grey photo showed my garage was in the way.</span></a></li>
 <li><a href="../../2026-10-17-the-dust-detector-saw-a-galaxy.html"><span class="note-title">My telescope's new dust detector mistook a galaxy for dust</span><span class="note-summary">A few hours after we taught the telescope to find dust on its camera by itself, it decided 122 specks of dust were covering 14 percent of the camera. Most of them were the galaxy. The fix was the same test I'd done by eye.</span></a></li>

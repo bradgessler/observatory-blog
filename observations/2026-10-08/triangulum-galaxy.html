@@ -36,7 +36,7 @@
   <h1>The Triangulum Galaxy</h1>
   <p class="sub">Messier 33, a spiral galaxy in Triangulum</p>
   <p class="what">The third-largest galaxy in our small group of neighbours, after Andromeda and our own Milky Way: a loose spiral of some 40 billion stars. The bright knot at lower left, NGC 604, is a cloud where new stars are being born, 1,500 light-years across.</p>
-  <p class="jump"><a href="#technical">Technical details</a></p>
+  <p class="jump"><a href="#photography">Photography notes</a></p>
 </header>
 <section>
   <h2>What you are looking at</h2>
@@ -49,8 +49,9 @@
 <div><dt>Honest note</dt><dd>The disc is grey on purpose: these frames cannot measure its faint colour</dd></div>
 </dl>
 </section>
-<section class="technical-details" id="technical" aria-labelledby="technical-h">
-  <h2 id="technical-h">Technical details</h2>
+<section class="technical-details" id="photography" aria-labelledby="photography-h">
+  <span id="technical"></span>
+  <h2 id="photography-h">Photography notes</h2>
     <p class="lede">21 of 24 frames of 15 s. 5.25 minutes of light on one field, under a clear sky.</p>
   
   <h3>Equipment</h3>
@@ -79,12 +80,11 @@
 <div><dt>Software</dt><dd>Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated.</dd></div>
 </dl>
   
-  <h3 id="triangulum-galaxy-reddit">Copy for Reddit</h3>
-  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-src="triangulum-galaxy-reddit.txt" aria-describedby="triangulum-galaxy-reddit" hidden>Copy</button>
-    <a class="copy-text" href="triangulum-galaxy-reddit.txt">Open as text</a>
+    <button type="button" class="copy" data-src="triangulum-galaxy-notes.txt" data-label="Copy photographer's notes" aria-describedby="triangulum-galaxy-copy-hint" hidden>Copy photographer's notes</button>
+    <a class="copy-text" href="triangulum-galaxy-notes.txt">Open as text</a>
   </div>
+  <p class="hint" id="triangulum-galaxy-copy-hint">Everything above as Markdown, ready to paste into a forum post.</p>
 
 </section>
 <p class="credit">© 2026 Brad Gessler  ·  Celestron 8SE (8 inch, 2,082 mm) and Sony a6000 on an EQ6-R  ·  San Francisco Bay Area  ·  night of 8 October 2026</p>
@@ -107,7 +107,7 @@ document.querySelectorAll("button.copy").forEach(function (b) {
   b.addEventListener("click", function () {
     var url = b.dataset.src;
     var open = function () { location.href = url; };
-    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
+    var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = b.dataset.label || "Copy"; }, 2000); };
     var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
     var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
     try {
