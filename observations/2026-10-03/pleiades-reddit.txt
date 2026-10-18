@@ -1,0 +1,30 @@
+﻿**The Pleiades**: Messier 45, the Seven Sisters
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: 10 s at ISO 1600, about 7 frames per panel: one minute each
+* Frames: 72 taken, 60 kept
+* When: 4 October 2026, before dawn, over 49 minutes. 74 degrees up, 41 percent Moon in the sky
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat and dust map from tonight's clouded frames; a faint sensor pattern common to all panels removed. No darks
+* Field: 99 x 63 arcmin, cropped level from the mosaic; one frame is 38.8 x 25.8
+* Sampling: 1.553 arcsec per pixel. Stars about 5 arcsec wide; the bright ones are saturated and left white
+
+**Processing**
+
+* Mosaic: Each panel centred to 0.6 arcmin by plate solve and a local nudge. Placed by its own plate solution (shared stars agree to 0.5 arcsec); one brightness scale and one constant per panel; feathered
+* Finish: Black 24 of 255, gamma 0.95. Saturation x 1.45. Dark sky made neutral and smoothed (median 5 px, then bilateral 5 px): faint haze traded for a quiet sky
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/pleiades.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#pleiades

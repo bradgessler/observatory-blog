@@ -1,0 +1,30 @@
+﻿**Messier 77**: NGC 1068, a spiral galaxy in Cetus with an active centre
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,082 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 29 × 15 s at ISO 3200 (7.25 minutes)
+* Frames: 31 taken, 29 kept
+* When: 13 October 2026, after midnight, over 20 minutes. About 50 degrees up
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat frames were taken. The night's flat, built from the open sky of the NGC 891 run, and 94 dust shadows it left, measured on this run's own sky and divided out. Hot pixels from the run itself (5,600 to 6,400 per colour plane)
+* Field: 15.5 x 10.4 arcmin
+* Sampling: 0.777 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One sky constant per colour per frame; in the picture only, a sky plane per colour is subtracted as well. Noise 4.8 to 5.2 times lower than one frame (5.4 expected from the weights)
+* Finish: The camera's daylight white balance and colour matrix, no star-colour calibration. Colour only where the light is over 8 DN, the bright disc and the stars; the fainter edge is grey. Arcsinh stretch, black at the 78th percentile, gamma 0.9, S-curve 0.2, saturation x 1.15. The dark sky is set near black and smoothed (bilateral, 5 px), by choice: 8.6 percent of the picture is exactly black
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/messier-77.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#messier-77

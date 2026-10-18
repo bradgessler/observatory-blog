@@ -1,0 +1,30 @@
+﻿**The Moon at last quarter**: 4 October 2026  ·  41 percent lit
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: 1/60 s at ISO 100
+* Frames: 78 taken over five aims in two passes, 39 kept
+* When: 4 October 2026, in morning twilight, over half an hour. 62 to 70 degrees up
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat from 7 twilight-sky frames: corners at 74 percent of the centre, 340 dust shadows divided out. Cloud glow fitted and subtracted per frame
+* Field: Disc 32.7 arcmin across, taller than one 38.8 x 25.9 frame
+* Sampling: 0.388 arcsec per pixel, the sensor's own
+
+**Processing**
+
+* Lucky imaging: Frames registered on the lunar surface itself (12,000 matched features, 0.8 px). In each patch only the sharpest 30 percent of the clear frames are averaged
+* Restoration: Blur measured at the limb: 1.8 arcsec. Wiener and Richardson-Lucy with the gain capped at 3 x and held at the limb. No ringing found at limb, cusps or terminator
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/moon.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#moon

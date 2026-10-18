@@ -1,0 +1,31 @@
+﻿**The Orion Nebula, wide**: Messier 42 and Messier 43
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: 20 s at ISO 3200 throughout; 2 s at ISO 800 for the core
+* Frames: Centre 39 of 69
+* When: 4 October 2026, before dawn. 41 to 46 degrees up, Moon up, thin cloud passing
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat from 26 twilight-sky frames, large-scale shape from cloud-lit frames. No darks
+* Field: 67.9 x 43.4 arcmin, cropped level from the mosaic; one frame is 38.8 x 25.9
+* Sampling: 1.552 arcsec per pixel (2 x 2 mean of the working grid). Stars 4.4 to 5 arcsec wide
+
+**Processing**
+
+* Mosaic: Each panel centred by plate solve, then placed by its own plate solution; scaled on shared stars; matched to the centre with a constant and a plane; feathered
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean
+* Finish: Black 34 and white 199 of 255, S-curve 0.3. Saturation x 1.5. Dark sky made neutral and smoothed (bilateral, 3 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/orion-nebula-wide.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#orion-nebula-wide

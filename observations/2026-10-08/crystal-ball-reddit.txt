@@ -1,0 +1,30 @@
+﻿**The Crystal Ball Nebula**: NGC 1514, a planetary nebula in Taurus
+
+Night of 8 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 14 × 15 s at ISO 3200 (3.5 minutes)
+* Frames: 25 taken on target, 14 kept
+* When: 9 October 2026, after midnight, over 10 minutes. 48 to 50 degrees up, no Moon
+* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
+* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (21,000 to 23,000 per colour plane) and repaired; vignetting and dust not corrected
+* Field: 7.8 x 5.2 arcmin, cropped round the central star from one sensor frame and turned by quarter turns only
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 3.6 times lower than one frame (3.7 expected)
+* Finish: The camera's daylight white balance and colour matrix. Arcsinh stretch on brightness, colour from an 8 px blur where faint, the star's clipped core white. Black at the 40th percentile, gamma 0.9, saturation x 1.4. Dark sky smoothed (median 5 px, bilateral 4 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/crystal-ball.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#crystal-ball

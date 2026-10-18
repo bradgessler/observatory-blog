@@ -1,0 +1,30 @@
+﻿**The heart of the Andromeda Galaxy**: Messier 31
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 38 × 20 s at ISO 3200 (12.7 minutes)
+* Frames: 109 taken, 38 kept (27 clear, 11 through thin cloud and down-weighted)
+* When: 4 October 2026, after midnight, over 70 minutes. 83 degrees up, Moon just rising
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat built from the clouded frames themselves: cloud glow seen through the optics, less the scaled clear frame. Dust shadows left out of the average. No darks
+* Field: 37.4 x 22.5 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean, weighted by transparency. One constant per frame; no sky surface fitted, the galaxy fills the frame
+* Finish: Black 13 and white 229 of 255, gamma 1.2, S-curve 0.45. Saturation x 1.2. Dark parts made neutral and smoothed (bilateral, 2.5 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/andromeda-core.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#andromeda-core

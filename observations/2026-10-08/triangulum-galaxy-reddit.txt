@@ -1,0 +1,30 @@
+﻿**The Triangulum Galaxy**: Messier 33, a spiral galaxy in Triangulum
+
+Night of 8 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.5 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 21 × 15 s at ISO 3200 (5.25 minutes)
+* Frames: 24 taken, 21 kept
+* When: 8 to 9 October 2026, around midnight, over 15 minutes. 69 to 72 degrees up, no Moon
+* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
+* Calibration: No darks and no flat frames were taken. The flat is built from the night's own open-sky frames of M57 and NGC 1514, at the same exposure: vignetting (corners at 69 percent) and 10 dust shadows divided out. Hot pixels from the run itself
+* Field: 38.4 x 25.6 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One constant per colour per frame, set where the galaxy is faintest; no surface fitted, the galaxy fills the frame. Noise 4.4 times lower than one frame (4.6 expected)
+* Finish: The camera's daylight white balance and colour matrix. Brightness smoothed 1 px (2 px where dark), arcsinh stretch, saturation x 1.1. Black just above the faintest part of the galaxy
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/triangulum-galaxy.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#triangulum-galaxy

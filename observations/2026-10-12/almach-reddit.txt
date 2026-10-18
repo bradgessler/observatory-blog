@@ -1,0 +1,30 @@
+﻿**Almach**: Gamma Andromedae, a gold and blue double star in Andromeda
+
+Night of 12 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,084 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without polar alignment, about 5 degrees off the pole; aligned from four plate-solved photos (about 1 arcminute), both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 5 × 1/60 s at ISO 400 (a twelfth of a second of light)
+* Frames: 13 taken, the sharpest 5 kept
+* When: 13 October 2026, after midnight, over 5 minutes. Nearly overhead
+* Sky: Clear and calm until the last hour and a half, when thin cloud came through in patches
+* Calibration: No darks and no flat. Each frame's sky median taken off per colour plane, one hot pixel repaired. The pair sits at the middle of the sensor, where a flat would change it by well under a percent
+* Field: 4.1 x 4.1 arcmin
+* Sampling: 0.388 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic). Shift only: each plane of each frame placed on its own centroid of the primary, at the true sensor position of every sample, as square drops of 1 px (drizzle). Each frame scaled to the run's median brightness first, since the star twinkles 8 percent from frame to frame
+* Finish: Brightness smoothed 0.8 px, colour 1.5 px, arcsinh stretch. Black at the 60th percentile, white at the brightest channel of the brightest pixel, S-curve 0.15, no saturation added. Dark sky smoothed (bilateral, 2 px) and without colour
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/almach.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-12/technical.html#almach

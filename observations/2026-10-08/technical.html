@@ -70,39 +70,10 @@
 </dl>
   
   <h3 id="andromeda-core-reddit">Copy for Reddit</h3>
-  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-copy="andromeda-core-text" aria-describedby="andromeda-core-reddit" hidden>Copy</button>
-    <pre id="andromeda-core-text">**The core of the Andromeda Galaxy**: Messier 31
-
-Night of 8 October 2026, San Francisco Bay Area
-
-**Equipment**
-
-* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083 mm focal length by plate solve of this stack, f/10.3
-* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
-* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
-* Computer: Raspberry Pi 3 running Observatory, in Elixir
-
-**Acquisition**
-
-* Lights: 30 × 15 s at ISO 3200 (7.5 minutes)
-* Frames: 33 taken, 30 kept
-* When: 8 October 2026, late evening, over 17 minutes. 75 to 79 degrees up, no Moon
-* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
-* Calibration: No darks and no flat frames were taken. The flat is built from the open sky round M76, shot 25 to 55 minutes earlier with nothing moved but the mount; it agrees with the 3 October flat to 1 percent in green and blue. 50 dust shadows divided out
-* Field: 38.3 x 25.6 arcmin
-* Sampling: 0.776 arcsec per pixel
-
-**Processing**
-
-* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one constant per frame. Noise 5.6 times lower than one frame (5.5 expected)
-* Finish: The camera's as-shot white balance, no colour matrix. Arcsinh stretch with the nucleus unclipped (250 of 255). Gamma 1.2, S-curve 0.45, saturation x 1.2. Faint glow made neutral, dark parts smoothed (bilateral, 2.5 px)
-* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
-
-Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/andromeda-core.html
-
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#andromeda-core</pre>
+    <button type="button" class="copy" data-src="andromeda-core-reddit.txt" aria-describedby="andromeda-core-reddit" hidden>Copy</button>
+    <a class="copy-text" href="andromeda-core-reddit.txt">Open as text</a>
   </div>
 </section>
 
@@ -141,39 +112,10 @@ All the technical details: https://bradgessler.github.io/observatory-blog/observ
 <div><dt>Not shown</dt><dd>The faint outer halo (to 1.9 arcmin) and the galaxy IC 1296, 4 arcmin away: both detected in the stack, both under the quiet sky. A Wiener-restored version was made and kept apart (stars 30 percent smaller, sky 40 percent noisier)</dd></div>
 </dl>
   <h3 id="ring-nebula-reddit">Copy for Reddit</h3>
-  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-copy="ring-nebula-text" aria-describedby="ring-nebula-reddit" hidden>Copy</button>
-    <pre id="ring-nebula-text">**The Ring Nebula**: Messier 57, a planetary nebula in Lyra
-
-Night of 8 October 2026, San Francisco Bay Area
-
-**Equipment**
-
-* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.7 mm focal length by plate solve of this stack, f/10.3
-* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
-* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
-* Computer: Raspberry Pi 3 running Observatory, in Elixir
-
-**Acquisition**
-
-* Lights: 18 × 15 s at ISO 3200 (4.5 minutes)
-* Frames: 33 taken, 18 kept
-* When: 8 October 2026, late evening, over 19 minutes. 35 to 39 degrees up, no Moon
-* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
-* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (31,000 to 36,000 per colour plane) and repaired; vignetting and dust not corrected
-* Field: 9.3 x 6.2 arcmin, cropped round the catalogue position from one sensor frame and turned a quarter turn (no resampling)
-* Sampling: 0.776 arcsec per pixel
-
-**Processing**
-
-* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 2.9 times lower than one frame (3.1 expected from the weights)
-* Finish: Arcsinh stretch on brightness, colour from a 3.5 px blur. Black at the 60th percentile, S-curve 0.15, no saturation boost. Dark sky neutral and smoothed (median 5 px, bilateral 4 px)
-* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
-
-Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/ring-nebula.html
-
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#ring-nebula</pre>
+    <button type="button" class="copy" data-src="ring-nebula-reddit.txt" aria-describedby="ring-nebula-reddit" hidden>Copy</button>
+    <a class="copy-text" href="ring-nebula-reddit.txt">Open as text</a>
   </div>
 </section>
 
@@ -211,39 +153,10 @@ All the technical details: https://bradgessler.github.io/observatory-blog/observ
 <div><dt>What is real</dt><dd>The shell repeats in two independent half stacks (13.5 and 13.6 DN, shapes correlated 0.87). The star's own glare is 8 percent of the shell's light. Texture inside the shell is noise</dd></div>
 </dl>
   <h3 id="crystal-ball-reddit">Copy for Reddit</h3>
-  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-copy="crystal-ball-text" aria-describedby="crystal-ball-reddit" hidden>Copy</button>
-    <pre id="crystal-ball-text">**The Crystal Ball Nebula**: NGC 1514, a planetary nebula in Taurus
-
-Night of 8 October 2026, San Francisco Bay Area
-
-**Equipment**
-
-* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081 mm focal length by plate solve of this stack, f/10.3
-* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
-* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
-* Computer: Raspberry Pi 3 running Observatory, in Elixir
-
-**Acquisition**
-
-* Lights: 14 × 15 s at ISO 3200 (3.5 minutes)
-* Frames: 25 taken on target, 14 kept
-* When: 9 October 2026, after midnight, over 10 minutes. 48 to 50 degrees up, no Moon
-* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
-* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (21,000 to 23,000 per colour plane) and repaired; vignetting and dust not corrected
-* Field: 7.8 x 5.2 arcmin, cropped round the central star from one sensor frame and turned by quarter turns only
-* Sampling: 0.776 arcsec per pixel
-
-**Processing**
-
-* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 3.6 times lower than one frame (3.7 expected)
-* Finish: The camera's daylight white balance and colour matrix. Arcsinh stretch on brightness, colour from an 8 px blur where faint, the star's clipped core white. Black at the 40th percentile, gamma 0.9, saturation x 1.4. Dark sky smoothed (median 5 px, bilateral 4 px)
-* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
-
-Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/crystal-ball.html
-
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#crystal-ball</pre>
+    <button type="button" class="copy" data-src="crystal-ball-reddit.txt" aria-describedby="crystal-ball-reddit" hidden>Copy</button>
+    <a class="copy-text" href="crystal-ball-reddit.txt">Open as text</a>
   </div>
 </section>
 
@@ -279,39 +192,10 @@ All the technical details: https://bradgessler.github.io/observatory-blog/observ
 </dl>
   
   <h3 id="triangulum-galaxy-reddit">Copy for Reddit</h3>
-  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-copy="triangulum-galaxy-text" aria-describedby="triangulum-galaxy-reddit" hidden>Copy</button>
-    <pre id="triangulum-galaxy-text">**The Triangulum Galaxy**: Messier 33, a spiral galaxy in Triangulum
-
-Night of 8 October 2026, San Francisco Bay Area
-
-**Equipment**
-
-* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,083.5 mm focal length by plate solve of this stack, f/10.3
-* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
-* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
-* Computer: Raspberry Pi 3 running Observatory, in Elixir
-
-**Acquisition**
-
-* Lights: 21 × 15 s at ISO 3200 (5.25 minutes)
-* Frames: 24 taken, 21 kept
-* When: 8 to 9 October 2026, around midnight, over 15 minutes. 69 to 72 degrees up, no Moon
-* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
-* Calibration: No darks and no flat frames were taken. The flat is built from the night's own open-sky frames of M57 and NGC 1514, at the same exposure: vignetting (corners at 69 percent) and 10 dust shadows divided out. Hot pixels from the run itself
-* Field: 38.4 x 25.6 arcmin
-* Sampling: 0.776 arcsec per pixel
-
-**Processing**
-
-* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean. One constant per colour per frame, set where the galaxy is faintest; no surface fitted, the galaxy fills the frame. Noise 4.4 times lower than one frame (4.6 expected)
-* Finish: The camera's daylight white balance and colour matrix. Brightness smoothed 1 px (2 px where dark), arcsinh stretch, saturation x 1.1. Black just above the faintest part of the galaxy
-* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
-
-Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/triangulum-galaxy.html
-
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#triangulum-galaxy</pre>
+    <button type="button" class="copy" data-src="triangulum-galaxy-reddit.txt" aria-describedby="triangulum-galaxy-reddit" hidden>Copy</button>
+    <a class="copy-text" href="triangulum-galaxy-reddit.txt">Open as text</a>
   </div>
 </section>
 
@@ -350,39 +234,10 @@ All the technical details: https://bradgessler.github.io/observatory-blog/observ
 <div><dt>What is real</dt><dd>The bar and both lobes repeat in two independent half stacks (lobes at 14 and 11 sigma), and so does the pink at the ends of the bar. The faint outer loops beyond 75 arcsec do not, so they are not shown</dd></div>
 </dl>
   <h3 id="little-dumbbell-reddit">Copy for Reddit</h3>
-  <p class="hint">In the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
+  <p class="hint">Everything above, in the Markdown r/astrophotography posts use. Paste it into the post's text in Markdown mode.</p>
   <div class="copy">
-    <button type="button" class="copy" data-copy="little-dumbbell-text" aria-describedby="little-dumbbell-reddit" hidden>Copy</button>
-    <pre id="little-dumbbell-text">**The Little Dumbbell Nebula**: Messier 76, a planetary nebula in Perseus
-
-Night of 8 October 2026, San Francisco Bay Area
-
-**Equipment**
-
-* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.4 mm focal length by plate solve of this stack, f/10.3
-* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
-* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
-* Computer: Raspberry Pi 3 running Observatory, in Elixir
-
-**Acquisition**
-
-* Lights: 22 × 15 s at ISO 3200 (5.5 minutes)
-* Frames: 26 taken, 22 kept
-* When: 8 October 2026, late evening, over 14 minutes. 57 to 59 degrees up, no Moon
-* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
-* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (21,000 to 23,000 per colour plane) and repaired
-* Field: 8.3 x 6.2 arcmin, north up, centred on the catalogue position; every frame resampled once, straight onto this grid
-* Sampling: 0.776 arcsec per pixel
-
-**Processing**
-
-* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 4.5 times lower than one frame (4.7 expected)
-* Finish: The camera's as-shot white balance, no colour matrix: the oxygen light comes out cyan-blue. Arcsinh stretch, black at the 64th percentile, gamma 0.9, S-curve 0.25, saturation x 1.1. Dark sky neutral and smoothed (median 5 px, bilateral 6 px)
-* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
-
-Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/little-dumbbell.html
-
-All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#little-dumbbell</pre>
+    <button type="button" class="copy" data-src="little-dumbbell-reddit.txt" aria-describedby="little-dumbbell-reddit" hidden>Copy</button>
+    <a class="copy-text" href="little-dumbbell-reddit.txt">Open as text</a>
   </div>
 </section>
 
@@ -397,10 +252,19 @@ All the technical details: https://bradgessler.github.io/observatory-blog/observ
 document.querySelectorAll("button.copy").forEach(function (b) {
   b.hidden = false;
   b.addEventListener("click", function () {
-    var pre = document.getElementById(b.dataset.copy);
-    var select = function () { var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
     var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
-    try { navigator.clipboard.writeText(pre.textContent).then(done, select); } catch (e) { select(); }
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
   });
 });
 </script>

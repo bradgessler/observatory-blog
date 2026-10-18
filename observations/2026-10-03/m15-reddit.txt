@@ -1,0 +1,30 @@
+﻿**Messier 15**: A globular cluster in Pegasus
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 23 × 15 s at ISO 1600 (5.75 minutes)
+* Frames: 26 taken, 23 kept
+* When: 4 October 2026, just after midnight. 45 degrees up, no Moon yet
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Dust and vignetting divided out with a flat built from the run's own sky. No darks
+* Field: 16 x 16 arcmin, cropped from one sensor frame
+* Sampling: 0.388 arcsec per pixel, the sensor's own. Stars 4.4 arcsec across (half-flux), down from 7.0 before the refocus
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean. Core unclipped: 26 percent of full scale
+* Finish: Black 28 and white 214 of 255, S-curve 0.2. Saturation x 1.5; dark sky shown without colour and smoothed (bilateral, 2.5 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/m15.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#m15

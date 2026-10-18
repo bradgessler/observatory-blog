@@ -1,0 +1,30 @@
+﻿**The Little Dumbbell Nebula**: Messier 76, a planetary nebula in Perseus
+
+Night of 8 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.4 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 22 × 15 s at ISO 3200 (5.5 minutes)
+* Frames: 26 taken, 22 kept
+* When: 8 October 2026, late evening, over 14 minutes. 57 to 59 degrees up, no Moon
+* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
+* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (21,000 to 23,000 per colour plane) and repaired
+* Field: 8.3 x 6.2 arcmin, north up, centred on the catalogue position; every frame resampled once, straight onto this grid
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 4.5 times lower than one frame (4.7 expected)
+* Finish: The camera's as-shot white balance, no colour matrix: the oxygen light comes out cyan-blue. Arcsinh stretch, black at the 64th percentile, gamma 0.9, S-curve 0.25, saturation x 1.1. Dark sky neutral and smoothed (median 5 px, bilateral 6 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/little-dumbbell.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#little-dumbbell

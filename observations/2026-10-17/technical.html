@@ -74,10 +74,19 @@
 document.querySelectorAll("button.copy").forEach(function (b) {
   b.hidden = false;
   b.addEventListener("click", function () {
-    var pre = document.getElementById(b.dataset.copy);
-    var select = function () { var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    var url = b.dataset.src;
+    var open = function () { location.href = url; };
     var done = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 2000); };
-    try { navigator.clipboard.writeText(pre.textContent).then(done, select); } catch (e) { select(); }
+    var text = fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.text(); });
+    var plain = function () { return text.then(function (t) { return navigator.clipboard.writeText(t); }); };
+    try {
+      if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+        var item = new ClipboardItem({ "text/plain": text.then(function (t) { return new Blob([t], { type: "text/plain" }); }) });
+        navigator.clipboard.write([item]).then(done, function () { plain().then(done, open); });
+      } else {
+        plain().then(done, open);
+      }
+    } catch (e) { open(); }
   });
 });
 </script>

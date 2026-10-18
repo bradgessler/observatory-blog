@@ -1,0 +1,31 @@
+﻿**The Orion Nebula**: Messier 42
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: 39 x 20 s at ISO 3200 for the nebula; 16 x 2 s at ISO 800 for the core
+* Frames: 69 long frames taken, 39 kept
+* When: 4 October 2026, before dawn. 41 to 46 degrees up, 41 percent Moon in the sky, thin cloud passing
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat from 26 twilight-sky frames, its large-scale shape from cloud-lit frames. No darks
+* Field: 38.8 x 25.8 arcmin
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped mean. One sky constant per colour
+* High dynamic range: The 2 s stack replaces the 20 s stack wherever any frame came within 7 percent of clipping: 31 star cores, the Trapezium among them. Measured ratio 41.0, expected 40
+* Finish: Black 19 and white 217 of 255, gamma 0.95, S-curve 0.3. Saturation x 1.6 in CIELAB. Dark sky made neutral and smoothed (bilateral, 2.5 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/orion-nebula.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#orion-nebula

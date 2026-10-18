@@ -1,0 +1,30 @@
+﻿**The Ring Nebula**: Messier 57, a planetary nebula in Lyra
+
+Night of 8 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain: 203 mm aperture, 2,081.7 mm focal length by plate solve of this stack, f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down without leveling, 13.4 degrees off the pole; aligned from four plate-solved photos, both axes driven from that model
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Lights: 18 × 15 s at ISO 3200 (4.5 minutes)
+* Frames: 33 taken, 18 kept
+* When: 8 October 2026, late evening, over 19 minutes. 35 to 39 degrees up, no Moon
+* Sky: Clear and moonless, with one patch of thin cloud that crossed the Ring Nebula for eight minutes. Steady air late in the night
+* Calibration: No darks and no flat frames were taken: hot pixels found from the run itself (31,000 to 36,000 per colour plane) and repaired; vignetting and dust not corrected
+* Field: 9.3 x 6.2 arcmin, cropped round the catalogue position from one sensor frame and turned a quarter turn (no resampling)
+* Sampling: 0.776 arcsec per pixel
+
+**Processing**
+
+* Stacking: RAW colour planes (no demosaic), hot pixels by 3 x 3 median, registered on stars with rotation, sigma-clipped weighted mean, one sky constant per colour per frame. Noise 2.9 times lower than one frame (3.1 expected from the weights)
+* Finish: Arcsinh stretch on brightness, colour from a 3.5 px blur. Black at the 60th percentile, S-curve 0.15, no saturation boost. Dark sky neutral and smoothed (median 5 px, bilateral 4 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, SciPy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/ring-nebula.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-08/technical.html#ring-nebula

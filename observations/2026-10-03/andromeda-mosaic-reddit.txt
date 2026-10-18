@@ -1,0 +1,30 @@
+﻿**The Andromeda Galaxy: core, dust lanes and a companion**: Messier 31 and Messier 32
+
+Night of 3 October 2026, San Francisco Bay Area
+
+**Equipment**
+
+* Telescope: Celestron 8SE Schmidt-Cassegrain with dew shield: 203 mm aperture, 2,084 mm focal length (measured by plate solve), f/10.3
+* Camera: Sony a6000, stock, at prime focus: APS-C 23.5 x 15.6 mm, 6000 x 4000, 3.9 micron pixels, RAW
+* Mount: Sky-Watcher EQ6-R, unguided. Set down 27 degrees off the pole; both axes driven from a pointing model fitted to plate solves. Residual drift about 0.1 arcsec per second
+* Computer: Raspberry Pi 3 running Observatory, in Elixir
+
+**Acquisition**
+
+* Exposures: Panels: 30 s at ISO 3200. Core: 20 s at ISO 3200
+* Frames: 66 panel frames taken, 23 kept
+* When: 4 October 2026, in the small hours, over 67 minutes. 72 to 61 degrees up, Moon up, cloud passing
+* Sky: Thin cloud drifting through all night, and a 41 percent Moon from the small hours. Warm, dry air
+* Calibration: Flat from 26 twilight-sky frames, its large-scale shape from cloud-lit frames; the dust in it checked against this hour's frames. No darks
+* Field: 74.8 x 42.5 arcmin, cropped level from the mosaic; one frame is 38.8 x 25.9
+* Sampling: 1.552 arcsec per pixel. Stars 4.1 arcsec wide
+
+**Processing**
+
+* Mosaic: Each panel plate-solved, then all solved jointly on shared stars (0.4 to 0.6 arcsec). One brightness scale per panel from shared stars; backgrounds matched with a plane per panel; feathered
+* Finish: Black 53 and white 226 of 255, gamma 1.2, S-curve 0.3. Dark sky made neutral and smoothed (bilateral, 3.5 px)
+* Software: Capture and mount: Observatory (Elixir on a Raspberry Pi 3). Stacking: numpy, OpenCV, rawpy. Plate solving: astrometry.net. Stacked from the camera's RAW frames. Nothing generated
+
+Full write-up: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/andromeda-mosaic.html
+
+All the technical details: https://bradgessler.github.io/observatory-blog/observations/2026-10-03/technical.html#andromeda-mosaic
